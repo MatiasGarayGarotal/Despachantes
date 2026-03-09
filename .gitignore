@@ -1,3 +1,6 @@
-".env" 
-"node_modules/" 
-"target/" 
+.env
+node_modules/
+target/
+.idea/
+*.class
+*.jar
