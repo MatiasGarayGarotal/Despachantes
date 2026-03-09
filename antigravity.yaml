@@ -1,0 +1,11 @@
+global_settings:
+  auto_execute_commands: true
+  auto_install_dependencies: true
+  environment: "development"
+coding_standards:
+  hardcoding_allowed: false
+  secrets_management: "dotenv"
+infrastructure:
+  database_and_services: "docker-compose.yml"
+  backend_execution: "local_hot_reload"
+  frontend_execution: "local_hot_reload"
