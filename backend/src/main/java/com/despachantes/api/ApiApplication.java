@@ -9,5 +9,5 @@ public class ApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ApiApplication.class, args);
 	}
-
+	// Comentario de prueba para validar el flujo de Git
 }
