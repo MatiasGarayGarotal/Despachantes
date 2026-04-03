@@ -1,0 +1,172 @@
+# Entrevista Gabriel López Vener — Relevamiento MVP
+**Objetivo:** Definir los últimos detalles de negocio que necesitamos para construir el sistema.
+Algunas preguntas son rápidas (1 línea). Otras requieren que nos expliques tu operativa actual.
+
+---
+
+## BLOQUE 1: Clientes
+
+**1.1 — Datos de una ficha de cliente**
+Cuando abrís una ficha de un cliente nuevo, ¿qué datos registrás? ¿Cuáles son obligatorios?
+*Ejemplos para guiarte: RUT, Razón Social, Dirección Fiscal, Teléfono, Email, Contacto principal.*
+
+**1.2 — Personas físicas vs. empresas**
+¿Tenés clientes que operen como Persona Física (con Cédula de Identidad) además de empresas con RUT?
+*Si es así: ¿el flujo de trabajo es igual o hay algo diferente con ellos?*
+
+**1.3 — Múltiples contactos por cliente**
+¿Un cliente puede tener varios contactos (por ejemplo: Gerente + Contadora)?
+*Si es así: ¿todos reciben notificaciones o solo uno?*
+
+**1.4 — Visibilidad entre operadores**
+¿Todos tus empleados pueden ver los clientes de todos, o cada operador tiene "sus" clientes asignados?
+
+---
+
+## BLOQUE 2: Numeración de Carpetas
+
+**2.1 — El número del sobre físico**
+Actualmente el sobre tiene un número impreso. ¿Ese número es el que querés usar en el sistema como "número de carpeta"?
+
+**2.2 — Secuencia de numeración**
+¿Cómo es la secuencia? Elegí la opción que más se acerca a tu operativa actual:
+- [ ] Correlativo único y global (ej: 1, 2, 3, ... nunca se reinicia)
+- [ ] Correlativo por año (ej: 2024-001, 2024-002 ... 2025-001, 2025-002)
+- [ ] Otro: _______________
+
+**2.3 — ¿El sistema lo genera o lo escribís vos?**
+¿Querés que el sistema asigne el número automáticamente, o preferís escribirlo vos porque ya viene del sobre?
+Contanos que es lo que te gustaaría
+---
+
+## BLOQUE 3: Workflow — Estados de una Carpeta
+
+A continuación está nuestra propuesta de estados. Marcá con ✅ los que usás, ❌ los que no, y agregá cualquiera que falte.
+
+| # | Estado propuesto | ¿Lo usás? | Nombre exacto que usás vos |
+|---|---|---|---|
+| 1 | Apertura | | |
+| 2 | Documentación en Proceso | | |
+| 3 | Documentación Completa | | |
+| 4 | Numerado (DUA asignado en Mega 6) | | |
+| 5 | Canal Asignado (Verde/Naranja/Rojo) | | |
+| 6 | En Depósito / Puerto | | |
+| 7 | Levante (aduana liberó la mercadería) | | |
+| 8 | Retirado (cliente retiró la mercadería) | | |
+| 9 | Facturado (emitiste la liquidación) | | |
+| 10 | Cerrado (cliente pagó) | | |
+
+**3.1 — ¿Una carpeta puede "retroceder" de estado?**
+Por ejemplo: si está en "Documentación Completa" y falta un documento, ¿vuelve a "Documentación en Proceso"?
+
+**3.2 — ¿El workflow de Exportación es diferente?**
+¿Los pasos para una exportación son iguales a los de una importación, o tiene estados distintos?
+
+---
+
+## BLOQUE 4: Documentos
+
+**4.1 — Tu lista real de documentos**
+Necesitamos tu lista completa de documentos que manejás en la práctica.
+*Ya tenemos los estándar (Factura Comercial, Packing List, BL, CRT, AWB, Certificado de Origen, etc.), pero seguro hay documentos propios de tu operativa que no son los "de libro".*
+Agrega una fecha de vencimiento en el caso que corresponda
+
+**4.2 — Reglas de qué pedís y cuándo**
+Para cada combinación, ¿qué documentos son OBLIGATORIOS (no podés avanzar sin ellos)?
+
+| Tipo de operación | Obligatorio siempre | Obligatorio según caso |
+|---|---|---|
+| Importación Marítima | | |
+| Importación Terrestre | | |
+| Importación Aérea | | |
+| Exportación Marítima | | |
+| Exportación Terrestre | | |
+| Exportación Aérea | | |
+
+**4.3 — Formatos de archivo**
+¿Manejás algo además de PDF, Excel e Imágenes (JPG/PNG)?
+*Ejemplos: Word, XML (Mega 6), mensajes de correo , etc.*
+
+**4.4 — Tamaño de archivos**
+¿Tenés documentos muy pesados? ¿Por ejemplo, fotos de inspección física de contenedores?
+*Esto nos ayuda a definir el límite de tamaño por archivo.*
+
+---
+
+## BLOQUE 5: Alertas y Vencimientos
+
+Algo que puede ayudarte a una mejor gestión es tener un módulo de alertas y vencimientos. 
+Contanos que te gustaría que te avise y por qué medios 
+
+**5.1 — Documentos con fecha de vencimiento**
+Algunos documentos (certificados fitosanitarios, CE/FDA) vencen.
+¿Querés que el sistema avise cuando un documento de una carpeta activa está por vencer?
+
+**5.4 — ¿Quién recibe las alertas?**
+Las alertas de vencimiento, ¿las ves solo vos (Jefe), el operador a cargo, o todos?
+
+---
+
+## BLOQUE 6: Proforma y Liquidación de Gastos
+
+**6.1 — Lista de conceptos**
+En la reunión mencionaste que a tu cliente le pasas una factura en excel. Tenes algún ejemplo asi vemos como podria ser el pdf a enviarle.
+Si tenes varios excel o nos podes comentar que información va de acuerdo casa caso mejor
+
+**6.2 — El Excel de Mega 6**
+Necesitamos una copia del Excel que exportás desde Mega 6 (puede ser con datos ficticios).
+Esto es para que el sistema pueda importar los datos automáticamente y que no tengas que tipearlos.
+
+**6.3 — Formato del PDF**
+¿El PDF de la proforma tiene que verse igual a cómo lo hacés ahora en Excel, o estás abierto a un formato nuevo más profesional con el logo de tu empresa?
+
+
+
+---
+
+## BLOQUE 7: Portal del Cliente Externo
+
+**7.1 — ¿Qué ve el cliente?**
+Cuando un cliente tuyo entre al sistema, ¿qué querés que pueda ver de sus carpetas?
+- [ ] Lista de sus carpetas y el estado actual
+- [ ] Los documentos que vos decidas compartir
+- [ ] El historial de cambios de estado
+- [ ] La proforma / liquidación de gastos
+- [ ] Otra cosa: _______________
+
+**7.2 — ¿Puede hacer algo o solo mira?**
+¿El cliente puede subir documentos desde su portal (ej: enviar la factura original), o solo visualiza?
+
+**7.3 — Notificaciones al cliente**
+¿Querés que el sistema le avise al cliente por email cuando su carpeta cambia de estado?
+*Ejemplo: "Tu mercadería obtuvo Canal Verde y está en proceso de retiro."*
+
+---
+
+## BLOQUE 8: Contexto y Volumen
+
+**8.1 — Volumen de operaciones**
+¿Cuántas carpetas nuevas abrís por mes, aproximadamente?
+
+**8.2 — Carpetas activas simultáneas**
+¿Cuántas carpetas tenés "en curso" en cualquier momento dado?
+
+**8.3 — Dispositivos**
+¿Vos y tus empleados trabajan principalmente desde computadora de escritorio/laptop, o también necesitan acceder desde el celular?
+
+
+---
+
+## BLOQUE 9: Insumos que necesitamos de vos
+
+Estos 3 ítems son bloqueantes — sin ellos no podemos avanzar en ciertos módulos:
+
+| Insumo | Para qué lo necesitamos | Estado |
+|---|---|---|
+| **Excel de Mega 6** (con datos ficticios) | Diseñar la importación automática de datos para la proforma | Pendiente |
+| **Lista de conceptos de proforma** con indicación de IVA | Configurar el generador de PDF | Pendiente |
+| **Mapa de estados definitivo** | Ya lo respondiste en el Bloque 3 | En esta entrevista |
+
+---
+
+*Preguntas preparadas por el equipo de desarrollo. Fecha: Marzo 2026.*

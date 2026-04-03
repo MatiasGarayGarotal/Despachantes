@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.google.com)",
+      "BashExecute(*)",
+      "FileWrite(*)",
+      "FileRead(*)"
+    ]
+  },
+  "customInstructions": "Eres un ingeniero pragmático. Aplica el CLAUDE.md estrictamente. Prioriza entregar archivos modificados listos para funcionar por encima de dar largas explicaciones textuales."
+}

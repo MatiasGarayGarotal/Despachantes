@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototipo — Documentos de Carpeta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0E3048;
+      --gold:        #B18F5B;
+      --slate-50:    #E9EBF0;
+      --slate-500:   #64748B;
+      --slate-700:   #334155;
+      --success:     #5AB6AD;
+      --warning:     #E67E22;
+      --info:        #2E4A7D;
+      --white:       #FFFFFF;
+      --radius-card: 16px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--slate-50);
+      color: var(--slate-700);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* ── SIDEBAR ─────────────────────────────────────────── */
+    .sidebar {
+      width: 220px;
+      min-width: 220px;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      padding: 24px 0;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 10;
+    }
+
+    .sidebar-logo {
+      padding: 0 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-logo-mark {
+      width: 32px; height: 32px;
+      background: var(--gold);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .sidebar-logo-mark svg { color: white; }
+
+    .sidebar-logo-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .sidebar-logo-text span {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.04em;
+    }
+
+    .sidebar-section-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.25);
+      text-transform: uppercase;
+      padding: 0 20px 8px;
+      margin-top: 16px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      cursor: pointer;
+      border-radius: 0;
+      transition: background 0.15s, color 0.15s;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); }
+
+    .sidebar-item.active {
+      background: rgba(177,143,91,0.15);
+      color: var(--gold);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .sidebar-icon {
+      width: 18px; height: 18px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+
+    /* ── MAIN ─────────────────────────────────────────────── */
+    .main {
+      margin-left: 220px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── TOPBAR ───────────────────────────────────────────── */
+    .topbar {
+      background: var(--navy);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      gap: 8px;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .topbar-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .topbar-breadcrumb a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .topbar-breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+
+    .topbar-breadcrumb .current {
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+    }
+
+    .topbar-breadcrumb .sep { opacity: 0.3; }
+
+    .topbar-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+    }
+
+    /* ── PAGE CANVAS ──────────────────────────────────────── */
+    .page-canvas {
+      background: var(--slate-50);
+      border-radius: 40px 0 0 0;
+      flex: 1;
+      padding: 32px 32px 48px;
+      margin-top: -1px;
+    }
+
+    /* ── PAGE HEADER ──────────────────────────────────────── */
+    .page-header {
+      margin-bottom: 24px;
+    }
+
+    .carpeta-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .page-subtitle {
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .pill-imp { background: #E8EDF8; color: #2E4A7D; }
+    .pill-mar { background: rgba(90,182,173,0.12); color: #3d9e96; }
+    .pill-exp { background: #FDF6EE; color: #8B6530; }
+
+    /* ── TABS ─────────────────────────────────────────────── */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid rgba(14,48,72,0.08);
+      margin-bottom: 28px;
+    }
+
+    .tab {
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate-500);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.15s;
+    }
+
+    .tab:hover { color: var(--navy); }
+
+    .tab.active {
+      color: var(--navy);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ── SECTION HEADER ───────────────────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: rgba(14,48,72,0.4);
+      text-transform: uppercase;
+    }
+
+    .section-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--slate-500);
+    }
+
+    .progress-bar-wrap {
+      width: 120px;
+      height: 5px;
+      background: rgba(14,48,72,0.08);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--success);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    /* ── VIEW TOGGLE ──────────────────────────────────────── */
+    .view-toggle-group {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .view-toggle {
+      width: 28px; height: 28px;
+      border: 1px solid rgba(14,48,72,0.12);
+      border-radius: 7px;
+      background: transparent;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(14,48,72,0.35);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .view-toggle:hover { background: rgba(14,48,72,0.05); color: var(--navy); }
+
+    .view-toggle.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: white;
+    }
+
+    /* ── DOC GRID ─────────────────────────────────────────── */
+    .doc-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 0 20px 20px;
+    }
+
+    .doc-grid.two-col {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* ── DOC CARD ─────────────────────────────────────────── */
+    .doc-card {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(14,48,72,0.06);
+      box-shadow: 0 2px 10px rgba(14,48,72,0.05);
+      padding: 14px 16px;
+      border-left: 3px solid var(--slate-50);
+      transition: box-shadow 0.2s;
+    }
+
+    .doc-card:hover { box-shadow: 0 4px 18px rgba(14,48,72,0.09); }
+
+    .doc-card.uploaded  { border-left-color: var(--success); }
+    .doc-card.pending   { border-left-color: var(--slate-50); }
+    .doc-card.expiring  { border-left-color: var(--warning); }
+
+    .doc-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .doc-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .doc-required-badge {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(14,48,72,0.06);
+      color: rgba(14,48,72,0.4);
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+
+    /* STATUS CHIP */
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .status-chip.ok      { background: rgba(90,182,173,0.12); color: #3d9e96; }
+    .status-chip.pending { background: rgba(14,48,72,0.05);   color: var(--slate-500); }
+    .status-chip.warn    { background: rgba(230,126,34,0.12);  color: #c0641a; }
+
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .status-dot.ok   { background: var(--success); }
+    .status-dot.pend { background: var(--slate-500); }
+    .status-dot.warn { background: var(--warning); }
+
+    /* FILE INFO */
+    .file-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      background: rgba(90,182,173,0.06);
+      border-radius: 10px;
+      margin-bottom: 4px;
+    }
+
+    .file-icon {
+      width: 32px; height: 32px;
+      background: rgba(90,182,173,0.15);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .file-icon svg { color: var(--success); }
+
+    .file-details { flex: 1; min-width: 0; }
+
+    .file-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .file-date {
+      font-size: 10px;
+      color: var(--slate-500);
+      margin-top: 1px;
+    }
+
+    .file-actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    .icon-btn {
+      width: 28px; height: 28px;
+      border: none;
+      background: transparent;
+      border-radius: 7px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--slate-500);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .icon-btn:hover { background: rgba(14,48,72,0.07); color: var(--navy); }
+    .icon-btn.danger:hover { background: rgba(239,68,68,0.1); color: #ef4444; }
+
+    /* FILE PREVIEW */
+    .file-preview-thumb {
+      width: 44px; height: 44px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid rgba(14,48,72,0.08);
+    }
+
+    .file-preview-pdf {
+      width: 44px; height: 44px;
+      border-radius: 8px;
+      background: rgba(46,74,125,0.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--info);
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(46,74,125,0.15);
+    }
+
+    .upload-zone.has-file .upload-preview-img {
+      width: 56px; height: 56px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 2px solid var(--success);
+    }
+
+    /* ── SECTION BADGE ────────────────────────────────────── */
+    .section-badge-ok {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #3d9e96;
+      background: rgba(90,182,173,0.12);
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    /* EXPIRATION WARNING */
+    .expiry-warning {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      background: rgba(230,126,34,0.08);
+      border: 1px solid rgba(230,126,34,0.2);
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #c0641a;
+      margin-top: 8px;
+    }
+
+    /* EXPIRATION DATE INPUT */
+    .expiry-field {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .expiry-field label {
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(14,48,72,0.5);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .expiry-field input[type="date"] {
+      flex: 1;
+      background: var(--slate-50);
+      border: 1px solid rgba(14,48,72,0.1);
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-family: inherit;
+      color: var(--navy);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .expiry-field input[type="date"]:focus {
+      background: var(--white);
+      border-color: rgba(177,143,91,0.6);
+      box-shadow: 0 0 0 3px rgba(177,143,91,0.08);
+    }
+
+    /* UPLOAD ZONE */
+    .upload-zone {
+      border: 1.5px dashed rgba(14,48,72,0.2);
+      border-radius: 12px;
+      padding: 18px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: rgba(14,48,72,0.015);
+      text-align: center;
+    }
+
+    .upload-zone:hover {
+      border-color: var(--gold);
+      background: rgba(177,143,91,0.04);
+    }
+
+    .upload-zone.drag-over {
+      border-color: var(--gold);
+      background: rgba(177,143,91,0.06);
+    }
+
+    .upload-zone input[type="file"] {
+      display: none;
+    }
+
+    .upload-icon {
+      width: 36px; height: 36px;
+      background: rgba(14,48,72,0.06);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .upload-zone:hover .upload-icon {
+      background: rgba(177,143,91,0.12);
+    }
+
+    .upload-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .upload-hint {
+      font-size: 10px;
+      color: var(--slate-500);
+    }
+
+    .upload-zone.has-file {
+      border-color: var(--success);
+      background: rgba(90,182,173,0.04);
+    }
+
+    .upload-selected-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--success);
+    }
+
+    /* ── OPTIONAL SECTION ─────────────────────────────────── */
+    .collapsible-section {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(14,48,72,0.06);
+      box-shadow: 0 4px 16px rgba(14,48,72,0.05);
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .collapsible-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .collapsible-header:hover { background: rgba(14,48,72,0.02); }
+
+    .collapsible-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .collapsible-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: rgba(14,48,72,0.4);
+      text-transform: uppercase;
+    }
+
+    .collapsible-count {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--slate-500);
+      background: rgba(14,48,72,0.06);
+      padding: 1px 6px;
+      border-radius: 99px;
+    }
+
+    .chevron {
+      width: 18px; height: 18px;
+      color: rgba(14,48,72,0.35);
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+
+    .chevron.open { transform: rotate(180deg); }
+
+    .collapsible-body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease;
+    }
+
+    .collapsible-body.open { max-height: 1000px; }
+
+    .collapsible-inner {
+      padding: 0 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* OPTIONAL DOC ROW */
+    .opt-doc-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1px solid rgba(14,48,72,0.07);
+      border-radius: 12px;
+      background: rgba(14,48,72,0.015);
+      transition: background 0.15s;
+    }
+
+    .opt-doc-row:hover { background: rgba(14,48,72,0.03); }
+
+    .opt-doc-name {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .opt-doc-desc {
+      font-size: 11px;
+      color: var(--slate-500);
+      margin-top: 1px;
+    }
+
+    .opt-upload-area {
+      padding: 0 14px 12px;
+      display: none;
+    }
+
+    .opt-upload-area.visible { display: block; }
+
+    /* ── EXTRAS SECTION ───────────────────────────────────── */
+    .extras-section {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(14,48,72,0.06);
+      box-shadow: 0 4px 16px rgba(14,48,72,0.05);
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
+    .extras-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .extra-form {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(14,48,72,0.06);
+    }
+
+    .extra-form.visible { display: flex; }
+
+    .field-group { display: flex; flex-direction: column; gap: 5px; }
+
+    .field-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(14,48,72,0.5);
+    }
+
+    .field-input {
+      width: 100%;
+      background: var(--slate-50);
+      border: 1px solid rgba(14,48,72,0.1);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--navy);
+      outline: none;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+
+    .field-input:focus {
+      background: var(--white);
+      border-color: rgba(177,143,91,0.6);
+      box-shadow: 0 0 0 4px rgba(177,143,91,0.05);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    /* ── BUTTONS ──────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--navy);
+      color: white;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(14,48,72,0.2);
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+
+    .btn-primary:hover  { transform: scale(1.02); box-shadow: 0 6px 18px rgba(14,48,72,0.25); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--white);
+      color: var(--navy);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(14,48,72,0.1);
+      cursor: pointer;
+      transition: border-color 0.15s, transform 0.12s;
+    }
+
+    .btn-secondary:hover  { border-color: rgba(14,48,72,0.3); transform: scale(1.01); }
+    .btn-secondary:active { transform: scale(0.98); }
+
+    .btn-add {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(177,143,91,0.1);
+      color: var(--gold);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 9px;
+      border: 1px solid rgba(177,143,91,0.25);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-add:hover { background: rgba(177,143,91,0.18); }
+
+    .btn-cancel {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: var(--slate-500);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-cancel:hover { background: rgba(14,48,72,0.05); }
+
+    /* ── EXTRAS LIST ──────────────────────────────────────── */
+    .extras-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .extra-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: rgba(14,48,72,0.025);
+      border-radius: 10px;
+      border: 1px solid rgba(14,48,72,0.06);
+    }
+
+    .extra-item-icon {
+      width: 30px; height: 30px;
+      background: rgba(14,48,72,0.08);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .extra-item-name {
+      flex: 1;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .extra-item-date {
+      font-size: 10px;
+      color: var(--slate-500);
+    }
+
+    /* ── TOOLTIP NOTE ─────────────────────────────────────── */
+    .prototype-note {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      background: var(--navy);
+      color: rgba(255,255,255,0.8);
+      font-size: 11px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(14,48,72,0.3);
+      max-width: 260px;
+      line-height: 1.5;
+      z-index: 99;
+    }
+
+    .prototype-note strong { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ══════════════════════════════════════════════════ -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+      </svg>
+    </div>
+    <div class="sidebar-logo-text">
+      López Vener
+      <span>& Asoc.</span>
+    </div>
+  </div>
+
+  <div class="sidebar-section-label">Principal</div>
+  <div class="sidebar-item">
+    <span class="sidebar-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+      </svg>
+    </span>
+    Dashboard
+  </div>
+  <div class="sidebar-item">
+    <span class="sidebar-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    </span>
+    Clientes
+  </div>
+  <div class="sidebar-item active">
+    <span class="sidebar-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+      </svg>
+    </span>
+    Carpetas
+  </div>
+
+  <div class="sidebar-section-label">Gestión</div>
+  <div class="sidebar-item">
+    <span class="sidebar-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </span>
+    Vencimientos
+  </div>
+  <div class="sidebar-item">
+    <span class="sidebar-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+      </svg>
+    </span>
+    Proformas
+  </div>
+
+  <div class="sidebar-section-label" style="margin-top:auto;">Sistema</div>
+  <div class="sidebar-item">
+    <span class="sidebar-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 1.41 14.14A10 10 0 0 1 4.93 4.93"/>
+      </svg>
+    </span>
+    Configuración
+  </div>
+</nav>
+
+<!-- ═══ MAIN ══════════════════════════════════════════════════════ -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-breadcrumb">
+      <a>Clientes</a>
+      <span class="sep">›</span>
+      <a>PAWER S.A.</a>
+      <span class="sep">›</span>
+      <a>Carpetas</a>
+      <span class="sep">›</span>
+      <span class="current">0030016</span>
+    </div>
+    <div class="topbar-actions">
+      <div class="avatar">GL</div>
+    </div>
+  </header>
+
+  <!-- PAGE CANVAS -->
+  <main class="page-canvas">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="carpeta-meta">
+        <div class="page-title">Carpeta 0030016</div>
+      </div>
+      <div class="page-subtitle">
+        <strong style="color:var(--navy)">PAWER S.A.</strong>
+        <span style="color:rgba(14,48,72,0.2)">·</span>
+        <span class="pill pill-imp">Importación</span>
+        <span class="pill pill-mar">Marítima</span>
+        <span style="color:rgba(14,48,72,0.2)">·</span>
+        <span style="font-size:12px">Abierta 14/03/2026</span>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <div class="tab">General</div>
+      <div class="tab">Estado</div>
+      <div class="tab active">Documentos</div>
+      <div class="tab">Gastos</div>
+      <div class="tab">Auditoría</div>
+    </div>
+
+    <!-- ─── SECCIÓN: DOCUMENTOS OBLIGATORIOS ─────────────── -->
+    <div class="collapsible-section" style="margin-bottom: 14px;">
+      <div class="collapsible-header" onclick="toggleSection('obligatorios')" style="padding: 14px 18px;">
+        <div class="collapsible-title-group">
+          <span class="collapsible-title">Documentos Obligatorios</span>
+          <span id="progress-badge" class="collapsible-count">2 de 5 completos</span>
+          <div class="progress-bar-wrap" style="width:80px; margin-left:4px;">
+            <div class="progress-bar-fill" id="progress-bar" style="width: 40%"></div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;" onclick="event.stopPropagation()">
+          <div class="view-toggle-group">
+            <button class="view-toggle active" id="btn-1col" onclick="setGridView(1)" title="Una columna">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </button>
+            <button class="view-toggle" id="btn-2col" onclick="setGridView(2)" title="Dos columnas">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/>
+                <rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/>
+              </svg>
+            </button>
+          </div>
+          <svg class="chevron open" id="chevron-obligatorios" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" onclick="toggleSection('obligatorios')">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+      </div>
+      <div class="collapsible-body open" id="body-obligatorios">
+        <div style="border-top: 1px solid rgba(14,48,72,0.05); padding-top: 4px;">
+
+    <div class="doc-grid" id="doc-grid">
+
+      <!-- ✅ Bill of Lading — UPLOADED -->
+      <div class="doc-card uploaded">
+        <div class="doc-card-header">
+          <span class="doc-name">Bill of Lading (BL)</span>
+          <span class="doc-required-badge">Obligatorio</span>
+        </div>
+        <div class="status-chip ok">
+          <span class="status-dot ok"></span>
+          Cargado
+        </div>
+        <div class="file-info">
+          <div class="file-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <div class="file-details">
+            <div class="file-name">BL_PAWER_0030016.pdf</div>
+            <div class="file-date">Subido el 15/03/2026 por G. López</div>
+          </div>
+          <div class="file-actions">
+            <button class="icon-btn" title="Descargar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </button>
+            <button class="icon-btn" title="Reemplazar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+              </svg>
+            </button>
+            <button class="icon-btn danger" title="Eliminar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ⬜ Factura Comercial — PENDING -->
+      <div class="doc-card pending">
+        <div class="doc-card-header">
+          <span class="doc-name">Factura Comercial</span>
+          <span class="doc-required-badge">Obligatorio</span>
+        </div>
+        <div class="status-chip pending">
+          <span class="status-dot pend"></span>
+          Pendiente
+        </div>
+        <label class="upload-zone" id="uz-factura">
+          <input type="file" onchange="handleFileSelect('uz-factura', this)" />
+          <div class="upload-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <span class="upload-label" id="uz-factura-label">Arrastrá el archivo o hacé click</span>
+          <span class="upload-hint" id="uz-factura-hint">PDF, JPG, PNG hasta 20 MB</span>
+        </label>
+      </div>
+
+      <!-- ⬜ CRT — PENDING -->
+      <div class="doc-card pending">
+        <div class="doc-card-header">
+          <span class="doc-name">CRT</span>
+          <span class="doc-required-badge">Obligatorio</span>
+        </div>
+        <div class="status-chip pending">
+          <span class="status-dot pend"></span>
+          Pendiente
+        </div>
+        <label class="upload-zone" id="uz-crt">
+          <input type="file" onchange="handleFileSelect('uz-crt', this)" />
+          <div class="upload-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <span class="upload-label" id="uz-crt-label">Arrastrá el archivo o hacé click</span>
+          <span class="upload-hint" id="uz-crt-hint">PDF, JPG, PNG hasta 20 MB</span>
+        </label>
+      </div>
+
+      <!-- ⬜ DUA — PENDING + EXPIRATION DATE -->
+      <div class="doc-card pending">
+        <div class="doc-card-header">
+          <span class="doc-name">DUA / Declaración</span>
+          <span class="doc-required-badge">Obligatorio</span>
+        </div>
+        <div class="status-chip pending">
+          <span class="status-dot pend"></span>
+          Pendiente
+        </div>
+        <label class="upload-zone" id="uz-dua">
+          <input type="file" onchange="handleFileSelect('uz-dua', this)" />
+          <div class="upload-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <span class="upload-label" id="uz-dua-label">Arrastrá el archivo o hacé click</span>
+          <span class="upload-hint" id="uz-dua-hint">PDF, JPG, PNG hasta 20 MB</span>
+        </label>
+        <div class="expiry-field">
+          <label>Fecha de vencimiento</label>
+          <input type="date" value="" />
+        </div>
+      </div>
+
+      <!-- ⚠️ Certificado de Origen — UPLOADED BUT EXPIRING -->
+      <div class="doc-card expiring">
+        <div class="doc-card-header">
+          <span class="doc-name">Certificado de Origen</span>
+          <span class="doc-required-badge">Obligatorio</span>
+        </div>
+        <div class="status-chip warn">
+          <span class="status-dot warn"></span>
+          Por vencer
+        </div>
+        <div class="file-info" style="background: rgba(230,126,34,0.06);">
+          <div class="file-icon" style="background: rgba(230,126,34,0.12);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c0641a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <div class="file-details">
+            <div class="file-name">CertOrigen_0030016.pdf</div>
+            <div class="file-date">Subido el 02/03/2026 · Vence 02/04/2026</div>
+          </div>
+          <div class="file-actions">
+            <button class="icon-btn" title="Descargar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </button>
+            <button class="icon-btn" title="Reemplazar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+              </svg>
+            </button>
+            <button class="icon-btn danger" title="Eliminar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="expiry-warning">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          Vence en 12 días — considerá renovarlo
+        </div>
+      </div>
+
+    </div><!-- /doc-grid -->
+        </div><!-- /border-top wrapper -->
+      </div><!-- /collapsible-body -->
+    </div><!-- /collapsible-section obligatorios -->
+
+    <!-- ─── SECCIÓN: DOCUMENTOS OPCIONALES ───────────────── -->
+    <div class="collapsible-section">
+      <div class="collapsible-header" onclick="toggleSection('optional')">
+        <div class="collapsible-title-group">
+          <span class="collapsible-title">Documentos Opcionales</span>
+          <span class="collapsible-count">2 tipos disponibles</span>
+        </div>
+        <svg class="chevron" id="chevron-optional" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+      <div class="collapsible-body" id="body-optional">
+        <div class="collapsible-inner">
+
+          <!-- Packing List -->
+          <div>
+            <div class="opt-doc-row">
+              <div>
+                <div class="opt-doc-name">Packing List</div>
+                <div class="opt-doc-desc">Lista de empaque del envío</div>
+              </div>
+              <button class="btn-add" onclick="toggleOptUpload('pl')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Agregar
+              </button>
+            </div>
+            <div class="opt-upload-area" id="opt-up-pl">
+              <label class="upload-zone" id="uz-pl" style="margin-top: 8px;">
+                <input type="file" onchange="handleFileSelect('uz-pl', this)" />
+                <div class="upload-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                </div>
+                <span class="upload-label" id="uz-pl-label">Arrastrá el archivo o hacé click</span>
+                <span class="upload-hint" id="uz-pl-hint">PDF, JPG, PNG hasta 20 MB</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Certificado Fitosanitario -->
+          <div>
+            <div class="opt-doc-row">
+              <div>
+                <div class="opt-doc-name">Certificado Fitosanitario</div>
+                <div class="opt-doc-desc">Requerido para productos vegetales</div>
+              </div>
+              <button class="btn-add" onclick="toggleOptUpload('fito')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Agregar
+              </button>
+            </div>
+            <div class="opt-upload-area" id="opt-up-fito">
+              <label class="upload-zone" id="uz-fito" style="margin-top: 8px;">
+                <input type="file" onchange="handleFileSelect('uz-fito', this)" />
+                <div class="upload-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                </div>
+                <span class="upload-label" id="uz-fito-label">Arrastrá el archivo o hacé click</span>
+                <span class="upload-hint" id="uz-fito-hint">PDF, JPG, PNG hasta 20 MB</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SECCIÓN: DOCUMENTOS EXTRAS ───────────────────── -->
+    <div class="extras-section">
+      <div class="extras-header">
+        <span class="section-label">Documentos Extras</span>
+        <button class="btn-add" onclick="toggleExtraForm()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Agregar documento extra
+        </button>
+      </div>
+
+      <!-- Lista de extras existentes -->
+      <div class="extras-list">
+        <div class="extra-item">
+          <div class="extra-item-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <div class="extra-item-name">Instrucciones especiales del cliente<br>
+            <span style="font-size:10px;color:var(--slate-500);font-weight:400">instrucciones_PAWER.pdf</span>
+          </div>
+          <div class="extra-item-date">13/03/2026</div>
+          <div class="file-actions">
+            <button class="icon-btn" title="Descargar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </button>
+            <button class="icon-btn danger" title="Eliminar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form to add extra -->
+      <div class="extra-form" id="extra-form">
+        <div class="field-group">
+          <label class="field-label">Descripción del documento</label>
+          <input class="field-input" type="text" placeholder="Ej: Autorización de depósito, nota de crédito..." />
+        </div>
+        <div class="field-group">
+          <label class="field-label">Archivo</label>
+          <label class="upload-zone" id="uz-extra">
+            <input type="file" onchange="handleFileSelect('uz-extra', this)" />
+            <div class="upload-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <span class="upload-label" id="uz-extra-label">Arrastrá el archivo o hacé click</span>
+            <span class="upload-hint" id="uz-extra-hint">PDF, JPG, PNG hasta 20 MB</span>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button class="btn-cancel" onclick="toggleExtraForm()">Cancelar</button>
+          <button class="btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            Guardar documento
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- PROTOTYPE NOTE -->
+<div class="prototype-note">
+  <strong>Prototipo estático</strong> — Las zonas de upload simulan selección de archivo. Los botones de acción no conectan al backend. Para feedback, anotá comentarios directamente en este documento.
+</div>
+
+<script>
+  // ── GRID VIEW TOGGLE ─────────────────────────────────────────
+  const PREF_KEY = 'docs_grid_view';
+
+  function setGridView(cols) {
+    const grid = document.getElementById('doc-grid');
+    const btn1 = document.getElementById('btn-1col');
+    const btn2 = document.getElementById('btn-2col');
+    if (cols === 2) {
+      grid.classList.add('two-col');
+      btn1.classList.remove('active');
+      btn2.classList.add('active');
+    } else {
+      grid.classList.remove('two-col');
+      btn1.classList.add('active');
+      btn2.classList.remove('active');
+    }
+    try { localStorage.setItem(PREF_KEY, cols); } catch(e) {}
+  }
+
+  // Restore preference on load
+  (function() {
+    try {
+      const saved = localStorage.getItem(PREF_KEY);
+      if (saved === '2') setGridView(2);
+    } catch(e) {}
+  })();
+
+  // ── FILE SELECT — with preview ────────────────────────────────
+  function handleFileSelect(zoneId, input) {
+    const zone = document.getElementById(zoneId);
+    if (!input.files || !input.files[0]) return;
+    const file = input.files[0];
+    renderFilePreview(zone, file);
+  }
+
+  function renderFilePreview(zone, file) {
+    zone.classList.add('has-file');
+
+    // Clear existing content
+    zone.innerHTML = '';
+
+    const isImage = file.type.startsWith('image/');
+    const isPdf   = file.type === 'application/pdf';
+    const kb      = (file.size / 1024).toFixed(0);
+
+    let previewEl;
+    if (isImage) {
+      const url = URL.createObjectURL(file);
+      previewEl = document.createElement('img');
+      previewEl.src = url;
+      previewEl.className = 'upload-zone-preview-img';
+      previewEl.style.cssText = 'width:52px;height:52px;border-radius:8px;object-fit:cover;border:2px solid var(--success);flex-shrink:0;';
+    } else if (isPdf) {
+      previewEl = document.createElement('div');
+      previewEl.style.cssText = 'width:52px;height:52px;border-radius:8px;background:rgba(46,74,125,0.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--info);border:1px solid rgba(46,74,125,0.2);flex-shrink:0;letter-spacing:0.04em;';
+      previewEl.textContent = 'PDF';
+    } else {
+      previewEl = document.createElement('div');
+      previewEl.style.cssText = 'width:52px;height:52px;border-radius:8px;background:rgba(14,48,72,0.07);display:flex;align-items:center;justify-content:center;flex-shrink:0;';
+      previewEl.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>';
+    }
+
+    const info = document.createElement('div');
+    info.style.cssText = 'flex:1;min-width:0;text-align:left;';
+    info.innerHTML = `
+      <div style="font-size:12px;font-weight:700;color:var(--success);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${file.name}</div>
+      <div style="font-size:10px;color:var(--slate-500);margin-top:2px;">${kb} KB · Listo para subir</div>
+    `;
+
+    const clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.style.cssText = 'width:22px;height:22px;border-radius:50%;border:none;background:rgba(14,48,72,0.1);color:var(--slate-500);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;';
+    clearBtn.innerHTML = '×';
+    clearBtn.title = 'Quitar archivo';
+    clearBtn.onclick = (e) => {
+      e.preventDefault();
+      zone.classList.remove('has-file');
+      resetUploadZone(zone);
+    };
+
+    zone.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px 12px;justify-content:flex-start;';
+    zone.appendChild(previewEl);
+    zone.appendChild(info);
+    zone.appendChild(clearBtn);
+
+    // Re-attach file input
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.style.display = 'none';
+    zone.appendChild(fileInput);
+  }
+
+  function resetUploadZone(zone) {
+    const originalStyle = 'display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:18px 14px;text-align:center;';
+    zone.style.cssText = originalStyle;
+    zone.innerHTML = `
+      <input type="file" style="display:none" onchange="handleFileSelect('${zone.id}', this)" />
+      <div class="upload-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+      <span class="upload-label">Arrastrá el archivo o hacé click</span>
+      <span class="upload-hint">PDF, JPG, PNG hasta 20 MB</span>
+    `;
+    zone.onclick = () => zone.querySelector('input[type=file]').click();
+  }
+
+  // ── COLLAPSE TOGGLE ───────────────────────────────────────────
+  function toggleSection(id) {
+    const body    = document.getElementById('body-' + id);
+    const chevron = document.getElementById('chevron-' + id);
+    const isOpen  = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    chevron.classList.toggle('open', !isOpen);
+  }
+
+  // ── OPT UPLOAD TOGGLE ─────────────────────────────────────────
+  function toggleOptUpload(id) {
+    const area = document.getElementById('opt-up-' + id);
+    area.classList.toggle('visible');
+  }
+
+  // ── EXTRA FORM TOGGLE ─────────────────────────────────────────
+  function toggleExtraForm() {
+    const form = document.getElementById('extra-form');
+    form.classList.toggle('visible');
+  }
+
+  // ── DRAG & DROP ───────────────────────────────────────────────
+  document.querySelectorAll('.upload-zone').forEach(zone => {
+    zone.addEventListener('dragover', e => {
+      e.preventDefault();
+      zone.classList.add('drag-over');
+    });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (!file) return;
+      renderFilePreview(zone, file);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wizard Estado — Ideas Visuales</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy: '#0E3048', gold: '#B18F5B', surface: '#E9EBF0', canvas: '#FFFFFF',
+        s50: '#E9EBF0', s100: '#DDE0E8', s400: '#8A94A8', s500: '#64748B', s600: '#475569', s700: '#334155',
+      },
+      fontFamily: { sans: ['Montserrat','sans-serif'] },
+    }
+  }
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Montserrat', sans-serif; box-sizing: border-box; }
+  .ring-progress { transform-origin: center; transform: rotate(-90deg); }
+  .option-tab { transition: all 0.15s; }
+</style>
+</head>
+<body class="bg-surface min-h-screen p-4 md:p-8">
+
+<div class="max-w-5xl mx-auto">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="bg-navy text-white text-center py-2.5 rounded-xl text-xs font-bold tracking-widest mb-4">
+      WIZARD DE ESTADO — IDEAS VISUALES · Mobile First
+    </div>
+    <p class="text-sm text-s600 text-center">
+      Tres conceptos para la <strong class="text-navy">sección de estado</strong> dentro de la carpeta.
+      La "rosca" es informativa. El selector es la acción.
+    </p>
+    <!-- Tabs selector -->
+    <div class="flex justify-center gap-2 mt-4">
+      <button onclick="showConcept(1)" id="tab1" class="px-4 py-2 text-xs font-bold rounded-xl bg-navy text-white transition-all">Concepto 1 · Rosca + Pills</button>
+      <button onclick="showConcept(2)" id="tab2" class="px-4 py-2 text-xs font-bold rounded-xl bg-s100 text-s600 transition-all">Concepto 2 · Rosca + Select Estético</button>
+      <button onclick="showConcept(3)" id="tab3" class="px-4 py-2 text-xs font-bold rounded-xl bg-s100 text-s600 transition-all">Concepto 3 · Cards de Paso</button>
+    </div>
+  </div>
+
+  <!-- ══ CONCEPTO 1: Rosca + Pills responsive ══════════════════════════════════ -->
+  <div id="concept-1" class="space-y-6">
+    <div class="text-center">
+      <p class="text-xs text-s500 font-medium">Pills en desktop → se convierte en <strong class="text-navy">select nativo estilizado</strong> en mobile. Probalo redimensionando el navegador.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Mobile frame -->
+      <div class="flex flex-col items-center">
+        <p class="text-[10px] font-bold text-navy/40 tracking-widest mb-3">MOBILE</p>
+        <div class="bg-canvas rounded-3xl shadow-xl border border-navy/10 w-80 overflow-hidden">
+          <div class="bg-navy px-5 py-4">
+            <p class="text-[10px] text-gold font-bold tracking-widest">ESTADO DE OPERACIÓN</p>
+            <p class="text-white font-bold text-sm mt-0.5">2025-IMP-0042</p>
+          </div>
+
+          <div class="p-5 space-y-5">
+            <!-- Rosca SVG -->
+            <div class="flex flex-col items-center">
+              <div class="relative" style="width:140px; height:140px">
+                <svg width="140" height="140" viewBox="0 0 140 140">
+                  <!-- Track -->
+                  <circle cx="70" cy="70" r="52" fill="none" stroke="#E9EBF0" stroke-width="12"/>
+                  <!-- Progress (5/10 = 50%) -->
+                  <circle cx="70" cy="70" r="52" fill="none" stroke="#0E3048" stroke-width="12"
+                    stroke-dasharray="163 163" stroke-dashoffset="0"
+                    stroke-linecap="round"
+                    class="ring-progress"/>
+                  <!-- Gold highlight for current step -->
+                  <circle cx="70" cy="70" r="52" fill="none" stroke="#B18F5B" stroke-width="12"
+                    stroke-dasharray="16 310"
+                    stroke-dashoffset="-147"
+                    stroke-linecap="round"
+                    class="ring-progress"/>
+                </svg>
+                <!-- Center text -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <p class="text-2xl font-bold text-navy leading-none">5</p>
+                  <p class="text-[9px] text-navy/40 font-bold tracking-widest">de 10</p>
+                  <p class="text-[10px] font-bold text-gold mt-1 leading-tight px-2">Canal<br>Asignado</p>
+                </div>
+              </div>
+              <!-- Context labels -->
+              <div class="flex items-center gap-3 mt-2 text-[10px] font-bold">
+                <div class="flex items-center gap-1 text-navy/40">
+                  <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m5 12 7 7M5 12l7-7"/></svg>
+                  Numerado
+                </div>
+                <div class="w-1.5 h-1.5 rounded-full bg-navy/20"></div>
+                <div class="flex items-center gap-1 text-navy/40">
+                  En Depósito
+                  <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Select estilizado (mobile) -->
+            <div>
+              <label class="block text-[10px] font-bold text-navy/50 tracking-widest mb-1.5">CAMBIAR ESTADO</label>
+              <div class="relative">
+                <select class="w-full appearance-none bg-s50 border-2 border-navy/10 rounded-xl py-3 pl-4 pr-10 text-sm font-bold text-navy outline-none focus:border-gold/60 focus:bg-white transition-all cursor-pointer">
+                  <option>Apertura ✓</option>
+                  <option>Documentación en proceso ✓</option>
+                  <option>Documentación completa ✓</option>
+                  <option>Numerado ✓</option>
+                  <option selected>▶ Canal Asignado (actual)</option>
+                  <option>En Depósito</option>
+                  <option>Levante</option>
+                  <option>Retirado</option>
+                  <option>Facturado</option>
+                  <option>Cerrado</option>
+                </select>
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-navy/30 pointer-events-none"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <button class="mt-2 w-full py-3 bg-navy text-white font-bold text-xs rounded-xl tracking-widest">
+                Confirmar cambio
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop frame -->
+      <div class="flex flex-col items-center">
+        <p class="text-[10px] font-bold text-navy/40 tracking-widest mb-3">DESKTOP</p>
+        <div class="bg-canvas rounded-2xl shadow-xl border border-navy/10 w-full max-w-md overflow-hidden">
+          <div class="bg-navy px-5 py-4">
+            <p class="text-[10px] text-gold font-bold tracking-widest">ESTADO DE OPERACIÓN</p>
+            <p class="text-white font-bold text-sm mt-0.5">2025-IMP-0042</p>
+          </div>
+          <div class="p-5 space-y-5">
+            <!-- Rosca + info lateral -->
+            <div class="flex items-center gap-5">
+              <div class="relative shrink-0" style="width:100px; height:100px">
+                <svg width="100" height="100" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#E9EBF0" stroke-width="9"/>
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#0E3048" stroke-width="9"
+                    stroke-dasharray="119 120" stroke-dashoffset="0" stroke-linecap="round" class="ring-progress"/>
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#B18F5B" stroke-width="9"
+                    stroke-dasharray="12 228" stroke-dashoffset="-108" stroke-linecap="round" class="ring-progress"/>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <p class="text-lg font-bold text-navy leading-none">5/10</p>
+                  <p class="text-[8px] font-bold text-gold mt-0.5 leading-tight">Canal<br>Asignado</p>
+                </div>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-1">
+                  <div class="h-1.5 flex-1 bg-s100 rounded-full overflow-hidden">
+                    <div class="h-full bg-navy rounded-full" style="width:50%"></div>
+                  </div>
+                  <span class="text-[10px] font-bold text-navy/40 whitespace-nowrap">50%</span>
+                </div>
+                <p class="text-xs text-s600 font-medium">5 de 10 pasos completados</p>
+                <div class="flex items-center gap-2 mt-2 text-[10px] font-bold text-navy/40">
+                  <span>← Numerado</span>
+                  <span class="text-navy/20">·</span>
+                  <span>En Depósito →</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pills (desktop — scroll horizontal en pantallas chicas) -->
+            <div>
+              <label class="block text-[10px] font-bold text-navy/50 tracking-widest mb-2">CAMBIAR ESTADO</label>
+              <div class="flex flex-wrap gap-1.5">
+                <button class="px-2.5 py-1.5 text-[10px] font-bold rounded-lg bg-navy/80 text-white flex items-center gap-1">
+                  <svg width="9" height="9" fill="white" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                  Apertura
+                </button>
+                <button class="px-2.5 py-1.5 text-[10px] font-bold rounded-lg bg-navy/80 text-white flex items-center gap-1">
+                  <svg width="9" height="9" fill="white" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                  Docs. proceso
+                </button>
+                <button class="px-2.5 py-1.5 text-[10px] font-bold rounded-lg bg-navy/80 text-white flex items-center gap-1">
+                  <svg width="9" height="9" fill="white" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                  Docs. completa
+                </button>
+                <button class="px-2.5 py-1.5 text-[10px] font-bold rounded-lg bg-navy/80 text-white flex items-center gap-1">
+                  <svg width="9" height="9" fill="white" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                  Numerado
+                </button>
+                <!-- CURRENT -->
+                <button class="px-2.5 py-1.5 text-[10px] font-bold rounded-lg ring-2 ring-gold bg-gold/10 text-gold flex items-center gap-1">
+                  ▶ Canal Asignado
+                </button>
+                <button class="px-2.5 py-1.5 text-[10px] font-bold rounded-lg bg-s50 text-navy/50 hover:bg-white hover:text-navy border border-navy/10 transition-all">En Depósito</button>
+                <button class="px-2.5 py-1.5 text-[10px] font-bold rounded-lg bg-s50 text-navy/50 hover:bg-white hover:text-navy border border-navy/10 transition-all">Levante</button>
+                <button class="px-2.5 py-1.5 text-[10px] font-bold rounded-lg bg-s50 text-navy/50 hover:bg-white hover:text-navy border border-navy/10 transition-all">Retirado</button>
+                <button class="px-2.5 py-1.5 text-[10px] font-bold rounded-lg bg-s50 text-navy/50 hover:bg-white hover:text-navy border border-navy/10 transition-all">Facturado</button>
+                <button class="px-2.5 py-1.5 text-[10px] font-bold rounded-lg bg-s50 text-navy/50 hover:bg-white hover:text-navy border border-navy/10 transition-all">Cerrado</button>
+              </div>
+              <p class="text-[10px] text-s400 mt-2">Click en un estado para seleccionarlo → se pedirá confirmación</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CONCEPTO 2: Rosca + Select con diseño custom ══════════════════════════ -->
+  <div id="concept-2" class="hidden space-y-6">
+    <p class="text-xs text-s500 font-medium text-center">Select siempre visible, con diseño custom que no parece un input nativo. Funciona igual en mobile y desktop.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      <div class="bg-canvas rounded-2xl shadow-xl border border-navy/10 overflow-hidden">
+        <div class="bg-navy px-5 py-4">
+          <p class="text-[10px] text-gold font-bold tracking-widest">ESTADO DE OPERACIÓN</p>
+        </div>
+        <div class="p-5 space-y-5">
+          <!-- Rosca -->
+          <div class="flex items-center gap-4">
+            <div class="relative shrink-0" style="width:90px;height:90px">
+              <svg width="90" height="90" viewBox="0 0 90 90">
+                <circle cx="45" cy="45" r="34" fill="none" stroke="#E9EBF0" stroke-width="8"/>
+                <circle cx="45" cy="45" r="34" fill="none" stroke="#0E3048" stroke-width="8" stroke-dasharray="107 107" stroke-dashoffset="0" stroke-linecap="round" class="ring-progress"/>
+                <circle cx="45" cy="45" r="34" fill="none" stroke="#B18F5B" stroke-width="8" stroke-dasharray="11 204" stroke-dashoffset="-97" stroke-linecap="round" class="ring-progress"/>
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <p class="text-base font-bold text-navy leading-none">5/10</p>
+                <p class="text-[8px] text-gold font-bold mt-0.5">ACTUAL</p>
+              </div>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-navy">Canal Asignado</p>
+              <p class="text-xs text-s500 mt-0.5">Paso 5 de 10</p>
+              <div class="flex items-center gap-1.5 mt-2">
+                <span class="text-[9px] bg-s50 text-navy/40 px-2 py-0.5 rounded font-bold">← Numerado</span>
+                <span class="text-[9px] bg-s50 text-navy/40 px-2 py-0.5 rounded font-bold">En Depósito →</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Custom select dropdown styled -->
+          <div>
+            <p class="text-[10px] font-bold text-navy/50 tracking-widest mb-2">CAMBIAR A</p>
+            <div class="space-y-1 bg-s50 rounded-xl p-2">
+              <div class="flex items-center gap-2.5 p-2 rounded-lg bg-navy/5">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20" class="text-navy/40 shrink-0"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span class="text-xs text-navy/40 line-through">Apertura</span>
+                <span class="ml-auto text-[9px] text-navy/30 font-mono">1</span>
+              </div>
+              <div class="flex items-center gap-2.5 p-2 rounded-lg bg-navy/5">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20" class="text-navy/40 shrink-0"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span class="text-xs text-navy/40 line-through">Docs. en proceso</span>
+                <span class="ml-auto text-[9px] text-navy/30 font-mono">2</span>
+              </div>
+              <!-- Current -->
+              <div class="flex items-center gap-2.5 p-2.5 rounded-lg bg-gold/10 border-2 border-gold/40">
+                <div class="w-3 h-3 rounded-full bg-gold shrink-0"></div>
+                <span class="text-xs font-bold text-navy">Canal Asignado</span>
+                <span class="ml-auto text-[9px] bg-gold/20 text-gold font-bold px-1.5 py-0.5 rounded-full">HOY</span>
+              </div>
+              <!-- Next states -->
+              <button class="w-full flex items-center gap-2.5 p-2.5 rounded-lg hover:bg-white transition-colors group text-left border-2 border-transparent hover:border-navy/10">
+                <div class="w-3 h-3 rounded-full border-2 border-navy/20 shrink-0"></div>
+                <span class="text-xs text-navy/50 font-medium group-hover:text-navy transition-colors">En Depósito</span>
+                <span class="ml-auto text-[9px] text-navy/30 font-mono">6</span>
+              </button>
+              <button class="w-full flex items-center gap-2.5 p-2.5 rounded-lg hover:bg-white transition-colors group text-left border-2 border-transparent hover:border-navy/10">
+                <div class="w-3 h-3 rounded-full border-2 border-navy/20 shrink-0"></div>
+                <span class="text-xs text-navy/50 font-medium group-hover:text-navy transition-colors">Levante</span>
+                <span class="ml-auto text-[9px] text-navy/30 font-mono">7</span>
+              </button>
+              <button class="w-full flex items-center gap-2.5 p-2.5 rounded-lg hover:bg-white transition-colors group text-left border-2 border-transparent hover:border-navy/10">
+                <div class="w-3 h-3 rounded-full border-2 border-navy/20 shrink-0"></div>
+                <span class="text-xs text-navy/50 font-medium group-hover:text-navy transition-colors">Retirado</span>
+                <span class="ml-auto text-[9px] text-navy/30 font-mono">8</span>
+              </button>
+            </div>
+            <p class="text-[10px] text-s400 mt-2">Seleccionar un estado pendiente pedirá confirmación</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-navy/5 rounded-2xl p-5 flex flex-col gap-3">
+        <p class="text-xs font-bold text-navy">Características de este concepto</p>
+        <ul class="space-y-2 text-xs text-s600">
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> Funciona igual en mobile y desktop</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> Completo historial visual (tachado = hecho)</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> Podés saltar a cualquier estado con un click</li>
+          <li class="flex items-start gap-2"><span class="text-gold font-bold mt-0.5">✓</span> Estado actual muy visible con el resaltado dorado</li>
+          <li class="flex items-start gap-2"><span class="text-navy/40 font-bold mt-0.5">—</span> Ocupa más espacio vertical que los pills</li>
+          <li class="flex items-start gap-2"><span class="text-navy/40 font-bold mt-0.5">—</span> Requiere scroll en pantallas muy pequeñas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CONCEPTO 3: Cards de paso ══════════════════════════════════════════════ -->
+  <div id="concept-3" class="hidden space-y-6">
+    <p class="text-xs text-s500 font-medium text-center">El contexto se muestra como 3 cards horizontales: anterior, actual, siguiente. El selector de cambio de estado está separado y siempre accesible.</p>
+    <div class="max-w-xl mx-auto space-y-4">
+      <!-- Three step cards -->
+      <div class="grid grid-cols-3 gap-3">
+        <div class="bg-canvas rounded-2xl p-4 border border-navy/5 shadow-sm opacity-60">
+          <p class="text-[9px] font-bold text-navy/30 tracking-widest mb-1">ANTERIOR</p>
+          <p class="text-xs font-bold text-navy">Numerado</p>
+          <p class="text-[9px] text-navy/40 mt-0.5">Paso 4</p>
+          <div class="mt-2 w-full h-1 bg-navy rounded-full"></div>
+        </div>
+        <div class="bg-navy rounded-2xl p-4 shadow-lg ring-2 ring-gold/30">
+          <p class="text-[9px] font-bold text-gold tracking-widest mb-1">ACTUAL</p>
+          <p class="text-xs font-bold text-white leading-tight">Canal Asignado</p>
+          <p class="text-[9px] text-gold mt-0.5">Paso 5 / 10</p>
+          <div class="mt-2 w-full h-1 bg-gold/30 rounded-full overflow-hidden">
+            <div class="h-full bg-gold rounded-full" style="width:50%"></div>
+          </div>
+        </div>
+        <div class="bg-canvas rounded-2xl p-4 border border-navy/5 shadow-sm opacity-40">
+          <p class="text-[9px] font-bold text-navy/30 tracking-widest mb-1">SIGUIENTE</p>
+          <p class="text-xs font-bold text-navy">En Depósito</p>
+          <p class="text-[9px] text-navy/40 mt-0.5">Paso 6</p>
+          <div class="mt-2 w-full h-1 bg-navy/10 rounded-full"></div>
+        </div>
+      </div>
+
+      <!-- Select de cambio -->
+      <div class="bg-canvas rounded-2xl border border-navy/5 shadow-sm p-5">
+        <p class="text-[10px] font-bold text-navy/50 tracking-widest mb-3">CAMBIAR ESTADO</p>
+        <div class="flex flex-wrap gap-2">
+          <button class="px-3 py-2 text-xs font-bold rounded-xl bg-navy/80 text-white flex items-center gap-1.5">
+            <svg width="10" height="10" fill="white" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+            Apertura
+          </button>
+          <button class="px-3 py-2 text-xs font-bold rounded-xl bg-navy/80 text-white flex items-center gap-1.5">
+            <svg width="10" height="10" fill="white" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+            Docs. proceso
+          </button>
+          <button class="px-3 py-2 text-xs font-bold rounded-xl bg-navy/80 text-white flex items-center gap-1.5">
+            <svg width="10" height="10" fill="white" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+            Docs. completa
+          </button>
+          <button class="px-3 py-2 text-xs font-bold rounded-xl bg-navy/80 text-white flex items-center gap-1.5">
+            <svg width="10" height="10" fill="white" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+            Numerado
+          </button>
+          <button class="px-3 py-2 text-xs font-bold rounded-xl ring-2 ring-gold bg-gold/10 text-gold">▶ Canal Asignado</button>
+          <button class="px-3 py-2 text-xs font-bold rounded-xl bg-s50 text-navy/50 hover:bg-white hover:text-navy border border-navy/10 transition-all">En Depósito</button>
+          <button class="px-3 py-2 text-xs font-bold rounded-xl bg-s50 text-navy/50 hover:bg-white hover:text-navy border border-navy/10 transition-all">Levante</button>
+          <button class="px-3 py-2 text-xs font-bold rounded-xl bg-s50 text-navy/50 hover:bg-white hover:text-navy border border-navy/10 transition-all">Retirado</button>
+          <button class="px-3 py-2 text-xs font-bold rounded-xl bg-s50 text-navy/50 hover:bg-white hover:text-navy border border-navy/10 transition-all">Facturado</button>
+          <button class="px-3 py-2 text-xs font-bold rounded-xl bg-s50 text-navy/50 hover:bg-white hover:text-navy border border-navy/10 transition-all">Cerrado</button>
+        </div>
+
+        <!-- Mobile: en screen < md se transforma en select -->
+        <div class="mt-3 md:hidden">
+          <div class="relative">
+            <select class="w-full appearance-none bg-s50 border-2 border-navy/10 rounded-xl py-3 pl-4 pr-10 text-sm font-bold text-navy outline-none focus:border-gold/60 focus:bg-white">
+              <option>▶ Canal Asignado (actual)</option>
+              <option>En Depósito</option>
+              <option>Levante</option>
+            </select>
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-navy/30 pointer-events-none"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-navy/5 rounded-2xl p-4">
+        <p class="text-xs text-s600">
+          <strong class="text-navy">✓ Concepto 3:</strong> Las 3 cards dan contexto inmediato. Es el más visual e impactante. Los pills/select debajo dan el control.<br>
+          <strong class="text-navy">— Consideración:</strong> Las cards en mobile quedan pequeñas. El texto se corta. Funciona mejor en tablet+.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showConcept(n) {
+  [1,2,3].forEach(i => {
+    document.getElementById('concept-' + i).classList.toggle('hidden', i !== n);
+    const tab = document.getElementById('tab' + i);
+    tab.className = i === n
+      ? 'px-4 py-2 text-xs font-bold rounded-xl bg-navy text-white transition-all'
+      : 'px-4 py-2 text-xs font-bold rounded-xl bg-s100 text-s600 transition-all';
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opción C — Carpetas Pre-filtradas</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy: '#0E3048', gold: '#B18F5B', surface: '#E9EBF0', canvas: '#FFFFFF',
+        s50: '#E9EBF0', s100: '#DDE0E8', s400: '#8A94A8', s500: '#64748B', s600: '#475569', s700: '#334155',
+        info: '#2E4A7D', success: '#5AB6AD',
+      },
+      fontFamily: { sans: ['Montserrat','sans-serif'] },
+    }
+  }
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>* { font-family: 'Montserrat', sans-serif; box-sizing: border-box; }</style>
+</head>
+<body class="bg-surface min-h-screen">
+
+<div class="bg-navy text-white text-center py-2 text-xs font-bold tracking-widest">
+  OPCIÓN C — CARPETAS PRE-FILTRADAS · Redirige a Carpetas con filtro activo de cliente
+</div>
+<div class="bg-white border-b border-navy/10 px-4 py-3 flex items-center justify-between flex-wrap gap-2">
+  <p class="text-xs text-s500 max-w-lg">
+    Desde el cliente, al hacer click en una carpeta se navega a <strong class="text-navy">Carpetas</strong> con el cliente ya filtrado.
+    El filtro activo es visible como chip. Quitarlo vuelve a ver todas.
+  </p>
+  <div class="flex items-center gap-2">
+    <button onclick="showPanel(false)" id="btn-list" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-navy text-white">Lista</button>
+    <button onclick="showPanel(true)" id="btn-detail" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-s100 text-s600">Con detalle</button>
+  </div>
+</div>
+
+<div class="flex flex-col" style="height:calc(100vh - 76px)">
+  <header class="h-12 bg-navy flex items-center justify-between px-4 shrink-0">
+    <div class="flex items-center gap-3">
+      <button class="p-1.5 text-white/50"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <span class="text-white font-bold text-sm">López Vener <span class="text-gold">&</span> Asoc.</span>
+    </div>
+    <div class="w-8 h-8 rounded-full bg-gold flex items-center justify-center text-navy font-bold text-xs">GV</div>
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+    <aside class="hidden lg:flex flex-col w-16 bg-navy border-r border-white/5 shrink-0">
+      <nav class="flex-1 flex flex-col gap-1 pt-4 px-2">
+        <button class="flex items-center justify-center py-3 rounded-xl text-white/30"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+        <button class="flex items-center justify-center py-3 rounded-xl text-white/30"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></button>
+        <button class="flex items-center justify-center py-3 rounded-xl bg-white/10"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="text-gold"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></button>
+      </nav>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto bg-surface rounded-tl-[40px] flex flex-col">
+
+      <!-- Page header -->
+      <div class="px-4 md:px-8 pt-6 pb-3 shrink-0">
+        <!-- Context origin chip — aparece cuando venís desde un cliente -->
+        <div class="flex items-center gap-2 mb-3">
+          <button class="flex items-center gap-1.5 text-xs text-navy/40 hover:text-navy transition-colors">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
+            Volver a Clientes
+          </button>
+        </div>
+        <div class="flex items-center justify-between gap-4 flex-wrap">
+          <div>
+            <h2 class="text-2xl font-bold text-navy tracking-tight">Carpetas</h2>
+            <p class="text-s500 text-sm mt-0.5">Mostrando carpetas de <strong class="text-navy">ACME Importaciones SA</strong></p>
+          </div>
+          <button class="flex items-center gap-2 bg-navy text-white font-bold py-2.5 px-4 rounded-xl text-xs shadow-lg shadow-navy/20">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+            Nueva Carpeta
+          </button>
+        </div>
+      </div>
+
+      <!-- Filtros con chip de cliente activo -->
+      <div class="px-4 md:px-8 pb-3 shrink-0">
+        <div class="flex flex-wrap gap-2 items-center">
+          <!-- Chip de cliente activo (filtro pre-aplicado) -->
+          <div class="flex items-center gap-2 px-3 py-1.5 bg-navy text-white rounded-full text-xs font-bold">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span>ACME Importaciones SA</span>
+            <button class="ml-0.5 opacity-60 hover:opacity-100 transition-opacity">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <!-- Otros filtros opcionales -->
+          <div class="relative">
+            <input placeholder="Buscar carpeta..." class="pl-8 pr-4 py-1.5 bg-white border border-navy/10 rounded-full text-xs outline-none focus:border-gold/50 w-44">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="absolute left-3 top-1/2 -translate-y-1/2 text-navy/30"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <button class="px-3 py-1.5 bg-white border border-navy/10 rounded-full text-xs font-bold text-navy/50 hover:border-navy/30">
+            Estado ↓
+          </button>
+          <button class="px-3 py-1.5 bg-white border border-navy/10 rounded-full text-xs font-bold text-navy/50 hover:border-navy/30">
+            Tipo ↓
+          </button>
+        </div>
+      </div>
+
+      <!-- Lista + Panel -->
+      <div class="flex flex-1 overflow-hidden px-4 md:px-8 pb-4 gap-3">
+
+        <!-- Lista de carpetas -->
+        <div class="flex-1 overflow-auto min-w-0">
+          <div class="bg-canvas rounded-2xl shadow-sm border border-navy/5 overflow-hidden">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-navy/5 bg-s50/60">
+                  <th class="px-5 py-3 text-[10px] font-bold text-navy/40 tracking-wide">Nro. Carpeta</th>
+                  <th class="px-5 py-3 text-[10px] font-bold text-navy/40 tracking-wide hidden md:table-cell">Tipo</th>
+                  <th class="px-5 py-3 text-[10px] font-bold text-navy/40 tracking-wide">Estado</th>
+                  <th class="px-5 py-3 text-[10px] font-bold text-navy/40 tracking-wide hidden lg:table-cell">Apertura</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-navy/[0.04]">
+                <tr onclick="showPanel(true)" id="row-42"
+                  class="cursor-pointer hover:bg-gold/[0.04] transition-colors group">
+                  <td class="px-5 py-4">
+                    <span class="font-mono text-sm font-bold text-navy group-hover:text-gold transition-colors">2025-IMP-0042</span>
+                  </td>
+                  <td class="px-5 py-4 hidden md:table-cell">
+                    <span class="text-[11px] font-bold px-2 py-1 rounded-lg" style="background:#E8EDF8; color:#2E4A7D">IMP</span>
+                  </td>
+                  <td class="px-5 py-4">
+                    <span class="text-[10px] font-bold px-2.5 py-1 rounded-full" style="background:#FFF3E0; color:#B45309">CANAL ASIGNADO</span>
+                  </td>
+                  <td class="px-5 py-4 hidden lg:table-cell"><span class="text-sm text-s500">15/01/2025</span></td>
+                </tr>
+                <tr class="cursor-pointer hover:bg-gold/[0.04] transition-colors group">
+                  <td class="px-5 py-4"><span class="font-mono text-sm font-bold text-navy group-hover:text-gold transition-colors">2025-IMP-0018</span></td>
+                  <td class="px-5 py-4 hidden md:table-cell"><span class="text-[11px] font-bold px-2 py-1 rounded-lg" style="background:#E8EDF8; color:#2E4A7D">IMP</span></td>
+                  <td class="px-5 py-4"><span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">CERRADO</span></td>
+                  <td class="px-5 py-4 hidden lg:table-cell"><span class="text-sm text-s500">03/01/2025</span></td>
+                </tr>
+                <tr class="cursor-pointer hover:bg-gold/[0.04] transition-colors group">
+                  <td class="px-5 py-4"><span class="font-mono text-sm font-bold text-navy group-hover:text-gold transition-colors">2024-EXP-0099</span></td>
+                  <td class="px-5 py-4 hidden md:table-cell"><span class="text-[11px] font-bold px-2 py-1 rounded-lg" style="background:#FDF6EE; color:#8B6530">EXP</span></td>
+                  <td class="px-5 py-4"><span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">CERRADO</span></td>
+                  <td class="px-5 py-4 hidden lg:table-cell"><span class="text-sm text-s500">10/11/2024</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Panel detalle carpeta (aparece al hacer click) -->
+        <div id="detail-panel" class="hidden flex-col bg-canvas rounded-2xl shadow-lg border border-navy/5 overflow-hidden shrink-0" style="width:360px">
+          <div class="bg-navy px-5 py-4 shrink-0 flex items-center justify-between">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white text-sm font-mono">2025-IMP-0042</span>
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded-full" style="background:#FFF3E0; color:#B45309">CANAL ASIGNADO</span>
+              </div>
+              <p class="text-[10px] text-gold font-bold tracking-widest mt-0.5">ACME IMPORTACIONES SA</p>
+            </div>
+            <button onclick="showPanel(false)" class="p-1.5 hover:bg-white/10 rounded-lg">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="text-white/50"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <div class="flex border-b border-navy/5 shrink-0">
+            <button class="flex-1 py-2.5 text-[11px] font-bold text-navy border-b-2 border-gold">Datos</button>
+            <button class="flex-1 py-2.5 text-[11px] font-bold text-navy/30 border-b-2 border-transparent">Docs.</button>
+            <button class="flex-1 py-2.5 text-[11px] font-bold text-navy/30 border-b-2 border-transparent">Estado</button>
+          </div>
+          <div class="flex-1 overflow-y-auto p-4 space-y-4">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <p class="text-[9px] text-navy/40 font-bold tracking-widest mb-1">TIPO</p>
+                <span class="text-[11px] font-bold px-2 py-1 rounded-lg" style="background:#E8EDF8; color:#2E4A7D">IMPORTACIÓN</span>
+              </div>
+              <div>
+                <p class="text-[9px] text-navy/40 font-bold tracking-widest mb-1">VÍA</p>
+                <span class="text-[11px] font-bold px-2 py-1 rounded-lg bg-s50 text-s600">MARÍTIMA</span>
+              </div>
+            </div>
+            <div>
+              <p class="text-[9px] text-navy/40 font-bold tracking-widest mb-1">PROVEEDOR</p>
+              <p class="text-xs text-s700">China Exports Co. Ltd</p>
+            </div>
+            <div>
+              <p class="text-[9px] text-navy/40 font-bold tracking-widest mb-1">MERCADERÍA</p>
+              <p class="text-xs text-s700">Componentes electrónicos — Lote 847A</p>
+            </div>
+            <div class="border-t border-navy/5 pt-3">
+              <p class="text-[9px] text-navy/40 font-bold tracking-widest mb-2">DOCUMENTOS</p>
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2 p-2 rounded-lg bg-emerald-50">
+                  <svg width="11" height="11" fill="currentColor" viewBox="0 0 20 20" class="text-emerald-500"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  <span class="text-[11px] font-medium text-emerald-700">Factura Comercial</span>
+                </div>
+                <div class="flex items-center gap-2 p-2 rounded-lg bg-s50">
+                  <div class="w-3 h-3 rounded-full border border-navy/15"></div>
+                  <span class="text-[11px] text-navy/40">Bill of Lading</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-4 mb-4 p-3 bg-navy/5 rounded-2xl border border-navy/10 shrink-0">
+        <p class="text-xs text-s600">
+          <strong class="text-navy">✓ Ventajas:</strong> Reutiliza la misma página de Carpetas. El chip "cliente" es fácil de entender y quitar. Master-detail familiar.<br>
+          <strong class="text-navy">— Consideración:</strong> Al quitar el chip de cliente se pierde la referencia al cliente de origen. "Volver a Clientes" ayuda pero el flujo puede sentirse menos directo que el breadcrumb.
+        </p>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+function showPanel(visible) {
+  const panel = document.getElementById('detail-panel');
+  const row = document.getElementById('row-42');
+  if (visible) {
+    panel.classList.remove('hidden');
+    panel.classList.add('flex');
+    row.classList.add('bg-gold/[0.06]');
+    document.getElementById('btn-detail').className = 'px-3 py-1.5 text-xs font-bold rounded-lg bg-navy text-white';
+    document.getElementById('btn-list').className = 'px-3 py-1.5 text-xs font-bold rounded-lg bg-s100 text-s600';
+  } else {
+    panel.classList.add('hidden');
+    panel.classList.remove('flex');
+    row.classList.remove('bg-gold/[0.06]');
+    document.getElementById('btn-list').className = 'px-3 py-1.5 text-xs font-bold rounded-lg bg-navy text-white';
+    document.getElementById('btn-detail').className = 'px-3 py-1.5 text-xs font-bold rounded-lg bg-s100 text-s600';
+  }
+}
+</script>
+</body>
+</html>

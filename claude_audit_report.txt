@@ -1,0 +1,3342 @@
+CLAUDE CODE / PROJECT AUDIT REPORT
+Generated: 2026-03-29 18:29:20
+Root: C:\Users\mgaray\Documents\Personal\Proyectos\Despachantes\DespachantesV2\producto
+
+============================================================
+1. BASIC PROJECT INFO
+============================================================
+
+PowerShell Version: 5.1.26100.7920
+Current Directory: C:\Users\mgaray\Documents\Personal\Proyectos\Despachantes\DespachantesV2\producto
+Git Root: C:/Users/mgaray/Documents/Personal/Proyectos/Despachantes/DespachantesV2/producto
+Git Branch: main
+
+Git Status:
+ M .gitignore
+ M antigravity.yaml
+ D backend.zip
+ M backend/pom.xml
+ M backend/src/main/java/com/despachantes/api/ApiApplication.java
+ M backend/src/main/resources/application.yaml
+ M docker-compose.yml
+ M frontend/index.html
+ M frontend/package-lock.json
+ M frontend/package.json
+ M frontend/src/App.jsx
+ M frontend/src/index.css
+ M frontend/vite.config.js
+?? .claude/
+?? .env.example
+?? CLAUDE.md
+?? agent/
+?? backend.log
+?? backend/src/main/java/com/despachantes/api/config/
+?? backend/src/main/java/com/despachantes/api/controller/
+?? backend/src/main/java/com/despachantes/api/dto/
+?? backend/src/main/java/com/despachantes/api/exception/
+?? backend/src/main/java/com/despachantes/api/model/
+?? backend/src/main/java/com/despachantes/api/repository/
+?? backend/src/main/java/com/despachantes/api/security/
+?? backend/src/main/java/com/despachantes/api/service/
+?? backend/src/main/resources/db/
+?? claude_audit_report.txt
+?? design/
+?? frontend.log
+?? frontend/.env.example
+?? frontend/src/api/
+?? frontend/src/assets/Logo1.jpeg
+?? frontend/src/assets/LogoLV.svg
+?? frontend/src/components/
+?? frontend/src/contexts/
+?? frontend/src/pages/
+?? frontend/src/utils/
+?? requerimientos/
+
+============================================================
+2. PROJECT TREE (DEPTH <= 4)
+============================================================
+
+[DIR]  .claude
+[DIR]  agent
+[DIR]  backend
+[DIR]  design
+[DIR]  frontend
+[DIR]  requerimientos
+[FILE] .env
+[FILE] .env.example
+[FILE] .gitignore
+[FILE] antigravity.yaml
+[FILE] backend.log
+[FILE] CLAUDE.md
+[FILE] claude_audit_report.txt
+[FILE] docker-compose.yml
+[FILE] frontend.log
+[FILE] .claude\settings.local.json
+[DIR]  agent\skills
+[DIR]  agent\skills-despachantes
+[DIR]  agent\skills\backend-api-expert-dev
+[DIR]  agent\skills\brainstorming-pro
+[DIR]  agent\skills\cloud-architect-auditor
+[DIR]  agent\skills\creador-de-skills
+[DIR]  agent\skills\db-architect
+[DIR]  agent\skills\devops-local
+[DIR]  agent\skills\estilo-marca
+[DIR]  agent\skills\frontend-expert-dev
+[DIR]  agent\skills\modo-produccion
+[DIR]  agent\skills\planificacion-pro
+[DIR]  agent\skills\qa-auditor-expert
+[DIR]  agent\skills\requirements-specifier-expert
+[DIR]  agent\skills\security-auth-expert
+[DIR]  agent\skills\ux-ui-premium-expert
+[FILE] agent\skills\backend-api-expert-dev\SKILL.md
+[FILE] agent\skills\brainstorming-pro\SKILL.md
+[FILE] agent\skills\cloud-architect-auditor\SKILL.md
+[FILE] agent\skills\creador-de-skills\SKILL.md
+[FILE] agent\skills\db-architect\SKILL.md
+[FILE] agent\skills\devops-local\SKILL.md
+[DIR]  agent\skills\estilo-marca\recursos
+[FILE] agent\skills\estilo-marca\SKILL.md
+[FILE] agent\skills\frontend-expert-dev\SKILL.md
+[FILE] agent\skills\modo-produccion\SKILL.md
+[FILE] agent\skills\planificacion-pro\SKILL.md
+[FILE] agent\skills\qa-auditor-expert\SKILL.md
+[FILE] agent\skills\requirements-specifier-expert\SKILL.md
+[FILE] agent\skills\security-auth-expert\SKILL.md
+[FILE] agent\skills\ux-ui-premium-expert\SKILL.md
+[DIR]  agent\skills-despachantes\domain-expert-despachantes
+[FILE] agent\skills-despachantes\domain-expert-despachantes\SKILL.md
+[DIR]  backend\.apt_generated
+[DIR]  backend\.apt_generated_tests
+[DIR]  backend\.mvn
+[DIR]  backend\src
+[FILE] backend\.gitattributes
+[FILE] backend\.gitignore
+[FILE] backend\HELP.md
+[FILE] backend\mvnw
+[FILE] backend\mvnw.cmd
+[FILE] backend\pom.xml
+[DIR]  backend\.mvn\wrapper
+[FILE] backend\.mvn\wrapper\maven-wrapper.properties
+[DIR]  backend\src\main
+[DIR]  backend\src\test
+[DIR]  backend\src\main\java
+[DIR]  backend\src\main\resources
+[DIR]  backend\src\test\java
+[DIR]  design\mockups
+[DIR]  design\recursos
+[FILE] design\mockups\nav_a_breadcrumb.html
+[FILE] design\mockups\nav_b_tres_columnas.html
+[FILE] design\mockups\nav_c_carpetas_filtradas.html
+[FILE] design\mockups\wizard_estado.html
+[FILE] design\recursos\App-Gabi-menu-abierto.png
+[FILE] design\recursos\App-Gabi-menu-cerrado.png
+[FILE] design\recursos\docs_ui_prototype.html
+[FILE] design\recursos\Logo LV web.svg
+[FILE] design\recursos\manual_producto.md
+[FILE] design\recursos\skill_design_.md
+[FILE] design\recursos\SRS_tecnico.md
+[FILE] design\recursos\ui_standards.md
+[DIR]  frontend\public
+[DIR]  frontend\src
+[FILE] frontend\.env
+[FILE] frontend\.env.example
+[FILE] frontend\.gitignore
+[FILE] frontend\eslint.config.js
+[FILE] frontend\index.html
+[FILE] frontend\package-lock.json
+[FILE] frontend\package.json
+[FILE] frontend\README.md
+[FILE] frontend\vite.config.js
+[FILE] frontend\public\vite.svg
+[DIR]  frontend\src\api
+[DIR]  frontend\src\assets
+[DIR]  frontend\src\components
+[DIR]  frontend\src\contexts
+[DIR]  frontend\src\hooks
+[DIR]  frontend\src\pages
+[DIR]  frontend\src\utils
+[FILE] frontend\src\App.css
+[FILE] frontend\src\App.jsx
+[FILE] frontend\src\index.css
+[FILE] frontend\src\main.jsx
+[FILE] frontend\src\api\api.js
+[FILE] frontend\src\api\clients.js
+[FILE] frontend\src\api\contacts.js
+[FILE] frontend\src\api\contactTypes.js
+[FILE] frontend\src\api\documentTypes.js
+[FILE] frontend\src\api\emailTemplates.js
+[FILE] frontend\src\api\operations.js
+[FILE] frontend\src\api\users.js
+[FILE] frontend\src\api\workflowStates.js
+[FILE] frontend\src\assets\Logo1.jpeg
+[FILE] frontend\src\assets\LogoLV.svg
+[FILE] frontend\src\assets\react.svg
+[DIR]  frontend\src\components\auth
+[DIR]  frontend\src\components\ui
+[FILE] frontend\src\components\CarpetaDrawer.jsx
+[FILE] frontend\src\components\ClientDrawer.jsx
+[FILE] frontend\src\components\ClientForm.jsx
+[FILE] frontend\src\components\DossierViewer.jsx
+[FILE] frontend\src\components\Header.jsx
+[FILE] frontend\src\components\OperationForm.jsx
+[FILE] frontend\src\components\Sidebar.jsx
+[FILE] frontend\src\contexts\AuthContext.jsx
+[FILE] frontend\src\pages\CarpetaDetailPage.jsx
+[FILE] frontend\src\pages\ClientDetailPage.jsx
+[FILE] frontend\src\pages\ClientesPage.jsx
+[FILE] frontend\src\pages\ConfigPage.jsx
+[FILE] frontend\src\pages\Dashboard.jsx
+[FILE] frontend\src\pages\ExpedientesPage.jsx
+[FILE] frontend\src\pages\LoginCallback.jsx
+[FILE] frontend\src\pages\LoginPage.jsx
+[FILE] frontend\src\pages\PublicSharePage.jsx
+[FILE] frontend\src\pages\TiposDocumentoPage.jsx
+[FILE] frontend\src\pages\WorkflowStatesPage.jsx
+[FILE] frontend\src\utils\operationTypes.js
+[FILE] frontend\src\utils\rutValidator.js
+[FILE] requerimientos\Entrevista Gabriel - Preguntas MVP.md
+[FILE] requerimientos\MVP 1.docx
+[FILE] requerimientos\MVP Preguntas Iniciales.docx
+[FILE] requerimientos\MVP Preguntas Iniciales_1.docx
+[FILE] requerimientos\Preguntas Gabriel.txt
+[FILE] requerimientos\Requerimientos Funcionales.docx
+[FILE] requerimientos\~$P Preguntas Iniciales_1.docx
+
+============================================================
+3. PRIORITY FILES / FOLDERS CHECK
+============================================================
+
+[FOUND] CLAUDE.md
+[MISSING] AGENTS.md
+[FOUND] frontend\README.md
+[FOUND] frontend\package.json
+[MISSING] pnpm-workspace.yaml
+[MISSING] turbo.json
+[MISSING] lerna.json
+[MISSING] nx.json
+[MISSING] tsconfig.json
+[MISSING] tsconfig.base.json
+[FOUND] docker-compose.yml
+[MISSING] docker-compose.yaml
+[MISSING] Dockerfile
+[FOUND] .claude
+[MISSING] docs
+[MISSING] prisma
+[FOUND] backend\src
+[FOUND] frontend\src
+[MISSING] apps
+[MISSING] packages
+
+============================================================
+4. CLAUDE / AI / PROMPTS / RULES / SKILLS
+============================================================
+
+
+--- FILE: .claude\settings.local.json ---
+
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.google.com)"
+    ]
+  }
+}
+
+
+--- FILE: CLAUDE.md ---
+
+# CLAUDE.md — Estándares Unificados Despachantes-V2
+
+## 1. Identidad Visual y Marca
+- **Fuente**: `Poppins` (Google Fonts) para todo el sistema. Sin excepciones.
+- **Paleta Estricta**:
+  - `brand-navy`: `#0E3048` (Estructura, Sidebar, Botón Primario).
+  - `brand-gold`: `#B18F5B` (Acentos, Estados Activos, Iconos).
+  - `brand-slate-50`: `#E9EBF0` (Fondo general de la app).
+  - `Success`: `#5AB6AD` | `Warning`: `#E67E22` | `Error`: Rojo (Solo destructivo).
+
+## 2. Layout y Estructura (Firma Visual)
+- **Main Canvas**: `bg-brand-slate-50 rounded-tl-[40px]`. Este radio es **obligatorio** para el efecto de superposición sobre el sidebar.
+- **Tarjetas de Contenido**: Todo formulario o lista DEBE estar en una tarjeta blanca:
+  `bg-white rounded-2xl border border-brand-navy/5 shadow-sm p-5 md:p-6`
+
+## 3. Componentes de UI (Clases de Referencia)
+- **Botón Primario**: `bg-brand-navy text-white font-bold py-3 px-5 rounded-2xl text-sm shadow-xl shadow-brand-navy/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2`
+- **Inputs/Selects**: `w-full bg-brand-slate-50 border border-brand-navy/10 rounded-xl py-3 px-4 text-sm outline-none focus:bg-white focus:border-brand-gold/60 focus:ring-4 focus:ring-brand-gold/5 transition-all`
+- **Labels**: `block text-[10px] font-bold text-brand-navy/50 tracking-widest uppercase mb-1.5`
+
+## 4. Patrones de Datos (Tablas y Listas)
+- **Contenedor**: `bg-white rounded-2xl shadow-xl shadow-brand-navy/5 border border-brand-navy/5 overflow-hidden`
+- **Filas**: `divide-y divide-brand-navy/[0.04]` con hover en `brand-gold/[0.04]`.
+- **Fila Seleccionada**: `bg-brand-gold/[0.06] border-l-2 border-l-brand-gold`.
+
+## 5. Reglas de Implementación React (Mobile First)
+- **Orden Tailwind**: Base (mobile) → `md:` → `lg:`.
+- **Hooks**: Un efecto, una responsabilidad. Usar patrón de cancelación en `useEffect` para carga de datos.
+- **Derivados**: Prohibido usar `useEffect` para valores que pueden ser `useMemo`.
+
+============================================================
+5. NODE / MONOREPO / TYPESCRIPT CONFIG
+============================================================
+
+
+--- FILE: frontend\package.json ---
+
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.2.1",
+    "axios": "^1.13.6",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.35.2",
+    "lucide-react": "^0.577.0",
+    "oidc-client-ts": "^3.1.0",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-dropzone": "^15.0.0",
+    "react-oidc-context": "^3.2.0",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "autoprefixer": "^10.4.27",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.1",
+    "vite": "^7.3.1"
+  }
+}
+
+
+--- FILE: frontend\package-lock.json ---
+
+{
+  "name": "frontend",
+  "version": "0.0.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "frontend",
+      "version": "0.0.0",
+      "dependencies": {
+        "@tailwindcss/vite": "^4.2.1",
+        "axios": "^1.13.6",
+        "clsx": "^2.1.1",
+        "framer-motion": "^12.35.2",
+        "lucide-react": "^0.577.0",
+        "oidc-client-ts": "^3.1.0",
+        "qrcode.react": "^4.2.0",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "react-dropzone": "^15.0.0",
+        "react-oidc-context": "^3.2.0",
+        "tailwind-merge": "^3.5.0"
+      },
+      "devDependencies": {
+        "@eslint/js": "^9.39.1",
+        "@types/react": "^19.2.7",
+        "@types/react-dom": "^19.2.3",
+        "@vitejs/plugin-react": "^5.1.1",
+        "autoprefixer": "^10.4.27",
+        "eslint": "^9.39.1",
+        "eslint-plugin-react-hooks": "^7.0.1",
+        "eslint-plugin-react-refresh": "^0.4.24",
+        "globals": "^16.5.0",
+        "postcss": "^8.5.8",
+        "tailwindcss": "^4.2.1",
+        "vite": "^7.3.1"
+      }
+    },
+    "node_modules/@babel/code-frame": {
+      "version": "7.29.0",
+      "resolved": "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.29.0.tgz",
+      "integrity": "sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/helper-validator-identifier": "^7.28.5",
+        "js-tokens": "^4.0.0",
+        "picocolors": "^1.1.1"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/compat-data": {
+      "version": "7.29.0",
+      "resolved": "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.29.0.tgz",
+      "integrity": "sha512-T1NCJqT/j9+cn8fvkt7jtwbLBfLC/1y1c7NtCeXFRgzGTsafi68MRv8yzkYSapBnFA6L3U2VSc02ciDzoAJhJg==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/core": {
+      "version": "7.29.0",
+      "resolved": "https://registry.npmjs.org/@babel/core/-/core-7.29.0.tgz",
+      "integrity": "sha512-CGOfOJqWjg2qW/Mb6zNsDm+u5vFQ8DxXfbM09z69p5Z6+mE1ikP2jUXw+j42Pf1XTYED2Rni5f95npYeuwMDQA==",
+      "dev": true,
+      "license": "MIT",
+      "peer": true,
+      "dependencies": {
+        "@babel/code-frame": "^7.29.0",
+        "@babel/generator": "^7.29.0",
+        "@babel/helper-compilation-targets": "^7.28.6",
+        "@babel/helper-module-transforms": "^7.28.6",
+        "@babel/helpers": "^7.28.6",
+        "@babel/parser": "^7.29.0",
+        "@babel/template": "^7.28.6",
+        "@babel/traverse": "^7.29.0",
+        "@babel/types": "^7.29.0",
+        "@jridgewell/remapping": "^2.3.5",
+        "convert-source-map": "^2.0.0",
+        "debug": "^4.1.0",
+        "gensync": "^1.0.0-beta.2",
+        "json5": "^2.2.3",
+        "semver": "^6.3.1"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/babel"
+      }
+    },
+    "node_modules/@babel/generator": {
+      "version": "7.29.1",
+      "resolved": "https://registry.npmjs.org/@babel/generator/-/generator-7.29.1.tgz",
+      "integrity": "sha512-qsaF+9Qcm2Qv8SRIMMscAvG4O3lJ0F1GuMo5HR/Bp02LopNgnZBC/EkbevHFeGs4ls/oPz9v+Bsmzbkbe+0dUw==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/parser": "^7.29.0",
+        "@babel/types": "^7.29.0",
+        "@jridgewell/gen-mapping": "^0.3.12",
+        "@jridgewell/trace-mapping": "^0.3.28",
+        "jsesc": "^3.0.2"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/helper-compilation-targets": {
+      "version": "7.28.6",
+      "resolved": "https://registry.npmjs.org/@babel/helper-compilation-targets/-/helper-compilation-targets-7.28.6.tgz",
+      "integrity": "sha512-JYtls3hqi15fcx5GaSNL7SCTJ2MNmjrkHXg4FSpOA/grxK8KwyZ5bubHsCq8FXCkua6xhuaaBit+3b7+VZRfcA==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/compat-data": "^7.28.6",
+        "@babel/helper-validator-option": "^7.27.1",
+        "browserslist": "^4.24.0",
+        "lru-cache": "^5.1.1",
+        "semver": "^6.3.1"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/helper-globals": {
+      "version": "7.28.0",
+      "resolved": "https://registry.npmjs.org/@babel/helper-globals/-/helper-globals-7.28.0.tgz",
+      "integrity": "sha512-+W6cISkXFa1jXsDEdYA8HeevQT/FULhxzR99pxphltZcVaugps53THCeiWA8SguxxpSp3gKPiuYfSWopkLQ4hw==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/helper-module-imports": {
+      "version": "7.28.6",
+      "resolved": "https://registry.npmjs.org/@babel/helper-module-imports/-/helper-module-imports-7.28.6.tgz",
+      "integrity": "sha512-l5XkZK7r7wa9LucGw9LwZyyCUscb4x37JWTPz7swwFE/0FMQAGpiWUZn8u9DzkSBWEcK25jmvubfpw2dnAMdbw==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/traverse": "^7.28.6",
+        "@babel/types": "^7.28.6"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/helper-module-transforms": {
+      "version": "7.28.6",
+      "resolved": "https://registry.npmjs.org/@babel/helper-module-transforms/-/helper-module-transforms-7.28.6.tgz",
+      "integrity": "sha512-67oXFAYr2cDLDVGLXTEABjdBJZ6drElUSI7WKp70NrpyISso3plG9SAGEF6y7zbha/wOzUByWWTJvEDVNIUGcA==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/helper-module-imports": "^7.28.6",
+        "@babel/helper-validator-identifier": "^7.28.5",
+        "@babel/traverse": "^7.28.6"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      },
+      "peerDependencies": {
+        "@babel/core": "^7.0.0"
+      }
+    },
+    "node_modules/@babel/helper-plugin-utils": {
+      "version": "7.28.6",
+      "resolved": "https://registry.npmjs.org/@babel/helper-plugin-utils/-/helper-plugin-utils-7.28.6.tgz",
+      "integrity": "sha512-S9gzZ/bz83GRysI7gAD4wPT/AI3uCnY+9xn+Mx/KPs2JwHJIz1W8PZkg2cqyt3RNOBM8ejcXhV6y8Og7ly/Dug==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/helper-string-parser": {
+      "version": "7.27.1",
+      "resolved": "https://registry.npmjs.org/@babel/helper-string-parser/-/helper-string-parser-7.27.1.tgz",
+      "integrity": "sha512-qMlSxKbpRlAridDExk92nSobyDdpPijUq2DW6oDnUqd0iOGxmQjyqhMIihI9+zv4LPyZdRje2cavWPbCbWm3eA==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/helper-validator-identifier": {
+      "version": "7.28.5",
+      "resolved": "https://registry.npmjs.org/@babel/helper-validator-identifier/-/helper-validator-identifier-7.28.5.tgz",
+      "integrity": "sha512-qSs4ifwzKJSV39ucNjsvc6WVHs6b7S03sOh2OcHF9UHfVPqWWALUsNUVzhSBiItjRZoLHx7nIarVjqKVusUZ1Q==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/helper-validator-option": {
+      "version": "7.27.1",
+      "resolved": "https://registry.npmjs.org/@babel/helper-validator-option/-/helper-validator-option-7.27.1.tgz",
+      "integrity": "sha512-YvjJow9FxbhFFKDSuFnVCe2WxXk1zWc22fFePVNEaWJEu8IrZVlda6N0uHwzZrUM1il7NC9Mlp4MaJYbYd9JSg==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/helpers": {
+      "version": "7.28.6",
+      "resolved": "https://registry.npmjs.org/@babel/helpers/-/helpers-7.28.6.tgz",
+      "integrity": "sha512-xOBvwq86HHdB7WUDTfKfT/Vuxh7gElQ+Sfti2Cy6yIWNW05P8iUslOVcZ4/sKbE+/jQaukQAdz/gf3724kYdqw==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/template": "^7.28.6",
+        "@babel/types": "^7.28.6"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/parser": {
+      "version": "7.29.0",
+      "resolved": "https://registry.npmjs.org/@babel/parser/-/parser-7.29.0.tgz",
+      "integrity": "sha512-IyDgFV5GeDUVX4YdF/3CPULtVGSXXMLh1xVIgdCgxApktqnQV0r7/8Nqthg+8YLGaAtdyIlo2qIdZrbCv4+7ww==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/types": "^7.29.0"
+      },
+      "bin": {
+        "parser": "bin/babel-parser.js"
+      },
+      "engines": {
+        "node": ">=6.0.0"
+      }
+    },
+    "node_modules/@babel/plugin-transform-react-jsx-self": {
+      "version": "7.27.1",
+      "resolved": "https://registry.npmjs.org/@babel/plugin-transform-react-jsx-self/-/plugin-transform-react-jsx-self-7.27.1.tgz",
+      "integrity": "sha512-6UzkCs+ejGdZ5mFFC/OCUrv028ab2fp1znZmCZjAOBKiBK2jXD1O+BPSfX8X2qjJ75fZBMSnQn3Rq2mrBJK2mw==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/helper-plugin-utils": "^7.27.1"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      },
+      "peerDependencies": {
+        "@babel/core": "^7.0.0-0"
+      }
+    },
+    "node_modules/@babel/plugin-transform-react-jsx-source": {
+      "version": "7.27.1",
+      "resolved": "https://registry.npmjs.org/@babel/plugin-transform-react-jsx-source/-/plugin-transform-react-jsx-source-7.27.1.tgz",
+      "integrity": "sha512-zbwoTsBruTeKB9hSq73ha66iFeJHuaFkUbwvqElnygoNbj/jHRsSeokowZFN3CZ64IvEqcmmkVe89OPXc7ldAw==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/helper-plugin-utils": "^7.27.1"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      },
+      "peerDependencies": {
+        "@babel/core": "^7.0.0-0"
+      }
+    },
+    "node_modules/@babel/template": {
+      "version": "7.28.6",
+      "resolved": "https://registry.npmjs.org/@babel/template/-/template-7.28.6.tgz",
+      "integrity": "sha512-YA6Ma2KsCdGb+WC6UpBVFJGXL58MDA6oyONbjyF/+5sBgxY/dwkhLogbMT2GXXyU84/IhRw/2D1Os1B/giz+BQ==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/code-frame": "^7.28.6",
+        "@babel/parser": "^7.28.6",
+        "@babel/types": "^7.28.6"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/traverse": {
+      "version": "7.29.0",
+      "resolved": "https://registry.npmjs.org/@babel/traverse/-/traverse-7.29.0.tgz",
+      "integrity": "sha512-4HPiQr0X7+waHfyXPZpWPfWL/J7dcN1mx9gL6WdQVMbPnF3+ZhSMs8tCxN7oHddJE9fhNE7+lxdnlyemKfJRuA==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/code-frame": "^7.29.0",
+        "@babel/generator": "^7.29.0",
+        "@babel/helper-globals": "^7.28.0",
+        "@babel/parser": "^7.29.0",
+        "@babel/template": "^7.28.6",
+        "@babel/types": "^7.29.0",
+        "debug": "^4.3.1"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/types": {
+      "version": "7.29.0",
+      "resolved": "https://registry.npmjs.org/@babel/types/-/types-7.29.0.tgz",
+      "integrity": "sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/helper-string-parser": "^7.27.1",
+        "@babel/helper-validator-identifier": "^7.28.5"
+      },
+      "engines": {
+        "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@esbuild/aix-ppc64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/aix-ppc64/-/aix-ppc64-0.27.3.tgz",
+      "integrity": "sha512-9fJMTNFTWZMh5qwrBItuziu834eOCUcEqymSH7pY+zoMVEZg3gcPuBNxH1EvfVYe9h0x/Ptw8KBzv7qxb7l8dg==",
+      "cpu": [
+        "ppc64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "aix"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/android-arm": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/android-arm/-/android-arm-0.27.3.tgz",
+      "integrity": "sha512-i5D1hPY7GIQmXlXhs2w8AWHhenb00+GxjxRncS2ZM7YNVGNfaMxgzSGuO8o8SJzRc/oZwU2bcScvVERk03QhzA==",
+      "cpu": [
+        "arm"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/android-arm64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/android-arm64/-/android-arm64-0.27.3.tgz",
+      "integrity": "sha512-YdghPYUmj/FX2SYKJ0OZxf+iaKgMsKHVPF1MAq/P8WirnSpCStzKJFjOjzsW0QQ7oIAiccHdcqjbHmJxRb/dmg==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/android-x64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/android-x64/-/android-x64-0.27.3.tgz",
+      "integrity": "sha512-IN/0BNTkHtk8lkOM8JWAYFg4ORxBkZQf9zXiEOfERX/CzxW3Vg1ewAhU7QSWQpVIzTW+b8Xy+lGzdYXV6UZObQ==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/darwin-arm64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.27.3.tgz",
+      "integrity": "sha512-Re491k7ByTVRy0t3EKWajdLIr0gz2kKKfzafkth4Q8A5n1xTHrkqZgLLjFEHVD+AXdUGgQMq+Godfq45mGpCKg==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/darwin-x64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/darwin-x64/-/darwin-x64-0.27.3.tgz",
+      "integrity": "sha512-vHk/hA7/1AckjGzRqi6wbo+jaShzRowYip6rt6q7VYEDX4LEy1pZfDpdxCBnGtl+A5zq8iXDcyuxwtv3hNtHFg==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/freebsd-arm64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/freebsd-arm64/-/freebsd-arm64-0.27.3.tgz",
+      "integrity": "sha512-ipTYM2fjt3kQAYOvo6vcxJx3nBYAzPjgTCk7QEgZG8AUO3ydUhvelmhrbOheMnGOlaSFUoHXB6un+A7q4ygY9w==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "freebsd"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/freebsd-x64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/freebsd-x64/-/freebsd-x64-0.27.3.tgz",
+      "integrity": "sha512-dDk0X87T7mI6U3K9VjWtHOXqwAMJBNN2r7bejDsc+j03SEjtD9HrOl8gVFByeM0aJksoUuUVU9TBaZa2rgj0oA==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "freebsd"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/linux-arm": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/linux-arm/-/linux-arm-0.27.3.tgz",
+      "integrity": "sha512-s6nPv2QkSupJwLYyfS+gwdirm0ukyTFNl3KTgZEAiJDd+iHZcbTPPcWCcRYH+WlNbwChgH2QkE9NSlNrMT8Gfw==",
+      "cpu": [
+        "arm"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/linux-arm64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/linux-arm64/-/linux-arm64-0.27.3.tgz",
+      "integrity": "sha512-sZOuFz/xWnZ4KH3YfFrKCf1WyPZHakVzTiqji3WDc0BCl2kBwiJLCXpzLzUBLgmp4veFZdvN5ChW4Eq/8Fc2Fg==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/linux-ia32": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/linux-ia32/-/linux-ia32-0.27.3.tgz",
+      "integrity": "sha512-yGlQYjdxtLdh0a3jHjuwOrxQjOZYD/C9PfdbgJJF3TIZWnm/tMd/RcNiLngiu4iwcBAOezdnSLAwQDPqTmtTYg==",
+      "cpu": [
+        "ia32"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/linux-loong64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/linux-loong64/-/linux-loong64-0.27.3.tgz",
+      "integrity": "sha512-WO60Sn8ly3gtzhyjATDgieJNet/KqsDlX5nRC5Y3oTFcS1l0KWba+SEa9Ja1GfDqSF1z6hif/SkpQJbL63cgOA==",
+      "cpu": [
+        "loong64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/linux-mips64el": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/linux-mips64el/-/linux-mips64el-0.27.3.tgz",
+      "integrity": "sha512-APsymYA6sGcZ4pD6k+UxbDjOFSvPWyZhjaiPyl/f79xKxwTnrn5QUnXR5prvetuaSMsb4jgeHewIDCIWljrSxw==",
+      "cpu": [
+        "mips64el"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/linux-ppc64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/linux-ppc64/-/linux-ppc64-0.27.3.tgz",
+      "integrity": "sha512-eizBnTeBefojtDb9nSh4vvVQ3V9Qf9Df01PfawPcRzJH4gFSgrObw+LveUyDoKU3kxi5+9RJTCWlj4FjYXVPEA==",
+      "cpu": [
+        "ppc64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/linux-riscv64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/linux-riscv64/-/linux-riscv64-0.27.3.tgz",
+      "integrity": "sha512-3Emwh0r5wmfm3ssTWRQSyVhbOHvqegUDRd0WhmXKX2mkHJe1SFCMJhagUleMq+Uci34wLSipf8Lagt4LlpRFWQ==",
+      "cpu": [
+        "riscv64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/linux-s390x": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/linux-s390x/-/linux-s390x-0.27.3.tgz",
+      "integrity": "sha512-pBHUx9LzXWBc7MFIEEL0yD/ZVtNgLytvx60gES28GcWMqil8ElCYR4kvbV2BDqsHOvVDRrOxGySBM9Fcv744hw==",
+      "cpu": [
+        "s390x"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/linux-x64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.27.3.tgz",
+      "integrity": "sha512-Czi8yzXUWIQYAtL/2y6vogER8pvcsOsk5cpwL4Gk5nJqH5UZiVByIY8Eorm5R13gq+DQKYg0+JyQoytLQas4dA==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/netbsd-arm64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/netbsd-arm64/-/netbsd-arm64-0.27.3.tgz",
+      "integrity": "sha512-sDpk0RgmTCR/5HguIZa9n9u+HVKf40fbEUt+iTzSnCaGvY9kFP0YKBWZtJaraonFnqef5SlJ8/TiPAxzyS+UoA==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "netbsd"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/netbsd-x64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/netbsd-x64/-/netbsd-x64-0.27.3.tgz",
+      "integrity": "sha512-P14lFKJl/DdaE00LItAukUdZO5iqNH7+PjoBm+fLQjtxfcfFE20Xf5CrLsmZdq5LFFZzb5JMZ9grUwvtVYzjiA==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "netbsd"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/openbsd-arm64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/openbsd-arm64/-/openbsd-arm64-0.27.3.tgz",
+      "integrity": "sha512-AIcMP77AvirGbRl/UZFTq5hjXK+2wC7qFRGoHSDrZ5v5b8DK/GYpXW3CPRL53NkvDqb9D+alBiC/dV0Fb7eJcw==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "openbsd"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/openbsd-x64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/openbsd-x64/-/openbsd-x64-0.27.3.tgz",
+      "integrity": "sha512-DnW2sRrBzA+YnE70LKqnM3P+z8vehfJWHXECbwBmH/CU51z6FiqTQTHFenPlHmo3a8UgpLyH3PT+87OViOh1AQ==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "openbsd"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/openharmony-arm64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/openharmony-arm64/-/openharmony-arm64-0.27.3.tgz",
+      "integrity": "sha512-NinAEgr/etERPTsZJ7aEZQvvg/A6IsZG/LgZy+81wON2huV7SrK3e63dU0XhyZP4RKGyTm7aOgmQk0bGp0fy2g==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "openharmony"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/sunos-x64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/sunos-x64/-/sunos-x64-0.27.3.tgz",
+      "integrity": "sha512-PanZ+nEz+eWoBJ8/f8HKxTTD172SKwdXebZ0ndd953gt1HRBbhMsaNqjTyYLGLPdoWHy4zLU7bDVJztF5f3BHA==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "sunos"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/win32-arm64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/win32-arm64/-/win32-arm64-0.27.3.tgz",
+      "integrity": "sha512-B2t59lWWYrbRDw/tjiWOuzSsFh1Y/E95ofKz7rIVYSQkUYBjfSgf6oeYPNWHToFRr2zx52JKApIcAS/D5TUBnA==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/win32-ia32": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/win32-ia32/-/win32-ia32-0.27.3.tgz",
+      "integrity": "sha512-QLKSFeXNS8+tHW7tZpMtjlNb7HKau0QDpwm49u0vUp9y1WOF+PEzkU84y9GqYaAVW8aH8f3GcBck26jh54cX4Q==",
+      "cpu": [
+        "ia32"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@esbuild/win32-x64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.27.3.tgz",
+      "integrity": "sha512-4uJGhsxuptu3OcpVAzli+/gWusVGwZZHTlS63hh++ehExkVT8SgiEf7/uC/PclrPPkLhZqGgCTjd0VWLo6xMqA==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@eslint-community/eslint-utils": {
+      "version": "4.9.1",
+      "resolved": "https://registry.npmjs.org/@eslint-community/eslint-utils/-/eslint-utils-4.9.1.tgz",
+      "integrity": "sha512-phrYmNiYppR7znFEdqgfWHXR6NCkZEK7hwWDHZUjit/2/U0r6XvkDl0SYnoM51Hq7FhCGdLDT6zxCCOY1hexsQ==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "eslint-visitor-keys": "^3.4.3"
+      },
+      "engines": {
+        "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
+      },
+      "funding": {
+        "url": "https://opencollective.com/eslint"
+      },
+      "peerDependencies": {
+        "eslint": "^6.0.0 || ^7.0.0 || >=8.0.0"
+      }
+    },
+    "node_modules/@eslint-community/eslint-utils/node_modules/eslint-visitor-keys": {
+      "version": "3.4.3",
+      "resolved": "https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-3.4.3.tgz",
+      "integrity": "sha512-wpc+LXeiyiisxPlEkUzU6svyS1frIO3Mgxj1fdy7Pm8Ygzguax2N3Fa/D/ag1WqbOprdI+uY6wMUl8/a2G+iag==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "engines": {
+        "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
+      },
+      "funding": {
+        "url": "https://opencollective.com/eslint"
+      }
+    },
+    "node_modules/@eslint-community/regexpp": {
+      "version": "4.12.2",
+      "resolved": "https://registry.npmjs.org/@eslint-community/regexpp/-/regexpp-4.12.2.tgz",
+      "integrity": "sha512-EriSTlt5OC9/7SXkRSCAhfSxxoSUgBm33OH+IkwbdpgoqsSsUg7y3uh+IICI/Qg4BBWr3U2i39RpmycbxMq4ew==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": "^12.0.0 || ^14.0.0 || >=16.0.0"
+      }
+    },
+    "node_modules/@eslint/config-array": {
+      "version": "0.21.2",
+      "resolved": "https://registry.npmjs.org/@eslint/config-array/-/config-array-0.21.2.tgz",
+      "integrity": "sha512-nJl2KGTlrf9GjLimgIru+V/mzgSK0ABCDQRvxw5BjURL7WfH5uoWmizbH7QB6MmnMBd8cIC9uceWnezL1VZWWw==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@eslint/object-schema": "^2.1.7",
+        "debug": "^4.3.1",
+        "minimatch": "^3.1.5"
+      },
+      "engines": {
+        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+      }
+    },
+    "node_modules/@eslint/config-helpers": {
+      "version": "0.4.2",
+      "resolved": "https://registry.npmjs.org/@eslint/config-helpers/-/config-helpers-0.4.2.tgz",
+      "integrity": "sha512-gBrxN88gOIf3R7ja5K9slwNayVcZgK6SOUORm2uBzTeIEfeVaIhOpCtTox3P6R7o2jLFwLFTLnC7kU/RGcYEgw==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@eslint/core": "^0.17.0"
+      },
+      "engines": {
+        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+      }
+    },
+    "node_modules/@eslint/core": {
+      "version": "0.17.0",
+      "resolved": "https://registry.npmjs.org/@eslint/core/-/core-0.17.0.tgz",
+      "integrity": "sha512-yL/sLrpmtDaFEiUj1osRP4TI2MDz1AddJL+jZ7KSqvBuliN4xqYY54IfdN8qD8Toa6g1iloph1fxQNkjOxrrpQ==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@types/json-schema": "^7.0.15"
+      },
+      "engines": {
+        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+      }
+    },
+    "node_modules/@eslint/eslintrc": {
+      "version": "3.3.5",
+      "resolved": "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-3.3.5.tgz",
+      "integrity": "sha512-4IlJx0X0qftVsN5E+/vGujTRIFtwuLbNsVUe7TO6zYPDR1O6nFwvwhIKEKSrl6dZchmYBITazxKoUYOjdtjlRg==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "ajv": "^6.14.0",
+        "debug": "^4.3.2",
+        "espree": "^10.0.1",
+        "globals": "^14.0.0",
+        "ignore": "^5.2.0",
+        "import-fresh": "^3.2.1",
+        "js-yaml": "^4.1.1",
+        "minimatch": "^3.1.5",
+        "strip-json-comments": "^3.1.1"
+      },
+      "engines": {
+        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+      },
+      "funding": {
+        "url": "https://opencollective.com/eslint"
+      }
+    },
+    "node_modules/@eslint/eslintrc/node_modules/globals": {
+      "version": "14.0.0",
+      "resolved": "https://registry.npmjs.org/globals/-/globals-14.0.0.tgz",
+      "integrity": "sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
+      }
+    },
+    "node_modules/@eslint/js": {
+      "version": "9.39.4",
+      "resolved": "https://registry.npmjs.org/@eslint/js/-/js-9.39.4.tgz",
+      "integrity": "sha512-nE7DEIchvtiFTwBw4Lfbu59PG+kCofhjsKaCWzxTpt4lfRjRMqG6uMBzKXuEcyXhOHoUp9riAm7/aWYGhXZ9cw==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+      },
+      "funding": {
+        "url": "https://eslint.org/donate"
+      }
+    },
+    "node_modules/@eslint/object-schema": {
+      "version": "2.1.7",
+      "resolved": "https://registry.npmjs.org/@eslint/object-schema/-/object-schema-2.1.7.tgz",
+      "integrity": "sha512-VtAOaymWVfZcmZbp6E2mympDIHvyjXs/12LqWYjVw6qjrfF+VK+fyG33kChz3nnK+SU5/NeHOqrTEHS8sXO3OA==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "engines": {
+        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+      }
+    },
+    "node_modules/@eslint/plugin-kit": {
+      "version": "0.4.1",
+      "resolved": "https://registry.npmjs.org/@eslint/plugin-kit/-/plugin-kit-0.4.1.tgz",
+      "integrity": "sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@eslint/core": "^0.17.0",
+        "levn": "^0.4.1"
+      },
+      "engines": {
+        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+      }
+    },
+    "node_modules/@humanfs/core": {
+      "version": "0.19.1",
+      "resolved": "https://registry.npmjs.org/@humanfs/core/-/core-0.19.1.tgz",
+      "integrity": "sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "engines": {
+        "node": ">=18.18.0"
+      }
+    },
+    "node_modules/@humanfs/node": {
+      "version": "0.16.7",
+      "resolved": "https://registry.npmjs.org/@humanfs/node/-/node-0.16.7.tgz",
+      "integrity": "sha512-/zUx+yOsIrG4Y43Eh2peDeKCxlRt/gET6aHfaKpuq267qXdYDFViVHfMaLyygZOnl0kGWxFIgsBy8QFuTLUXEQ==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@humanfs/core": "^0.19.1",
+        "@humanwhocodes/retry": "^0.4.0"
+      },
+      "engines": {
+        "node": ">=18.18.0"
+      }
+    },
+    "node_modules/@humanwhocodes/module-importer": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/@humanwhocodes/module-importer/-/module-importer-1.0.1.tgz",
+      "integrity": "sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "engines": {
+        "node": ">=12.22"
+      },
+      "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/nzakas"
+      }
+    },
+    "node_modules/@humanwhocodes/retry": {
+      "version": "0.4.3",
+      "resolved": "https://registry.npmjs.org/@humanwhocodes/retry/-/retry-0.4.3.tgz",
+      "integrity": "sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "engines": {
+        "node": ">=18.18"
+      },
+      "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/nzakas"
+      }
+    },
+    "node_modules/@jridgewell/gen-mapping": {
+      "version": "0.3.13",
+      "resolved": "https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.3.13.tgz",
+      "integrity": "sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==",
+      "license": "MIT",
+      "dependencies": {
+        "@jridgewell/sourcemap-codec": "^1.5.0",
+        "@jridgewell/trace-mapping": "^0.3.24"
+      }
+    },
+    "node_modules/@jridgewell/remapping": {
+      "version": "2.3.5",
+      "resolved": "https://registry.npmjs.org/@jridgewell/remapping/-/remapping-2.3.5.tgz",
+      "integrity": "sha512-LI9u/+laYG4Ds1TDKSJW2YPrIlcVYOwi2fUC6xB43lueCjgxV4lffOCZCtYFiH6TNOX+tQKXx97T4IKHbhyHEQ==",
+      "license": "MIT",
+      "dependencies": {
+        "@jridgewell/gen-mapping": "^0.3.5",
+        "@jridgewell/trace-mapping": "^0.3.24"
+      }
+    },
+    "node_modules/@jridgewell/resolve-uri": {
+      "version": "3.1.2",
+      "resolved": "https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.1.2.tgz",
+      "integrity": "sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=6.0.0"
+      }
+    },
+    "node_modules/@jridgewell/sourcemap-codec": {
+      "version": "1.5.5",
+      "resolved": "https://registry.npmjs.org/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.5.5.tgz",
+      "integrity": "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==",
+      "license": "MIT"
+    },
+    "node_modules/@jridgewell/trace-mapping": {
+      "version": "0.3.31",
+      "resolved": "https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.31.tgz",
+      "integrity": "sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==",
+      "license": "MIT",
+      "dependencies": {
+        "@jridgewell/resolve-uri": "^3.1.0",
+        "@jridgewell/sourcemap-codec": "^1.4.14"
+      }
+    },
+    "node_modules/@rolldown/pluginutils": {
+      "version": "1.0.0-rc.3",
+      "resolved": "https://registry.npmjs.org/@rolldown/pluginutils/-/pluginutils-1.0.0-rc.3.tgz",
+      "integrity": "sha512-eybk3TjzzzV97Dlj5c+XrBFW57eTNhzod66y9HrBlzJ6NsCrWCp/2kaPS3K9wJmurBC0Tdw4yPjXKZqlznim3Q==",
+      "dev": true,
+      "license": "MIT"
+    },
+    "node_modules/@rollup/rollup-android-arm-eabi": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.59.0.tgz",
+      "integrity": "sha512-upnNBkA6ZH2VKGcBj9Fyl9IGNPULcjXRlg0LLeaioQWueH30p6IXtJEbKAgvyv+mJaMxSm1l6xwDXYjpEMiLMg==",
+      "cpu": [
+        "arm"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ]
+    },
+    "node_modules/@rollup/rollup-android-arm64": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-android-arm64/-/rollup-android-arm64-4.59.0.tgz",
+      "integrity": "sha512-hZ+Zxj3SySm4A/DylsDKZAeVg0mvi++0PYVceVyX7hemkw7OreKdCvW2oQ3T1FMZvCaQXqOTHb8qmBShoqk69Q==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ]
+    },
+    "node_modules/@rollup/rollup-darwin-arm64": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.59.0.tgz",
+      "integrity": "sha512-W2Psnbh1J8ZJw0xKAd8zdNgF9HRLkdWwwdWqubSVk0pUuQkoHnv7rx4GiF9rT4t5DIZGAsConRE3AxCdJ4m8rg==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ]
+    },
+    "node_modules/@rollup/rollup-darwin-x64": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-darwin-x64/-/rollup-darwin-x64-4.59.0.tgz",
+      "integrity": "sha512-ZW2KkwlS4lwTv7ZVsYDiARfFCnSGhzYPdiOU4IM2fDbL+QGlyAbjgSFuqNRbSthybLbIJ915UtZBtmuLrQAT/w==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ]
+    },
+    "node_modules/@rollup/rollup-freebsd-arm64": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-freebsd-arm64/-/rollup-freebsd-arm64-4.59.0.tgz",
+      "integrity": "sha512-EsKaJ5ytAu9jI3lonzn3BgG8iRBjV4LxZexygcQbpiU0wU0ATxhNVEpXKfUa0pS05gTcSDMKpn3Sx+QB9RlTTA==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "freebsd"
+      ]
+    },
+    "node_modules/@rollup/rollup-freebsd-x64": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-freebsd-x64/-/rollup-freebsd-x64-4.59.0.tgz",
+      "integrity": "sha512-d3DuZi2KzTMjImrxoHIAODUZYoUUMsuUiY4SRRcJy6NJoZ6iIqWnJu9IScV9jXysyGMVuW+KNzZvBLOcpdl3Vg==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "freebsd"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-arm-gnueabihf": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm-gnueabihf/-/rollup-linux-arm-gnueabihf-4.59.0.tgz",
+      "integrity": "sha512-t4ONHboXi/3E0rT6OZl1pKbl2Vgxf9vJfWgmUoCEVQVxhW6Cw/c8I6hbbu7DAvgp82RKiH7TpLwxnJeKv2pbsw==",
+      "cpu": [
+        "arm"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-arm-musleabihf": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm-musleabihf/-/rollup-linux-arm-musleabihf-4.59.0.tgz",
+      "integrity": "sha512-CikFT7aYPA2ufMD086cVORBYGHffBo4K8MQ4uPS/ZnY54GKj36i196u8U+aDVT2LX4eSMbyHtyOh7D7Zvk2VvA==",
+      "cpu": [
+        "arm"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-arm64-gnu": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm64-gnu/-/rollup-linux-arm64-gnu-4.59.0.tgz",
+      "integrity": "sha512-jYgUGk5aLd1nUb1CtQ8E+t5JhLc9x5WdBKew9ZgAXg7DBk0ZHErLHdXM24rfX+bKrFe+Xp5YuJo54I5HFjGDAA==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-arm64-musl": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm64-musl/-/rollup-linux-arm64-musl-4.59.0.tgz",
+      "integrity": "sha512-peZRVEdnFWZ5Bh2KeumKG9ty7aCXzzEsHShOZEFiCQlDEepP1dpUl/SrUNXNg13UmZl+gzVDPsiCwnV1uI0RUA==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-loong64-gnu": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-loong64-gnu/-/rollup-linux-loong64-gnu-4.59.0.tgz",
+      "integrity": "sha512-gbUSW/97f7+r4gHy3Jlup8zDG190AuodsWnNiXErp9mT90iCy9NKKU0Xwx5k8VlRAIV2uU9CsMnEFg/xXaOfXg==",
+      "cpu": [
+        "loong64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-loong64-musl": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-loong64-musl/-/rollup-linux-loong64-musl-4.59.0.tgz",
+      "integrity": "sha512-yTRONe79E+o0FWFijasoTjtzG9EBedFXJMl888NBEDCDV9I2wGbFFfJQQe63OijbFCUZqxpHz1GzpbtSFikJ4Q==",
+      "cpu": [
+        "loong64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-ppc64-gnu": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-ppc64-gnu/-/rollup-linux-ppc64-gnu-4.59.0.tgz",
+      "integrity": "sha512-sw1o3tfyk12k3OEpRddF68a1unZ5VCN7zoTNtSn2KndUE+ea3m3ROOKRCZxEpmT9nsGnogpFP9x6mnLTCaoLkA==",
+      "cpu": [
+        "ppc64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-ppc64-musl": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-ppc64-musl/-/rollup-linux-ppc64-musl-4.59.0.tgz",
+      "integrity": "sha512-+2kLtQ4xT3AiIxkzFVFXfsmlZiG5FXYW7ZyIIvGA7Bdeuh9Z0aN4hVyXS/G1E9bTP/vqszNIN/pUKCk/BTHsKA==",
+      "cpu": [
+        "ppc64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-riscv64-gnu": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-riscv64-gnu/-/rollup-linux-riscv64-gnu-4.59.0.tgz",
+      "integrity": "sha512-NDYMpsXYJJaj+I7UdwIuHHNxXZ/b/N2hR15NyH3m2qAtb/hHPA4g4SuuvrdxetTdndfj9b1WOmy73kcPRoERUg==",
+      "cpu": [
+        "riscv64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-riscv64-musl": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-riscv64-musl/-/rollup-linux-riscv64-musl-4.59.0.tgz",
+      "integrity": "sha512-nLckB8WOqHIf1bhymk+oHxvM9D3tyPndZH8i8+35p/1YiVoVswPid2yLzgX7ZJP0KQvnkhM4H6QZ5m0LzbyIAg==",
+      "cpu": [
+        "riscv64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-s390x-gnu": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-s390x-gnu/-/rollup-linux-s390x-gnu-4.59.0.tgz",
+      "integrity": "sha512-oF87Ie3uAIvORFBpwnCvUzdeYUqi2wY6jRFWJAy1qus/udHFYIkplYRW+wo+GRUP4sKzYdmE1Y3+rY5Gc4ZO+w==",
+      "cpu": [
+        "s390x"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-x64-gnu": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.59.0.tgz",
+      "integrity": "sha512-3AHmtQq/ppNuUspKAlvA8HtLybkDflkMuLK4DPo77DfthRb71V84/c4MlWJXixZz4uruIH4uaa07IqoAkG64fg==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-linux-x64-musl": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.59.0.tgz",
+      "integrity": "sha512-2UdiwS/9cTAx7qIUZB/fWtToJwvt0Vbo0zmnYt7ED35KPg13Q0ym1g442THLC7VyI6JfYTP4PiSOWyoMdV2/xg==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ]
+    },
+    "node_modules/@rollup/rollup-openbsd-x64": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-openbsd-x64/-/rollup-openbsd-x64-4.59.0.tgz",
+      "integrity": "sha512-M3bLRAVk6GOwFlPTIxVBSYKUaqfLrn8l0psKinkCFxl4lQvOSz8ZrKDz2gxcBwHFpci0B6rttydI4IpS4IS/jQ==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "openbsd"
+      ]
+    },
+    "node_modules/@rollup/rollup-openharmony-arm64": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-openharmony-arm64/-/rollup-openharmony-arm64-4.59.0.tgz",
+      "integrity": "sha512-tt9KBJqaqp5i5HUZzoafHZX8b5Q2Fe7UjYERADll83O4fGqJ49O1FsL6LpdzVFQcpwvnyd0i+K/VSwu/o/nWlA==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "openharmony"
+      ]
+    },
+    "node_modules/@rollup/rollup-win32-arm64-msvc": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-arm64-msvc/-/rollup-win32-arm64-msvc-4.59.0.tgz",
+      "integrity": "sha512-V5B6mG7OrGTwnxaNUzZTDTjDS7F75PO1ae6MJYdiMu60sq0CqN5CVeVsbhPxalupvTX8gXVSU9gq+Rx1/hvu6A==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ]
+    },
+    "node_modules/@rollup/rollup-win32-ia32-msvc": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-ia32-msvc/-/rollup-win32-ia32-msvc-4.59.0.tgz",
+      "integrity": "sha512-UKFMHPuM9R0iBegwzKF4y0C4J9u8C6MEJgFuXTBerMk7EJ92GFVFYBfOZaSGLu6COf7FxpQNqhNS4c4icUPqxA==",
+      "cpu": [
+        "ia32"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ]
+    },
+    "node_modules/@rollup/rollup-win32-x64-gnu": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-x64-gnu/-/rollup-win32-x64-gnu-4.59.0.tgz",
+      "integrity": "sha512-laBkYlSS1n2L8fSo1thDNGrCTQMmxjYY5G0WFWjFFYZkKPjsMBsgJfGf4TLxXrF6RyhI60L8TMOjBMvXiTcxeA==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ]
+    },
+    "node_modules/@rollup/rollup-win32-x64-msvc": {
+      "version": "4.59.0",
+      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.59.0.tgz",
+      "integrity": "sha512-2HRCml6OztYXyJXAvdDXPKcawukWY2GpR5/nxKp4iBgiO3wcoEGkAaqctIbZcNB6KlUQBIqt8VYkNSj2397EfA==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ]
+    },
+    "node_modules/@tailwindcss/node": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/node/-/node-4.2.1.tgz",
+      "integrity": "sha512-jlx6sLk4EOwO6hHe1oCGm1Q4AN/s0rSrTTPBGPM0/RQ6Uylwq17FuU8IeJJKEjtc6K6O07zsvP+gDO6MMWo7pg==",
+      "license": "MIT",
+      "dependencies": {
+        "@jridgewell/remapping": "^2.3.5",
+        "enhanced-resolve": "^5.19.0",
+        "jiti": "^2.6.1",
+        "lightningcss": "1.31.1",
+        "magic-string": "^0.30.21",
+        "source-map-js": "^1.2.1",
+        "tailwindcss": "4.2.1"
+      }
+    },
+    "node_modules/@tailwindcss/oxide": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide/-/oxide-4.2.1.tgz",
+      "integrity": "sha512-yv9jeEFWnjKCI6/T3Oq50yQEOqmpmpfzG1hcZsAOaXFQPfzWprWrlHSdGPEF3WQTi8zu8ohC9Mh9J470nT5pUw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 20"
+      },
+      "optionalDependencies": {
+        "@tailwindcss/oxide-android-arm64": "4.2.1",
+        "@tailwindcss/oxide-darwin-arm64": "4.2.1",
+        "@tailwindcss/oxide-darwin-x64": "4.2.1",
+        "@tailwindcss/oxide-freebsd-x64": "4.2.1",
+        "@tailwindcss/oxide-linux-arm-gnueabihf": "4.2.1",
+        "@tailwindcss/oxide-linux-arm64-gnu": "4.2.1",
+        "@tailwindcss/oxide-linux-arm64-musl": "4.2.1",
+        "@tailwindcss/oxide-linux-x64-gnu": "4.2.1",
+        "@tailwindcss/oxide-linux-x64-musl": "4.2.1",
+        "@tailwindcss/oxide-wasm32-wasi": "4.2.1",
+        "@tailwindcss/oxide-win32-arm64-msvc": "4.2.1",
+        "@tailwindcss/oxide-win32-x64-msvc": "4.2.1"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-android-arm64": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-android-arm64/-/oxide-android-arm64-4.2.1.tgz",
+      "integrity": "sha512-eZ7G1Zm5EC8OOKaesIKuw77jw++QJ2lL9N+dDpdQiAB/c/B2wDh0QPFHbkBVrXnwNugvrbJFk1gK2SsVjwWReg==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ],
+      "engines": {
+        "node": ">= 20"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-darwin-arm64": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-darwin-arm64/-/oxide-darwin-arm64-4.2.1.tgz",
+      "integrity": "sha512-q/LHkOstoJ7pI1J0q6djesLzRvQSIfEto148ppAd+BVQK0JYjQIFSK3JgYZJa+Yzi0DDa52ZsQx2rqytBnf8Hw==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": ">= 20"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-darwin-x64": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-darwin-x64/-/oxide-darwin-x64-4.2.1.tgz",
+      "integrity": "sha512-/f/ozlaXGY6QLbpvd/kFTro2l18f7dHKpB+ieXz+Cijl4Mt9AI2rTrpq7V+t04nK+j9XBQHnSMdeQRhbGyt6fw==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": ">= 20"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-freebsd-x64": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-freebsd-x64/-/oxide-freebsd-x64-4.2.1.tgz",
+      "integrity": "sha512-5e/AkgYJT/cpbkys/OU2Ei2jdETCLlifwm7ogMC7/hksI2fC3iiq6OcXwjibcIjPung0kRtR3TxEITkqgn0TcA==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "freebsd"
+      ],
+      "engines": {
+        "node": ">= 20"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-linux-arm-gnueabihf": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-linux-arm-gnueabihf/-/oxide-linux-arm-gnueabihf-4.2.1.tgz",
+      "integrity": "sha512-Uny1EcVTTmerCKt/1ZuKTkb0x8ZaiuYucg2/kImO5A5Y/kBz41/+j0gxUZl+hTF3xkWpDmHX+TaWhOtba2Fyuw==",
+      "cpu": [
+        "arm"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">= 20"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-linux-arm64-gnu": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-linux-arm64-gnu/-/oxide-linux-arm64-gnu-4.2.1.tgz",
+      "integrity": "sha512-CTrwomI+c7n6aSSQlsPL0roRiNMDQ/YzMD9EjcR+H4f0I1SQ8QqIuPnsVp7QgMkC1Qi8rtkekLkOFjo7OlEFRQ==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">= 20"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-linux-arm64-musl": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-linux-arm64-musl/-/oxide-linux-arm64-musl-4.2.1.tgz",
+      "integrity": "sha512-WZA0CHRL/SP1TRbA5mp9htsppSEkWuQ4KsSUumYQnyl8ZdT39ntwqmz4IUHGN6p4XdSlYfJwM4rRzZLShHsGAQ==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">= 20"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-linux-x64-gnu": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-linux-x64-gnu/-/oxide-linux-x64-gnu-4.2.1.tgz",
+      "integrity": "sha512-qMFzxI2YlBOLW5PhblzuSWlWfwLHaneBE0xHzLrBgNtqN6mWfs+qYbhryGSXQjFYB1Dzf5w+LN5qbUTPhW7Y5g==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">= 20"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-linux-x64-musl": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-linux-x64-musl/-/oxide-linux-x64-musl-4.2.1.tgz",
+      "integrity": "sha512-5r1X2FKnCMUPlXTWRYpHdPYUY6a1Ar/t7P24OuiEdEOmms5lyqjDRvVY1yy9Rmioh+AunQ0rWiOTPE8F9A3v5g==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">= 20"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-wasm32-wasi": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-wasm32-wasi/-/oxide-wasm32-wasi-4.2.1.tgz",
+      "integrity": "sha512-MGFB5cVPvshR85MTJkEvqDUnuNoysrsRxd6vnk1Lf2tbiqNlXpHYZqkqOQalydienEWOHHFyyuTSYRsLfxFJ2Q==",
+      "bundleDependencies": [
+        "@napi-rs/wasm-runtime",
+        "@emnapi/core",
+        "@emnapi/runtime",
+        "@tybys/wasm-util",
+        "@emnapi/wasi-threads",
+        "tslib"
+      ],
+      "cpu": [
+        "wasm32"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "dependencies": {
+        "@emnapi/core": "^1.8.1",
+        "@emnapi/runtime": "^1.8.1",
+        "@emnapi/wasi-threads": "^1.1.0",
+        "@napi-rs/wasm-runtime": "^1.1.1",
+        "@tybys/wasm-util": "^0.10.1",
+        "tslib": "^2.8.1"
+      },
+      "engines": {
+        "node": ">=14.0.0"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-win32-arm64-msvc": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-win32-arm64-msvc/-/oxide-win32-arm64-msvc-4.2.1.tgz",
+      "integrity": "sha512-YlUEHRHBGnCMh4Nj4GnqQyBtsshUPdiNroZj8VPkvTZSoHsilRCwXcVKnG9kyi0ZFAS/3u+qKHBdDc81SADTRA==",
+      "cpu": [
+        "arm64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": ">= 20"
+      }
+    },
+    "node_modules/@tailwindcss/oxide-win32-x64-msvc": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/oxide-win32-x64-msvc/-/oxide-win32-x64-msvc-4.2.1.tgz",
+      "integrity": "sha512-rbO34G5sMWWyrN/idLeVxAZgAKWrn5LiR3/I90Q9MkA67s6T1oB0xtTe+0heoBvHSpbU9Mk7i6uwJnpo4u21XQ==",
+      "cpu": [
+        "x64"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": ">= 20"
+      }
+    },
+    "node_modules/@tailwindcss/vite": {
+      "version": "4.2.1",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/vite/-/vite-4.2.1.tgz",
+      "integrity": "sha512-TBf2sJjYeb28jD2U/OhwdW0bbOsxkWPwQ7SrqGf9sVcoYwZj7rkXljroBO9wKBut9XnmQLXanuDUeqQK0lGg/w==",
+      "license": "MIT",
+      "dependencies": {
+        "@tailwindcss/node": "4.2.1",
+        "@tailwindcss/oxide": "4.2.1",
+        "tailwindcss": "4.2.1"
+      },
+      "peerDependencies": {
+        "vite": "^5.2.0 || ^6 || ^7"
+      }
+    },
+    "node_modules/@types/babel__core": {
+      "version": "7.20.5",
+      "resolved": "https://registry.npmjs.org/@types/babel__core/-/babel__core-7.20.5.tgz",
+      "integrity": "sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/parser": "^7.20.7",
+        "@babel/types": "^7.20.7",
+        "@types/babel__generator": "*",
+        "@types/babel__template": "*",
+        "@types/babel__traverse": "*"
+      }
+    },
+    "node_modules/@types/babel__generator": {
+      "version": "7.27.0",
+      "resolved": "https://registry.npmjs.org/@types/babel__generator/-/babel__generator-7.27.0.tgz",
+      "integrity": "sha512-ufFd2Xi92OAVPYsy+P4n7/U7e68fex0+Ee8gSG9KX7eo084CWiQ4sdxktvdl0bOPupXtVJPY19zk6EwWqUQ8lg==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/types": "^7.0.0"
+      }
+    },
+    "node_modules/@types/babel__template": {
+      "version": "7.4.4",
+      "resolved": "https://registry.npmjs.org/@types/babel__template/-/babel__template-7.4.4.tgz",
+      "integrity": "sha512-h/NUaSyG5EyxBIp8YRxo4RMe2/qQgvyowRwVMzhYhBCONbW8PUsg4lkFMrhgZhUe5z3L3MiLDuvyJ/CaPa2A8A==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/parser": "^7.1.0",
+        "@babel/types": "^7.0.0"
+      }
+    },
+    "node_modules/@types/babel__traverse": {
+      "version": "7.28.0",
+      "resolved": "https://registry.npmjs.org/@types/babel__traverse/-/babel__traverse-7.28.0.tgz",
+      "integrity": "sha512-8PvcXf70gTDZBgt9ptxJ8elBeBjcLOAcOtoO/mPJjtji1+CdGbHgm77om1GrsPxsiE+uXIpNSK64UYaIwQXd4Q==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/types": "^7.28.2"
+      }
+    },
+    "node_modules/@types/estree": {
+      "version": "1.0.8",
+      "resolved": "https://registry.npmjs.org/@types/estree/-/estree-1.0.8.tgz",
+      "integrity": "sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==",
+      "license": "MIT"
+    },
+    "node_modules/@types/json-schema": {
+      "version": "7.0.15",
+      "resolved": "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz",
+      "integrity": "sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==",
+      "dev": true,
+      "license": "MIT"
+    },
+    "node_modules/@types/react": {
+      "version": "19.2.14",
+      "resolved": "https://registry.npmjs.org/@types/react/-/react-19.2.14.tgz",
+      "integrity": "sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==",
+      "dev": true,
+      "license": "MIT",
+      "peer": true,
+      "dependencies": {
+        "csstype": "^3.2.2"
+      }
+    },
+    "node_modules/@types/react-dom": {
+      "version": "19.2.3",
+      "resolved": "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.2.3.tgz",
+      "integrity": "sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==",
+      "dev": true,
+      "license": "MIT",
+      "peerDependencies": {
+        "@types/react": "^19.2.0"
+      }
+    },
+    "node_modules/@vitejs/plugin-react": {
+      "version": "5.1.4",
+      "resolved": "https://registry.npmjs.org/@vitejs/plugin-react/-/plugin-react-5.1.4.tgz",
+      "integrity": "sha512-VIcFLdRi/VYRU8OL/puL7QXMYafHmqOnwTZY50U1JPlCNj30PxCMx65c494b1K9be9hX83KVt0+gTEwTWLqToA==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@babel/core": "^7.29.0",
+        "@babel/plugin-transform-react-jsx-self": "^7.27.1",
+        "@babel/plugin-transform-react-jsx-source": "^7.27.1",
+        "@rolldown/pluginutils": "1.0.0-rc.3",
+        "@types/babel__core": "^7.20.5",
+        "react-refresh": "^0.18.0"
+      },
+      "engines": {
+        "node": "^20.19.0 || >=22.12.0"
+      },
+      "peerDependencies": {
+        "vite": "^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0"
+      }
+    },
+    "node_modules/acorn": {
+      "version": "8.16.0",
+      "resolved": "https://registry.npmjs.org/acorn/-/acorn-8.16.0.tgz",
+      "integrity": "sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==",
+      "dev": true,
+      "license": "MIT",
+      "peer": true,
+      "bin": {
+        "acorn": "bin/acorn"
+      },
+      "engines": {
+        "node": ">=0.4.0"
+      }
+    },
+    "node_modules/acorn-jsx": {
+      "version": "5.3.2",
+      "resolved": "https://registry.npmjs.org/acorn-jsx/-/acorn-jsx-5.3.2.tgz",
+      "integrity": "sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==",
+      "dev": true,
+      "license": "MIT",
+      "peerDependencies": {
+        "acorn": "^6.0.0 || ^7.0.0 || ^8.0.0"
+      }
+    },
+    "node_modules/ajv": {
+      "version": "6.14.0",
+      "resolved": "https://registry.npmjs.org/ajv/-/ajv-6.14.0.tgz",
+      "integrity": "sha512-IWrosm/yrn43eiKqkfkHis7QioDleaXQHdDVPKg0FSwwd/DuvyX79TZnFOnYpB7dcsFAMmtFztZuXPDvSePkFw==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "fast-deep-equal": "^3.1.1",
+        "fast-json-stable-stringify": "^2.0.0",
+        "json-schema-traverse": "^0.4.1",
+        "uri-js": "^4.2.2"
+      },
+      "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/epoberezkin"
+      }
+    },
+    "node_modules/ansi-styles": {
+      "version": "4.3.0",
+      "resolved": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-4.3.0.tgz",
+      "integrity": "sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "color-convert": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=8"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/ansi-styles?sponsor=1"
+      }
+    },
+    "node_modules/argparse": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz",
+      "integrity": "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==",
+      "dev": true,
+      "license": "Python-2.0"
+    },
+    "node_modules/asynckit": {
+      "version": "0.4.0",
+      "resolved": "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz",
+      "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==",
+      "license": "MIT"
+    },
+    "node_modules/attr-accept": {
+      "version": "2.2.5",
+      "resolved": "https://registry.npmjs.org/attr-accept/-/attr-accept-2.2.5.tgz",
+      "integrity": "sha512-0bDNnY/u6pPwHDMoF0FieU354oBi0a8rD9FcsLwzcGWbc8KS8KPIi7y+s13OlVY+gMWc/9xEMUgNE6Qm8ZllYQ==",
+      "lic
+...[TRUNCATED]...
+
+============================================================
+6. PYTHON CONFIG (IF ANY)
+============================================================
+
+No files found.
+
+============================================================
+7. DOCKER / ENV / INFRA
+============================================================
+
+
+--- FILE: .env ---
+
+COMPOSE_PROJECT_NAME=despachantes
+
+# ─── App Database ─────────────────────────────────────────────
+DB_HOST=localhost
+DB_PORT=5433
+DB_NAME=despachantes_db
+DB_USER=despachantes
+DB_PASS=***REDACTED***
+
+# ─── File Storage (MinIO) ─────────────────────────────────────
+STORAGE_ENDPOINT=http://localhost:9010
+STORAGE_ACCESS_KEY=minioadmin
+STORAGE_SECRET_KEY=minioadmin123
+STORAGE_BUCKET=despachantes-docs
+
+# ─── Auth Server (Zitadel) ────────────────────────────────────
+ZITADEL_MASTERKEY=MiMasterKeyDe32CaracteresExactos
+ZITADEL_DB_PASS=***REDACTED***
+ZITADEL_ADMIN_PASSWORD=***REDACTED***
+ZITADEL_ISSUER_URI=http://localhost:8080
+
+# ─── CORS ─────────────────────────────────────────────────────
+CORS_ALLOWED_ORIGINS=http://localhost:5173
+
+# ─── App ──────────────────────────────────────────────────────
+APP_PORT=8081
+
+# ─── Notificaciones ──────────────────────────────────────────────────────
+RESEND_API_KEY=***REDACTED***
+RESEND_FROM_EMAIL=onboarding@resend.dev
+
+--- FILE: .env.example ---
+
+# =============================================================
+# .env.example — DespachantesV2
+# Copiar a .env y completar con valores reales.
+# NUNCA commitear el .env al repositorio.
+# =============================================================
+
+# Docker Compose
+COMPOSE_PROJECT_NAME=despachantes
+
+# ─── App Database ─────────────────────────────────────────────
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=despachantes_db
+DB_USER=
+DB_PASS=
+
+***REDACTED***
+STORAGE_ENDPOINT=http://localhost:9010
+STORAGE_ACCESS_KEY=
+STORAGE_SECRET_KEY=
+STORAGE_BUCKET=despachantes-docs
+
+# ─── Auth Server (Zitadel) ────────────────────────────────────
+# Masterkey: exactamente 32 caracteres. Generarlo con:
+#   openssl rand -base64 24
+ZITADEL_MASTERKEY=
+ZITADEL_DB_PASS=
+***REDACTED***
+ZITADEL_ISSUER_URI=http://localhost:8080
+
+# ─── CORS ─────────────────────────────────────────────────────
+CORS_ALLOWED_ORIGINS=http://localhost:5173
+
+# ─── Email (Resend) ───────────────────────────────────────────
+# Obtener en: https://resend.com/api-keys
+RESEND_API_KEY=***REDACTED***
+# Requiere dominio verificado en Resend. En dev usar: onboarding@resend.dev
+RESEND_FROM_EMAIL=notificaciones@tudominio.com
+
+# ─── App ──────────────────────────────────────────────────────
+APP_PORT=8081
+
+
+--- FILE: docker-compose.yml ---
+
+# SOLO servicios de infraestructura.
+# El backend y el frontend corren FUERA de Docker en desarrollo.
+
+services:
+  # ─── App Database ───────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: ${COMPOSE_PROJECT_NAME:-despachantes}_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ***REDACTED***
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: ${COMPOSE_PROJECT_NAME:-despachantes}_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@local.com
+      PGADMIN_DEFAULT_PASSWORD: ***REDACTED***
+    ports:
+      - "5051:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ─── File Storage ───────────────────────────────────────────────────────────
+  minio:
+    image: minio/minio:latest
+    container_name: ${COMPOSE_PROJECT_NAME:-despachantes}_storage
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: ${STORAGE_ACCESS_KEY}
+      MINIO_ROOT_PASSWORD: ***REDACTED***
+    ports:
+      - "9010:9000"
+      - "9011:9001"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9010/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ─── Auth Server (Zitadel) ──────────────────────────────────────────────────
+  zitadel-db:
+    image: postgres:16-alpine
+    container_name: ${COMPOSE_PROJECT_NAME:-despachantes}_zitadel_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: zitadel
+      POSTGRES_PASSWORD: ***REDACTED***
+      POSTGRES_DB: zitadel
+    ports:
+      - "5434:5432"
+    volumes:
+      - zitadel_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zitadel -d zitadel"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  zitadel:
+    image: ghcr.io/zitadel/zitadel:v2.67.0
+    container_name: ${COMPOSE_PROJECT_NAME:-despachantes}_zitadel
+    restart: unless-stopped
+    command: 'start-from-init --masterkey "${ZITADEL_MASTERKEY}" --tlsMode disabled'
+    environment:
+      ZITADEL_DATABASE_POSTGRES_HOST: zitadel-db
+      ZITADEL_DATABASE_POSTGRES_PORT: 5432
+      ZITADEL_DATABASE_POSTGRES_DATABASE: zitadel
+      ZITADEL_DATABASE_POSTGRES_USER_USERNAME: zitadel
+      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: ***REDACTED***
+      ZITADEL_DATABASE_POSTGRES_USER_SSL_MODE: disable
+      ZITADEL_DATABASE_POSTGRES_ADMIN_USERNAME: zitadel
+      ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD: ***REDACTED***
+      ZITADEL_DATABASE_POSTGRES_ADMIN_SSL_MODE: disable
+      ZITADEL_EXTERNALSECURE: "false"
+      ZITADEL_EXTERNALPORT: 8080
+      ZITADEL_EXTERNALDOMAIN: localhost
+      ZITADEL_FIRSTINSTANCE_ORG_NAME: ${COMPOSE_PROJECT_NAME:-Despachantes}
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_USERNAME: admin
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD: ***REDACTED***
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORDCHANGEREQUIRED: "false"
+    ports:
+      - "8080:8080"
+    depends_on:
+      zitadel-db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  minio_data:
+  zitadel_db_data:
+
+
+--- FILE: frontend\.env ---
+
+VITE_API_URL=http://localhost:8081/api/v1
+VITE_ZITADEL_AUTHORITY=http://localhost:8080
+VITE_ZITADEL_CLIENT_ID=364387211749163010
+
+
+--- FILE: frontend\.env.example ---
+
+# Variables de entorno del frontend (Vite).
+# Copiar a frontend/.env y completar.
+# TODAS las variables deben empezar con VITE_ para que Vite las exponga.
+
+# URL base de la API del backend
+VITE_API_URL=http://localhost:8081/api/v1
+
+# Zitadel — obtenés estos valores en http://localhost:8080/ui/console
+# después de crear el Proyecto y la Aplicación (ver README de setup)
+VITE_ZITADEL_AUTHORITY=http://localhost:8080
+VITE_ZITADEL_CLIENT_ID=
+
+
+============================================================
+8. README / DOCS / ARCHITECTURE / DOMAIN
+============================================================
+
+
+--- FILE: frontend\README.md ---
+
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+============================================================
+9. DATABASE / PRISMA / SQL
+============================================================
+
+
+--- FILE: backend\src\main\resources\db\migration\V001__create_initial_schema.sql ---
+
+-- =============================================================
+-- V001: Schema inicial - DespachantesV2
+-- =============================================================
+-- Convenciones:
+--   - IDs: UUID (gen_random_uuid())
+--   - Todas las tablas tienen created_at y updated_at
+--   - Soft delete con deleted_at (NULL = activo)
+--   - snake_case en nombres de columnas y tablas
+-- Autenticación: Zitadel gestiona passwords y sesiones.
+--   La tabla users almacena perfil + rol para autorización.
+-- =============================================================
+
+-- 1. Usuarios
+-- Zitadel gestiona la autenticación. Aquí guardamos perfil + rol para permisos.
+-- zitadel_user_id: el "sub" del JWT. Se completa en el primer login.
+CREATE TABLE users (
+    id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    zitadel_user_id     VARCHAR(255)    NOT NULL UNIQUE,
+    email               VARCHAR(255)    NOT NULL UNIQUE,
+    full_name           VARCHAR(255)    NOT NULL,
+    role                VARCHAR(50)     NOT NULL DEFAULT 'EMP_ADM',
+    is_active           BOOLEAN         NOT NULL DEFAULT TRUE,
+    -- client_id: solo para usuarios externos (rol CLIENT). NULL para empleados.
+    client_id           UUID            NULL,
+    created_at          TIMESTAMP       NOT NULL DEFAULT NOW(),
+    updated_at          TIMESTAMP       NOT NULL DEFAULT NOW(),
+    deleted_at          TIMESTAMP       NULL
+);
+
+COMMENT ON COLUMN users.role IS 'ADMIN | JEFE | EMP_IMP | EMP_EXP | EMP_ADM | CLIENT';
+COMMENT ON COLUMN users.zitadel_user_id IS 'Claim "sub" del JWT de Zitadel. Se asigna en el primer login.';
+
+-- 2. Clientes (empresas importadoras/exportadoras de Gabriel)
+-- Uruguay usa RUT (Registro Único Tributario). CUIT es Argentina.
+CREATE TABLE clients (
+    id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    rut             VARCHAR(20)     NOT NULL UNIQUE,
+    razon_social    VARCHAR(255)    NOT NULL,
+    email           VARCHAR(255)    NULL,
+    telefono        VARCHAR(50)     NULL,
+    direccion       TEXT            NULL,
+    is_active       BOOLEAN         NOT NULL DEFAULT TRUE,
+    created_at      TIMESTAMP       NOT NULL DEFAULT NOW(),
+    updated_at      TIMESTAMP       NOT NULL DEFAULT NOW(),
+    deleted_at      TIMESTAMP       NULL
+);
+
+-- FK de users → clients
+ALTER TABLE users
+    ADD CONSTRAINT fk_user_client FOREIGN KEY (client_id) REFERENCES clients(id);
+
+-- 3. Tipos de documentos (datos maestros configurables)
+CREATE TABLE document_types (
+    id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    code                VARCHAR(50)     NOT NULL UNIQUE,
+    name                VARCHAR(255)    NOT NULL,
+    description         TEXT            NULL,
+    applies_to          VARCHAR(20)     NOT NULL DEFAULT 'AMBAS',
+    via_transporte      VARCHAR(20)     NOT NULL DEFAULT 'TODAS',
+    is_always_required  BOOLEAN         NOT NULL DEFAULT FALSE,
+    created_at          TIMESTAMP       NOT NULL DEFAULT NOW()
+);
+
+-- 4. Operaciones (carpetas digitales)
+CREATE TABLE operations (
+    id                      UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    nro_carpeta             VARCHAR(50)     NOT NULL UNIQUE,
+    nro_dua                 VARCHAR(50)     NULL UNIQUE,
+    tipo                    VARCHAR(20)     NOT NULL,
+    via_transporte          VARCHAR(20)     NOT NULL,
+    estado                  VARCHAR(50)     NOT NULL DEFAULT 'APERTURA',
+    canal_dna               VARCHAR(20)     NULL,
+    proveedor               VARCHAR(255)    NULL,
+    descripcion_mercaderia  TEXT            NULL,
+    valor_estimado          DECIMAL(15,2)   NULL,
+    fecha_apertura          DATE            NOT NULL DEFAULT CURRENT_DATE,
+    fecha_levante           DATE            NULL,
+    es_admision_temporaria  BOOLEAN         NOT NULL DEFAULT FALSE,
+    fecha_vencimiento_at    DATE            NULL,
+    client_id               UUID            NOT NULL,
+    created_by              UUID            NOT NULL,
+    created_at              TIMESTAMP       NOT NULL DEFAULT NOW(),
+    updated_at              TIMESTAMP       NOT NULL DEFAULT NOW(),
+    deleted_at              TIMESTAMP       NULL,
+    CONSTRAINT fk_operation_client  FOREIGN KEY (client_id)  REFERENCES clients(id),
+    CONSTRAINT fk_operation_creator FOREIGN KEY (created_by) REFERENCES users(id)
+);
+
+-- 5. Documentos
+CREATE TABLE documents (
+    id                      UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    file_name               VARCHAR(255)    NOT NULL,
+    content_type            VARCHAR(100)    NOT NULL,
+    storage_path            VARCHAR(512)    NOT NULL,
+    file_size_bytes         BIGINT          NULL,
+    document_type_id        UUID            NULL,
+    is_shared_with_client   BOOLEAN         NOT NULL DEFAULT FALSE,
+    operation_id            UUID            NOT NULL,
+    uploaded_by             UUID            NOT NULL,
+    created_at              TIMESTAMP       NOT NULL DEFAULT NOW(),
+    deleted_at              TIMESTAMP       NULL,
+    CONSTRAINT fk_doc_type      FOREIGN KEY (document_type_id) REFERENCES document_types(id),
+    CONSTRAINT fk_doc_operation FOREIGN KEY (operation_id)     REFERENCES operations(id),
+    CONSTRAINT fk_doc_uploader  FOREIGN KEY (uploaded_by)      REFERENCES users(id)
+);
+
+-- 6. Audit log (inalterable — RN-07)
+-- SIN FK intencional: sobrevive al borrado de entidades referenciadas.
+CREATE TABLE audit_logs (
+    id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    action      VARCHAR(100)    NOT NULL,
+    entity_type VARCHAR(100)    NULL,
+    entity_id   VARCHAR(255)    NULL,
+    description TEXT            NULL,
+    user_id     UUID            NULL,
+    ip_address  VARCHAR(45)     NULL,
+    created_at  TIMESTAMP       NOT NULL DEFAULT NOW()
+);
+
+-- 7. Refresh tokens de Zitadel no se gestionan aquí (Zitadel los maneja).
+-- Esta tabla es para tokens de revocación si en el futuro se necesita.
+-- Por ahora Zitadel gestiona sesiones completas.
+
+-- Índices
+CREATE INDEX idx_operations_client_id   ON operations(client_id);
+CREATE INDEX idx_operations_estado      ON operations(estado);
+CREATE INDEX idx_operations_vencimiento ON operations(fecha_vencimiento_at) WHERE fecha_vencimiento_at IS NOT NULL;
+CREATE INDEX idx_documents_operation_id ON documents(operation_id);
+CREATE INDEX idx_audit_logs_entity      ON audit_logs(entity_type, entity_id);
+CREATE INDEX idx_users_zitadel_id       ON users(zitadel_user_id);
+
+
+--- FILE: backend\src\main\resources\db\migration\V002__seed_document_types.sql ---
+
+-- =============================================================
+-- V002: Tipos de documentos iniciales (datos maestros)
+-- =============================================================
+-- Fuente: domain-expert-despachantes — documentos por vía de transporte
+-- Pendiente de confirmar con Gabriel: reglas de obligatoriedad exactas
+-- =============================================================
+
+-- Documentos requeridos para CUALQUIER operación (cualquier vía)
+INSERT INTO document_types (code, name, description, applies_to, via_transporte, is_always_required) VALUES
+    ('FACTURA_COMERCIAL', 'Factura Comercial', 'Commercial Invoice — detalla mercadería y valor', 'AMBAS', 'TODAS', TRUE),
+    ('PACKING_LIST',      'Packing List',      'Detalle de bultos, pesos y medidas',              'AMBAS', 'TODAS', TRUE);
+
+-- Importación Marítima
+INSERT INTO document_types (code, name, description, applies_to, via_transporte, is_always_required) VALUES
+    ('BL',             'Bill of Lading',            'Documento de embarque marítimo (original o telex release)', 'IMPORTACION', 'MARITIMA', TRUE),
+    ('POLIZA_SEGURO',  'Póliza de Seguro',           'Seguro de la carga marítima',                               'IMPORTACION', 'MARITIMA', TRUE);
+
+-- Importación Terrestre
+INSERT INTO document_types (code, name, description, applies_to, via_transporte, is_always_required) VALUES
+    ('CRT',    'CRT - Carta de Porte Internacional', 'Documento de transporte terrestre internacional', 'IMPORTACION', 'TERRESTRE', TRUE),
+    ('MIC_DTA','MIC/DTA',                            'Manifiesto Internacional de Carga',               'IMPORTACION', 'TERRESTRE', TRUE);
+
+-- Importación Aérea
+INSERT INTO document_types (code, name, description, applies_to, via_transporte, is_always_required) VALUES
+    ('AWB', 'Air Waybill', 'Documento de transporte aéreo', 'IMPORTACION', 'AEREA', TRUE);
+
+-- Documentos condicionales (según el producto o acuerdo comercial)
+INSERT INTO document_types (code, name, description, applies_to, via_transporte, is_always_required) VALUES
+    ('CERT_ORIGEN',       'Certificado de Origen',           'Para beneficios arancelarios (MERCOSUR, etc.)',           'AMBAS',       'TODAS', FALSE),
+    ('CERT_FITOSANITARIO','Certificado Fitosanitario',        'Para productos agropecuarios — vegetal',                  'IMPORTACION', 'TODAS', FALSE),
+    ('CERT_ZOOSANITARIO', 'Certificado Zoosanitario',        'Para productos agropecuarios — animal',                   'IMPORTACION', 'TODAS', FALSE),
+    ('LICENCIA_IMP',      'Licencia de Importación',         'Para productos controlados que la requieren',             'IMPORTACION', 'TODAS', FALSE),
+    ('ANALISIS_LAB',      'Análisis de Laboratorio',         'Para alimentos, medicamentos, productos regulados',       'IMPORTACION', 'TODAS', FALSE),
+    ('CERT_CE_FDA',       'Certificado CE / FDA',            'Para productos con regulación en origen',                 'IMPORTACION', 'TODAS', FALSE);
+
+
+--- FILE: backend\src\main\resources\db\migration\V003__create_permissions_tables.sql ---
+
+-- =============================================================
+-- V003: Sistema de permisos granulares
+-- =============================================================
+-- permissions: catálogo de todas las acciones posibles del sistema.
+--   code: identificador técnico usado en el frontend/backend (ej: BTN_CREAR_OPERACION)
+--   module: agrupa permisos en la pantalla de configuración
+--
+-- role_permissions: qué permisos tiene cada rol.
+--   Esta tabla es la que modifica el admin desde la pantalla de configuración.
+-- =============================================================
+
+CREATE TABLE permissions (
+    id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    code        VARCHAR(100)    NOT NULL UNIQUE,
+    name        VARCHAR(255)    NOT NULL,
+    description TEXT            NULL,
+    module      VARCHAR(50)     NOT NULL,
+    created_at  TIMESTAMP       NOT NULL DEFAULT NOW()
+);
+
+COMMENT ON TABLE permissions IS 'Catálogo de todos los permisos posibles del sistema. No se modifica en runtime.';
+COMMENT ON COLUMN permissions.code IS 'Identificador técnico. Ej: BTN_CREAR_OPERACION. Usado en frontend con hasPermission().';
+COMMENT ON COLUMN permissions.module IS 'Módulo al que pertenece para agrupar en la UI de configuración.';
+
+CREATE TABLE role_permissions (
+    role            VARCHAR(50)     NOT NULL,
+    permission_code VARCHAR(100)    NOT NULL,
+    granted_at      TIMESTAMP       NOT NULL DEFAULT NOW(),
+    PRIMARY KEY (role, permission_code),
+    CONSTRAINT fk_rp_permission FOREIGN KEY (permission_code) REFERENCES permissions(code) ON DELETE CASCADE
+);
+
+COMMENT ON TABLE role_permissions IS 'Define qué permisos tiene cada rol. Editable desde la pantalla de configuración.';
+
+CREATE INDEX idx_role_permissions_role ON role_permissions(role);
+
+
+--- FILE: backend\src\main\resources\db\migration\V004__seed_permissions_despachantes.sql ---
+
+-- =============================================================
+-- V004: Permisos del sistema DespachantesV2
+-- =============================================================
+-- Convención de códigos:
+--   PAGE_*   → acceso a una página/sección completa
+--   BTN_*    → acción específica (botón, menú item)
+--   VIEW_*   → ver información sensible (sin poder editarla)
+-- =============================================================
+
+-- ─── Módulo: Dashboard ────────────────────────────────────────
+INSERT INTO permissions (code, name, description, module) VALUES
+    ('PAGE_DASHBOARD', 'Ver Dashboard', 'Acceso a la pantalla principal', 'Dashboard');
+
+-- ─── Módulo: Clientes ─────────────────────────────────────────
+INSERT INTO permissions (code, name, description, module) VALUES
+    ('PAGE_CLIENTES',       'Ver sección Clientes',      'Acceso a la lista de clientes',          'Clientes'),
+    ('BTN_CREAR_CLIENTE',   'Crear Cliente',             'Botón para crear un cliente nuevo',      'Clientes'),
+    ('BTN_EDITAR_CLIENTE',  'Editar Cliente',            'Botón para editar datos de un cliente',  'Clientes'),
+    ('BTN_ELIMINAR_CLIENTE','Eliminar Cliente',          'Botón para dar de baja un cliente',      'Clientes');
+
+-- ─── Módulo: Operaciones ──────────────────────────────────────
+INSERT INTO permissions (code, name, description, module) VALUES
+    ('PAGE_OPERACIONES',        'Ver sección Operaciones',   'Acceso a la lista de operaciones',              'Operaciones'),
+    ('BTN_CREAR_OPERACION',     'Crear Operación',           'Botón para abrir una carpeta nueva',            'Operaciones'),
+    ('BTN_EDITAR_OPERACION',    'Editar Operación',          'Botón para modificar datos de una operación',   'Operaciones'),
+    ('BTN_CAMBIAR_ESTADO',      'Cambiar Estado',            'Botón para avanzar el estado de una carpeta',   'Operaciones'),
+    ('BTN_ELIMINAR_OPERACION',  'Eliminar Operación',        'Botón para dar de baja una operación',          'Operaciones'),
+    ('VIEW_OPERACIONES_TODAS',  'Ver operaciones de todos',  'Ver carpetas de cualquier operador (no solo las propias)', 'Operaciones');
+
+-- ─── Módulo: Documentos ───────────────────────────────────────
+INSERT INTO permissions (code, name, description, module) VALUES
+    ('BTN_SUBIR_DOCUMENTO',     'Subir Documento',           'Botón para adjuntar un archivo',                'Documentos'),
+    ('BTN_DESCARGAR_DOCUMENTO', 'Descargar Documento',       'Botón para descargar un archivo',              'Documentos'),
+    ('BTN_ELIMINAR_DOCUMENTO',  'Eliminar Documento',        'Botón para borrar un documento',               'Documentos'),
+    ('BTN_COMPARTIR_DOCUMENTO', 'Compartir con Cliente',     'Marcar un documento como visible al cliente',  'Documentos');
+
+-- ─── Módulo: Proforma / Liquidación ──────────────────────────
+INSERT INTO permissions (code, name, description, module) VALUES
+    ('PAGE_PROFORMAS',          'Ver sección Proformas',     'Acceso al módulo de proformas',         'Proformas'),
+    ('BTN_CREAR_PROFORMA',      'Crear Proforma',            'Generar una liquidación de gastos',     'Proformas'),
+    ('VIEW_DATOS_FACTURACION',  'Ver datos de facturación',  'Ver montos, honorarios y tributos',     'Proformas');
+
+-- ─── Módulo: Alertas / Vencimientos ──────────────────────────
+INSERT INTO permissions (code, name, description, module) VALUES
+    ('PAGE_ALERTAS',    'Ver sección Alertas',  'Acceso al panel de vencimientos y alertas', 'Alertas');
+
+-- ─── Módulo: Configuración ────────────────────────────────────
+INSERT INTO permissions (code, name, description, module) VALUES
+    ('PAGE_CONFIG',                 'Ver Configuración',            'Acceso al menú de configuración',                  'Configuración'),
+    ('PAGE_CONFIG_USUARIOS',        'Gestionar Usuarios',           'Ver y editar usuarios del sistema',                'Configuración'),
+    ('BTN_CREAR_USUARIO',           'Crear Usuario',                'Botón para crear un usuario nuevo',                'Configuración'),
+    ('BTN_EDITAR_USUARIO',          'Editar Usuario',               'Botón para modificar un usuario',                  'Configuración'),
+    ('BTN_DESACTIVAR_USUARIO',      'Desactivar Usuario',           'Botón para desactivar un usuario',                 'Configuración'),
+    ('PAGE_CONFIG_ROLES',           'Gestionar Roles y Permisos',   'Ver y editar qué permisos tiene cada rol',         'Configuración'),
+    ('BTN_EDITAR_PERMISOS_ROL',     'Editar Permisos de un Rol',    'Asignar o quitar permisos a un rol',               'Configuración'),
+    ('PAGE_CONFIG_SESIONES',        'Ver Sesiones Activas',         'Dashboard de usuarios logueados actualmente',       'Configuración'),
+    ('PAGE_CONFIG_DOC_TYPES',       'Gestionar Tipos de Documento', 'Configurar el catálogo de tipos de documento',     'Configuración');
+
+-- =============================================================
+-- Asignación de permisos por rol (estado inicial)
+-- Ajustable desde la pantalla de configuración sin tocar código.
+-- =============================================================
+
+-- ADMIN: acceso total
+INSERT INTO role_permissions (role, permission_code)
+SELECT 'ADMIN', code FROM permissions;
+
+-- JEFE: acceso total al negocio (igual que ADMIN excepto gestión técnica de usuarios)
+INSERT INTO role_permissions (role, permission_code)
+SELECT 'JEFE', code FROM permissions
+WHERE code NOT IN ('PAGE_CONFIG_USUARIOS', 'BTN_CREAR_USUARIO', 'BTN_EDITAR_USUARIO', 'BTN_DESACTIVAR_USUARIO');
+
+-- EMP_IMP: Empleado de Importaciones
+INSERT INTO role_permissions (role, permission_code) VALUES
+    ('EMP_IMP', 'PAGE_DASHBOARD'),
+    ('EMP_IMP', 'PAGE_CLIENTES'),
+    ('EMP_IMP', 'PAGE_OPERACIONES'),
+    ('EMP_IMP', 'BTN_CREAR_OPERACION'),
+    ('EMP_IMP', 'BTN_EDITAR_OPERACION'),
+    ('EMP_IMP', 'BTN_CAMBIAR_ESTADO'),
+    ('EMP_IMP', 'BTN_SUBIR_DOCUMENTO'),
+    ('EMP_IMP', 'BTN_DESCARGAR_DOCUMENTO'),
+    ('EMP_IMP', 'PAGE_ALERTAS');
+
+-- EMP_EXP: Empleado de Exportaciones (igual que IMP por ahora)
+INSERT INTO role_permissions (role, permission_code) VALUES
+    ('EMP_EXP', 'PAGE_DASHBOARD'),
+    ('EMP_EXP', 'PAGE_CLIENTES'),
+    ('EMP_EXP', 'PAGE_OPERACIONES'),
+    ('EMP_EXP', 'BTN_CREAR_OPERACION'),
+    ('EMP_EXP', 'BTN_EDITAR_OPERACION'),
+    ('EMP_EXP', 'BTN_CAMBIAR_ESTADO'),
+    ('EMP_EXP', 'BTN_SUBIR_DOCUMENTO'),
+    ('EMP_EXP', 'BTN_DESCARGAR_DOCUMENTO'),
+    ('EMP_EXP', 'PAGE_ALERTAS');
+
+-- EMP_ADM: Empleado Administrativo
+INSERT INTO role_permissions (role, permission_code) VALUES
+    ('EMP_ADM', 'PAGE_DASHBOARD'),
+    ('EMP_ADM', 'PAGE_CLIENTES'),
+    ('EMP_ADM', 'BTN_CREAR_CLIENTE'),
+    ('EMP_ADM', 'BTN_EDITAR_CLIENTE'),
+    ('EMP_ADM', 'PAGE_OPERACIONES'),
+    ('EMP_ADM', 'VIEW_OPERACIONES_TODAS'),
+    ('EMP_ADM', 'BTN_DESCARGAR_DOCUMENTO'),
+    ('EMP_ADM', 'PAGE_PROFORMAS'),
+    ('EMP_ADM', 'BTN_CREAR_PROFORMA'),
+    ('EMP_ADM', 'VIEW_DATOS_FACTURACION'),
+    ('EMP_ADM', 'PAGE_ALERTAS');
+
+-- CLIENT: Cliente externo (solo ve sus propias carpetas y documentos compartidos)
+INSERT INTO role_permissions (role, permission_code) VALUES
+    ('CLIENT', 'PAGE_DASHBOARD'),
+    ('CLIENT', 'PAGE_OPERACIONES'),
+    ('CLIENT', 'BTN_DESCARGAR_DOCUMENTO');
+
+
+--- FILE: backend\src\main\resources\db\migration\V005__adjust_emp_adm_permissions.sql ---
+
+-- =============================================================
+-- V005: Ajuste de permisos EMP_ADM
+-- EMP_ADM es un rol de consulta y soporte administrativo.
+-- No debe poder crear ni eliminar clientes (solo visualizar y editar).
+-- =============================================================
+
+DELETE FROM role_permissions
+WHERE role = 'EMP_ADM'
+  AND permission_code IN ('BTN_CREAR_CLIENTE', 'BTN_ELIMINAR_CLIENTE');
+
+
+--- FILE: backend\src\main\resources\db\migration\V006__system_config_and_document_shares.sql ---
+
+-- =============================================================
+-- V006: Configuración del sistema + tokens de compartir documentos
+-- =============================================================
+
+-- 1. Parámetros de configuración del sistema
+CREATE TABLE system_config (
+    id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    key         VARCHAR(100)    NOT NULL UNIQUE,
+    value       TEXT            NOT NULL,
+    description TEXT            NULL,
+    created_at  TIMESTAMP       NOT NULL DEFAULT NOW(),
+    updated_at  TIMESTAMP       NOT NULL DEFAULT NOW()
+);
+
+-- Parámetros iniciales
+INSERT INTO system_config (key, value, description) VALUES
+    ('share_link_expiry_days', '7',   'Días de vigencia del link de compartir documentos'),
+    ('share_link_base_url',    '',    'URL base para links públicos (vacío = usa la URL del servidor)');
+
+-- 2. Tokens de links compartidos de documentos
+CREATE TABLE document_shares (
+    id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    token       VARCHAR(64)     NOT NULL UNIQUE,
+    document_id UUID            NOT NULL,
+    expires_at  TIMESTAMP       NOT NULL,
+    created_by  UUID            NOT NULL,
+    created_at  TIMESTAMP       NOT NULL DEFAULT NOW(),
+    revoked_at  TIMESTAMP       NULL,
+    CONSTRAINT fk_share_document    FOREIGN KEY (document_id) REFERENCES documents(id),
+    CONSTRAINT fk_share_created_by  FOREIGN KEY (created_by)  REFERENCES users(id)
+);
+
+CREATE INDEX idx_document_shares_token       ON document_shares(token);
+CREATE INDEX idx_document_shares_document_id ON document_shares(document_id);
+
+
+--- FILE: backend\src\main\resources\db\migration\V007__email_templates.sql ---
+
+-- V007: Email templates table (editable por super admin)
+
+CREATE TABLE email_templates (
+    id              UUID         PRIMARY KEY DEFAULT gen_random_uuid(),
+    code            VARCHAR(100) NOT NULL UNIQUE,
+    name            VARCHAR(200) NOT NULL,
+    subject         TEXT         NOT NULL,
+    html_body       TEXT         NOT NULL,
+    variables_doc   TEXT,        -- JSON string con descripción de variables disponibles
+    is_active       BOOLEAN      NOT NULL DEFAULT TRUE,
+    updated_at      TIMESTAMP    NOT NULL DEFAULT NOW(),
+    updated_by_id   UUID         REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- Plantilla: documento compartido con cliente
+INSERT INTO email_templates (code, name, subject, html_body, variables_doc) VALUES (
+'SHARE_DOCUMENT',
+'Documento compartido con cliente',
+'Documentación disponible - Carpeta {{carpetaNro}} | López Vener & Asoc.',
+'<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Documento compartido</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: ''Helvetica Neue'', Helvetica, Arial, sans-serif; background-color: #f4f5f7; color: #0E3048; }
+    .wrapper { max-width: 600px; margin: 40px auto; }
+    .header { background-color: #0E3048; border-radius: 12px 12px 0 0; padding: 32px 40px; display: flex; align-items: center; gap: 16px; }
+    .logo-box { width: 44px; height: 44px; background-color: #d89772; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .logo-text { color: #0E3048; font-weight: 900; font-size: 18px; letter-spacing: -0.5px; }
+    .brand-name { color: #ffffff; font-size: 18px; font-weight: 700; letter-spacing: -0.3px; line-height: 1.2; }
+    .brand-sub { color: #d89772; font-size: 11px; font-weight: 600; letter-spacing: 1px; margin-top: 2px; }
+    .body { background: #ffffff; padding: 40px; }
+    .greeting { font-size: 22px; font-weight: 700; color: #0E3048; margin-bottom: 12px; }
+    .intro { font-size: 15px; color: #4a6070; line-height: 1.6; margin-bottom: 28px; }
+    .doc-card { background: #f8f9fb; border: 1px solid #e5eaee; border-radius: 10px; padding: 20px 24px; margin-bottom: 28px; }
+    .doc-card-label { font-size: 10px; font-weight: 700; color: #d89772; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+    .doc-name { font-size: 16px; font-weight: 700; color: #0E3048; margin-bottom: 4px; }
+    .doc-type { font-size: 13px; color: #6b8394; margin-bottom: 12px; }
+    .doc-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+    .doc-meta-item { font-size: 12px; color: #6b8394; }
+    .doc-meta-item strong { color: #0E3048; }
+    .cta-wrapper { text-align: center; margin-bottom: 28px; }
+    .cta-btn { display: inline-block; background-color: #0E3048; color: #ffffff !important; font-size: 15px; font-weight: 700; padding: 16px 40px; border-radius: 10px; text-decoration: none; letter-spacing: 0.3px; }
+    .cta-btn span { color: #d89772; }
+    .expiry-note { background: #fffbf4; border: 1px solid #f0e0ca; border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #8a5a2a; margin-bottom: 28px; }
+    .expiry-note strong { color: #6b3d10; }
+    .divider { border: none; border-top: 1px solid #eef0f3; margin: 28px 0; }
+    .footer-note { font-size: 13px; color: #8b9faf; line-height: 1.6; }
+    .footer { background: #f4f5f7; border-radius: 0 0 12px 12px; padding: 20px 40px; border-top: 1px solid #e5eaee; }
+    .footer p { font-size: 11px; color: #8b9faf; text-align: center; line-height: 1.7; }
+    .footer a { color: #d89772; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-box"><span class="logo-text">LV</span></div>
+      <div>
+        <div class="brand-name">LÓPEZ VENER &amp; ASOC.</div>
+        <div class="brand-sub">Despachante de Aduana OEC</div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="body">
+      <p class="greeting">Hola, {{recipientName}}</p>
+      <p class="intro">
+        Tenés documentación disponible para descargar correspondiente a tu operación de comercio exterior.
+        {{sharedBy}} compartió el siguiente documento con vos:
+      </p>
+
+      <!-- Doc card -->
+      <div class="doc-card">
+        <div class="doc-card-label">Documento</div>
+        <div class="doc-name">{{documentName}}</div>
+        <div class="doc-type">{{documentType}}</div>
+        <div class="doc-meta">
+          <div class="doc-meta-item"><strong>Carpeta:</strong> {{carpetaNro}}</div>
+          <div class="doc-meta-item"><strong>Cliente:</strong> {{clientName}}</div>
+          <div class="doc-meta-item"><strong>Compartido por:</strong> {{sharedBy}}</div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-wrapper">
+        <a href="{{shareUrl}}" class="cta-btn">
+          Ver y descargar documento <span>→</span>
+        </a>
+      </div>
+
+      <!-- Expiry -->
+      <div class="expiry-note">
+        ⏱ <strong>Link con vencimiento:</strong> Este link estará disponible hasta el <strong>{{expiresAt}}</strong>. Pasada esa fecha deberás solicitar uno nuevo.
+      </div>
+
+      <hr class="divider" />
+
+      <p class="footer-note">
+        Si tenés dudas sobre este documento o tu operación, no dudes en contactarnos respondiendo este correo o comunicándote directamente con tu despachante asignado.
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>
+        © López Vener &amp; Asoc. — Despachante de Aduana OEC<br/>
+        Este es un correo automático, por favor no responder directamente.<br/>
+        <a href="{{shareUrl}}">Ver documento</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>',
+'[
+  {"var": "recipientName",  "desc": "Nombre del destinatario"},
+  {"var": "documentName",   "desc": "Nombre del archivo"},
+  {"var": "documentType",   "desc": "Tipo de documento (ej: Factura Comercial)"},
+  {"var": "carpetaNro",     "desc": "Número de carpeta (ej: 2025-IMP-0001)"},
+  {"var": "clientName",     "desc": "Razón social del cliente"},
+  {"var": "shareUrl",       "desc": "URL del link de descarga"},
+  {"var": "expiresAt",      "desc": "Fecha y hora de vencimiento del link"},
+  {"var": "sharedBy",       "desc": "Nombre de quien generó el link"}
+]'
+);
+
+-- Plantilla: cambio de estado de carpeta
+INSERT INTO email_templates (code, name, subject, html_body, variables_doc, is_active) VALUES (
+'STATUS_CHANGE',
+'Actualización de estado de carpeta',
+'Tu expediente {{carpetaNro}} avanzó a: {{nuevoEstado}} | López Vener',
+'<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: ''Helvetica Neue'', Helvetica, Arial, sans-serif; background:#f4f5f7; color:#0E3048; }
+    .wrapper { max-width:600px; margin:40px auto; }
+    .header { background:#0E3048; border-radius:12px 12px 0 0; padding:32px 40px; }
+    .brand-name { color:#fff; font-size:18px; font-weight:700; }
+    .brand-sub { color:#d89772; font-size:11px; font-weight:600; letter-spacing:1px; margin-top:2px; }
+    .body { background:#fff; padding:40px; }
+    .greeting { font-size:22px; font-weight:700; margin-bottom:12px; }
+    .intro { font-size:15px; color:#4a6070; line-height:1.6; margin-bottom:24px; }
+    .status-badge { display:inline-block; background:#d89772; color:#0E3048; font-weight:700; font-size:14px; padding:8px 20px; border-radius:20px; margin-bottom:24px; }
+    .meta { background:#f8f9fb; border:1px solid #e5eaee; border-radius:10px; padding:16px 20px; margin-bottom:28px; font-size:13px; color:#4a6070; line-height:2; }
+    .meta strong { color:#0E3048; }
+    .footer { background:#f4f5f7; border-radius:0 0 12px 12px; padding:20px 40px; border-top:1px solid #e5eaee; }
+    .footer p { font-size:11px; color:#8b9faf; text-align:center; line-height:1.7; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <div class="brand-name">LÓPEZ VENER &amp; ASOC.</div>
+      <div class="brand-sub">Despachante de Aduana OEC</div>
+    </div>
+    <div class="body">
+      <p class="greeting">Hola, {{recipientName}}</p>
+      <p class="intro">Tu expediente avanzó a una nueva etapa:</p>
+      <div class="status-badge">{{nuevoEstado}}</div>
+      <div class="meta">
+        <div><strong>Carpeta:</strong> {{carpetaNro}}</div>
+        <div><strong>Cliente:</strong> {{clientName}}</div>
+        <div><strong>Actualizado por:</strong> {{updatedBy}}</div>
+        <div><strong>Fecha:</strong> {{updatedAt}}</div>
+      </div>
+      <p style="font-size:13px;color:#8b9faf;">Ante cualquier consulta podés contactarte con tu despachante asignado.</p>
+    </div>
+    <div class="footer">
+      <p>© López Vener &amp; Asoc. — Despachante de Aduana OEC</p>
+    </div>
+  </div>
+</body>
+</html>',
+'[
+  {"var": "recipientName", "desc": "Nombre del destinatario"},
+  {"var": "carpetaNro",    "desc": "Número de carpeta"},
+  {"var": "clientName",    "desc": "Razón social del cliente"},
+  {"var": "nuevoEstado",   "desc": "Nuevo estado (ej: Levante)"},
+  {"var": "updatedBy",     "desc": "Nombre de quien actualizó el estado"},
+  {"var": "updatedAt",     "desc": "Fecha y hora del cambio"}
+]',
+FALSE  -- inactiva hasta implementar
+);
+
+
+--- FILE: backend\src\main\resources\db\migration\V008__client_contacts_workflow_documents.sql ---
+
+-- =============================================================
+-- V008: Clientes extendidos + Contactos + Workflow States + Documentos
+-- =============================================================
+-- Cambios:
+--   1. clients: tipo_persona, tipo_documento, numero_documento (renombra rut),
+--               localidad, mega_numero
+--   2. document_types: has_expiration + correcciones de Gabriel (Bloque 4)
+--   3. documents: expiration_date, description
+--   4. workflow_states: tabla maestra de estados por tipo de operación
+--   5. contact_types: tipos de contacto configurables
+--   6. contacts: contactos por cliente
+-- =============================================================
+
+-- ─────────────────────────────────────────────────────────────
+-- 1. CLIENTES — nuevos campos
+-- ─────────────────────────────────────────────────────────────
+
+-- Renombrar rut → numero_documento (el constraint unique se mantiene)
+ALTER TABLE clients RENAME COLUMN rut TO numero_documento;
+
+-- Tipo de persona: EMPRESA (RUT) o FISICA (CI)
+ALTER TABLE clients
+    ADD COLUMN tipo_persona   VARCHAR(10) NOT NULL DEFAULT 'EMPRESA',
+    ADD COLUMN tipo_documento VARCHAR(5)  NOT NULL DEFAULT 'RUT',
+    ADD COLUMN localidad      VARCHAR(100) NULL,
+    ADD COLUMN mega_numero    VARCHAR(50)  NULL;
+
+COMMENT ON COLUMN clients.tipo_persona   IS 'EMPRESA | FISICA';
+COMMENT ON COLUMN clients.tipo_documento IS 'RUT | CI';
+COMMENT ON COLUMN clients.mega_numero    IS 'Número interno de cliente en Mega 6 (opcional)';
+
+-- ─────────────────────────────────────────────────────────────
+-- 2. TIPOS DE DOCUMENTOS — agregar has_expiration
+--    y corregir datos según respuestas de Gabriel (Bloque 4)
+-- ─────────────────────────────────────────────────────────────
+
+ALTER TABLE document_types
+    ADD COLUMN has_expiration BOOLEAN NOT NULL DEFAULT FALSE;
+
+-- Factura Comercial: Gabriel dijo NO obligatorio siempre, SÍ vence
+UPDATE document_types SET is_always_required = FALSE, has_expiration = TRUE
+    WHERE code = 'FACTURA_COMERCIAL';
+
+-- Packing List: no obligatorio, sin vencimiento, aplica a ambas
+UPDATE document_types SET is_always_required = FALSE, has_expiration = FALSE, applies_to = 'AMBAS'
+    WHERE code = 'PACKING_LIST';
+
+-- BL: obligatorio, sin vencimiento, aplica a AMBAS (exportación marítima también)
+UPDATE document_types SET is_always_required = TRUE, has_expiration = FALSE, applies_to = 'AMBAS'
+    WHERE code = 'BL';
+
+-- CRT: obligatorio, sin vencimiento, aplica a AMBAS (terrestre)
+UPDATE document_types SET is_always_required = TRUE, has_expiration = FALSE, applies_to = 'AMBAS'
+    WHERE code = 'CRT';
+
+-- AWB: obligatorio, sin vencimiento, aplica a AMBAS (aérea)
+UPDATE document_types SET is_always_required = TRUE, has_expiration = FALSE, applies_to = 'AMBAS'
+    WHERE code = 'AWB';
+
+-- Certificado de Origen: no obligatorio siempre, SÍ vence (180 días)
+UPDATE document_types SET is_always_required = FALSE, has_expiration = TRUE
+    WHERE code = 'CERT_ORIGEN';
+
+-- ─────────────────────────────────────────────────────────────
+-- 3. DOCUMENTOS — fecha de vencimiento y descripción
+-- ─────────────────────────────────────────────────────────────
+
+ALTER TABLE documents
+    ADD COLUMN expiration_date DATE         NULL,
+    ADD COLUMN description     VARCHAR(255) NULL;
+
+COMMENT ON COLUMN documents.expiration_date IS 'Solo se carga si el tipo de documento tiene has_expiration=true';
+COMMENT ON COLUMN documents.description     IS 'Descripción libre para documentos extras sin tipo';
+
+-- ─────────────────────────────────────────────────────────────
+-- 4. WORKFLOW STATES — estados configurables por tipo de operación
+-- ─────────────────────────────────────────────────────────────
+
+CREATE TABLE workflow_states (
+    id             UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+    operation_type VARCHAR(20) NOT NULL,          -- IMPORTACION | EXPORTACION | TRANSITO
+    step_order     INT         NOT NULL,
+    code           VARCHAR(50) NOT NULL,
+    name           VARCHAR(100) NOT NULL,
+    is_active      BOOLEAN     NOT NULL DEFAULT TRUE,
+    created_at     TIMESTAMP   NOT NULL DEFAULT NOW(),
+    updated_at     TIMESTAMP   NOT NULL DEFAULT NOW(),
+    CONSTRAINT uq_workflow_type_order UNIQUE (operation_type, step_order),
+    CONSTRAINT uq_workflow_type_code  UNIQUE (operation_type, code)
+);
+
+COMMENT ON TABLE workflow_states IS 'Estados del workflow por tipo de operación. Editables desde Configuración.';
+
+-- ─────────────────────────────────────────────────────────────
+-- 5. TIPOS DE CONTACTO — catálogo configurable
+-- ─────────────────────────────────────────────────────────────
+
+CREATE TABLE contact_types (
+    id          UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+    code        VARCHAR(50) NOT NULL UNIQUE,
+    name        VARCHAR(100) NOT NULL,
+    description TEXT        NULL,
+    sort_order  INT         NOT NULL DEFAULT 0,
+    is_active   BOOLEAN     NOT NULL DEFAULT TRUE,
+    created_at  TIMESTAMP   NOT NULL DEFAULT NOW()
+);
+
+-- ─────────────────────────────────────────────────────────────
+-- 6. CONTACTOS — múltiples contactos por cliente
+-- ─────────────────────────────────────────────────────────────
+
+CREATE TABLE contacts (
+    id                      UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+    client_id               UUID        NOT NULL,
+    contact_type_id         UUID        NULL,         -- NULL cuando es "Otro" sin tipo estándar
+    nombre                  VARCHAR(255) NOT NULL,
+    cargo                   VARCHAR(100) NULL,
+    telefono                VARCHAR(50)  NULL,
+    email                   VARCHAR(255) NULL,
+    receives_notifications  BOOLEAN     NOT NULL DEFAULT FALSE,
+    notas                   TEXT        NULL,
+    sort_order              INT         NOT NULL DEFAULT 0,
+    created_at              TIMESTAMP   NOT NULL DEFAULT NOW(),
+    updated_at              TIMESTAMP   NOT NULL DEFAULT NOW(),
+    deleted_at              TIMESTAMP   NULL,
+    CONSTRAINT fk_contact_client FOREIGN KEY (client_id)        REFERENCES clients(id),
+    CONSTRAINT fk_contact_type   FOREIGN KEY (contact_type_id)  REFERENCES contact_types(id)
+);
+
+CREATE INDEX idx_contacts_client_id ON contacts(client_id);
+
+-- ─────────────────────────────────────────────────────────────
+-- SEED: Tipos de contacto iniciales
+-- ─────────────────────────────────────────────────────────────
+
+INSERT INTO contact_types (code, name, description, sort_order) VALUES
+    ('RESPONSABLE_PRINCIPAL',   'Responsable Principal',          'Interlocutor general del cliente. Recibe la mayoría de notificaciones.', 1),
+    ('ENCARGADO_DEPOSITO',      'Encargado de Depósito',          'Gestiona la logística y el retiro físico de la mercadería.',             2),
+    ('CONTADORA',               'Contadora / Administración',     'Gestiona pagos y recibe las liquidaciones de gastos.',                   3),
+    ('GERENTE',                 'Gerente / Dueño',                'Recibe alertas críticas y resúmenes ejecutivos.',                        4),
+    ('CONTACTO_EXPORTACION',    'Contacto de Exportación',        'Específico para operaciones de exportación.',                            5),
+    ('OTRO',                    'Otro',                           'Contacto con rol personalizado.',                                        6);
+
+-- ─────────────────────────────────────────────────────────────
+-- SEED: Workflow states — Importación (10 estados)
+-- ─────────────────────────────────────────────────────────────
+
+INSERT INTO workflow_states (operation_type, step_order, code, name) VALUES
+    ('IMPORTACION', 1,  'APERTURA',                  'Apertura'),
+    ('IMPORTACION', 2,  'DOCUMENTACION_EN_PROCESO',  'Documentación en Proceso'),
+    ('IMPORTACION', 3,  'DOCUMENTACION_COMPLETA',    'Documentación Completa'),
+    ('IMPORTACION', 4,  'NUMERADO',                  'Numerado (DUA asignado)'),
+    ('IMPORTACION', 5,  'CANAL_ASIGNADO',            'Canal Asignado'),
+    ('IMPORTACION', 6,  'EN_DEPOSITO',               'En Depósito / Puerto'),
+    ('IMPORTACION', 7,  'LEVANTE',                   'Levante'),
+    ('IMPORTACION', 8,  'RETIRADO',                  'Retirado'),
+    ('IMPORTACION', 9,  'FACTURADO',                 'Facturado'),
+    ('IMPORTACION', 10, 'CERRADO',                   'Cerrado');
+
+-- ─────────────────────────────────────────────────────────────
+-- SEED: Workflow states — Exportación (10 estados)
+-- Incluye INGRESO_PUERTO entre NUMERADO y CANAL_ASIGNADO (pedido de Gabriel)
+-- ─────────────────────────────────────────────────────────────
+
+INSERT INTO workflow_states (operation_type, step_order, code, name) VALUES
+    ('EXPORTACION', 1,  'APERTURA',                  'Apertura'),
+    ('EXPORTACION', 2,  'DOCUMENTACION_EN_PROCESO',  'Documentación en Proceso'),
+    ('EXPORTACION', 3,  'DOCUMENTACION_COMPLETA',    'Documentación Completa'),
+    ('EXPORTACION', 4,  'NUMERADO',                  'Numerado (DUA asignado)'),
+    ('EXPORTACION', 5,  'INGRESO_PUERTO',             'Ingreso de Mercadería a Puerto'),
+    ('EXPORTACION', 6,  'CANAL_ASIGNADO',            'Canal Asignado'),
+    ('EXPORTACION', 7,  'EN_DEPOSITO',               'En Depósito / Puerto'),
+    ('EXPORTACION', 8,  'LEVANTE',                   'Levante / Embarque'),
+    ('EXPORTACION', 9,  'FACTURADO',                 'Facturado'),
+    ('EXPORTACION', 10, 'CERRADO',                   'Cerrado');
+
+-- ─────────────────────────────────────────────────────────────
+-- SEED: Workflow states — Tránsito (mismo que Importación por ahora)
+-- Pendiente confirmación final de Gabriel
+-- ─────────────────────────────────────────────────────────────
+
+INSERT INTO workflow_states (operation_type, step_order, code, name) VALUES
+    ('TRANSITO', 1,  'APERTURA',                  'Apertura'),
+    ('TRANSITO', 2,  'DOCUMENTACION_EN_PROCESO',  'Documentación en Proceso'),
+    ('TRANSITO', 3,  'DOCUMENTACION_COMPLETA',    'Documentación Completa'),
+    ('TRANSITO', 4,  'NUMERADO',                  'Numerado (DUA asignado)'),
+    ('TRANSITO', 5,  'CANAL_ASIGNADO',            'Canal Asignado'),
+    ('TRANSITO', 6,  'EN_DEPOSITO',               'En Depósito / Puerto'),
+    ('TRANSITO', 7,  'LEVANTE',                   'Levante'),
+    ('TRANSITO', 8,  'RETIRADO',                  'Retirado'),
+    ('TRANSITO', 9,  'FACTURADO',                 'Facturado'),
+    ('TRANSITO', 10, 'CERRADO',                   'Cerrado');
+
+
+--- FILE: backend\src\main\resources\db\migration\V009__update_document_types_client_config.sql ---
+
+-- =============================================================
+-- V009: Actualización tipos de documentos según configuración del cliente
+-- - Agrega campo expiry_hint para mostrar ayuda contextual
+-- - Elimina 7 tipos no utilizados (y sus documentos/shares)
+-- - Actualiza los 6 tipos definitivos con datos correctos
+-- =============================================================
+
+-- 1. Agregar columna expiry_hint
+ALTER TABLE document_types
+    ADD COLUMN expiry_hint VARCHAR(255) NULL;
+
+-- 2. Eliminar shares de documentos que referencian tipos a borrar
+DELETE FROM document_shares
+WHERE document_id IN (
+    SELECT d.id FROM documents d
+    JOIN document_types dt ON d.document_type_id = dt.id
+    WHERE dt.code IN ('POLIZA_SEGURO','MIC_DTA','CERT_FITOSANITARIO','CERT_ZOOSANITARIO','LICENCIA_IMP','ANALISIS_LAB','CERT_CE_FDA')
+);
+
+-- 3. Eliminar documentos que referencian tipos a borrar
+DELETE FROM documents
+WHERE document_type_id IN (
+    SELECT id FROM document_types
+    WHERE code IN ('POLIZA_SEGURO','MIC_DTA','CERT_FITOSANITARIO','CERT_ZOOSANITARIO','LICENCIA_IMP','ANALISIS_LAB','CERT_CE_FDA')
+);
+
+-- 4. Eliminar los 7 tipos no utilizados
+DELETE FROM document_types
+WHERE code IN ('POLIZA_SEGURO','MIC_DTA','CERT_FITOSANITARIO','CERT_ZOOSANITARIO','LICENCIA_IMP','ANALISIS_LAB','CERT_CE_FDA');
+
+-- 5. Actualizar los 6 tipos definitivos con la configuración correcta
+
+-- Factura Comercial: opcional, aplica a ambas operaciones, todas las vías
+UPDATE document_types SET
+    name                = 'Factura Comercial',
+    description         = 'Commercial Invoice — detalla mercadería y valor de la transacción',
+    applies_to          = 'AMBAS',
+    via_transporte      = 'TODAS',
+    is_always_required  = FALSE,
+    has_expiration      = FALSE,
+    expiry_hint         = NULL
+WHERE code = 'FACTURA_COMERCIAL';
+
+-- Packing List: opcional, aplica a ambas operaciones, todas las vías
+UPDATE document_types SET
+    name                = 'Packing List',
+    description         = 'Detalle de bultos, pesos y medidas. Conveniente pero no obligatorio.',
+    applies_to          = 'AMBAS',
+    via_transporte      = 'TODAS',
+    is_always_required  = FALSE,
+    has_expiration      = FALSE,
+    expiry_hint         = NULL
+WHERE code = 'PACKING_LIST';
+
+-- BL: obligatorio cuando la vía es marítima, aplica a ambas operaciones
+UPDATE document_types SET
+    name                = 'Bill of Lading (BL)',
+    description         = 'Documento de embarque marítimo (original o telex release)',
+    applies_to          = 'AMBAS',
+    via_transporte      = 'MARITIMA',
+    is_always_required  = TRUE,
+    has_expiration      = FALSE,
+    expiry_hint         = NULL
+WHERE code = 'BL';
+
+-- CRT: obligatorio cuando la vía es terrestre, aplica a ambas operaciones
+UPDATE document_types SET
+    name                = 'CRT - Carta de Porte Internacional',
+    description         = 'Documento de transporte terrestre internacional',
+    applies_to          = 'AMBAS',
+    via_transporte      = 'TERRESTRE',
+    is_always_required  = TRUE,
+    has_expiration      = FALSE,
+    expiry_hint         = NULL
+WHERE code = 'CRT';
+
+-- AWB: obligatorio cuando la vía es aérea, aplica a ambas operaciones
+UPDATE document_types SET
+    name                = 'Air Waybill (AWB)',
+    description         = 'Documento de transporte aéreo internacional',
+    applies_to          = 'AMBAS',
+    via_transporte      = 'AEREA',
+    is_always_required  = TRUE,
+    has_expiration      = FALSE,
+    expiry_hint         = NULL
+WHERE code = 'AWB';
+
+-- Certificado de Origen: opcional, vence a 180 días desde emisión
+UPDATE document_types SET
+    name                = 'Certificado de Origen',
+    description         = 'Para aplicar beneficios arancelarios (MERCOSUR, acuerdos comerciales)',
+    applies_to          = 'AMBAS',
+    via_transporte      = 'TODAS',
+    is_always_required  = FALSE,
+    has_expiration      = TRUE,
+    expiry_hint         = '180 días desde emisión'
+WHERE code = 'CERT_ORIGEN';
+
+
+============================================================
+10. AUTH / ROLES / MIDDLEWARE CANDIDATE FILES
+============================================================
+
+agent\skills\security-auth-expert\SKILL.md
+backend\src\main\java\com\despachantes\api\model\Permission.java
+backend\src\main\java\com\despachantes\api\model\Role.java
+backend\src\main\java\com\despachantes\api\model\RolePermission.java
+backend\src\main\java\com\despachantes\api\repository\PermissionRepository.java
+backend\src\main\java\com\despachantes\api\repository\RolePermissionRepository.java
+backend\src\main\java\com\despachantes\api\service\PermissionService.java
+backend\src\main\resources\db\migration\V003__create_permissions_tables.sql
+backend\src\main\resources\db\migration\V004__seed_permissions_despachantes.sql
+backend\src\main\resources\db\migration\V005__adjust_emp_adm_permissions.sql
+frontend\src\components\auth\IfPermission.jsx
+frontend\src\contexts\AuthContext.jsx
+
+============================================================
+11. CUSTOMS DOMAIN CANDIDATE FILES
+============================================================
+
+agent\skills-despachantes\domain-expert-despachantes\SKILL.md
+backend\src\main\java\com\despachantes\api\ApiApplication.java
+backend\src\main\java\com\despachantes\api\config\MinioConfig.java
+backend\src\main\java\com\despachantes\api\controller\ClientController.java
+backend\src\main\java\com\despachantes\api\controller\ContactController.java
+backend\src\main\java\com\despachantes\api\controller\ContactTypeController.java
+backend\src\main\java\com\despachantes\api\controller\DocumentController.java
+backend\src\main\java\com\despachantes\api\controller\DocumentTypeController.java
+backend\src\main\java\com\despachantes\api\controller\EmailTemplateController.java
+backend\src\main\java\com\despachantes\api\controller\OperationController.java
+backend\src\main\java\com\despachantes\api\controller\PublicShareController.java
+backend\src\main\java\com\despachantes\api\controller\UserController.java
+backend\src\main\java\com\despachantes\api\controller\WorkflowStateController.java
+backend\src\main\java\com\despachantes\api\dto\ClientDto.java
+backend\src\main\java\com\despachantes\api\dto\ContactDto.java
+backend\src\main\java\com\despachantes\api\dto\ContactTypeDeleteResultDto.java
+backend\src\main\java\com\despachantes\api\dto\ContactTypeDto.java
+backend\src\main\java\com\despachantes\api\dto\DocumentDto.java
+backend\src\main\java\com\despachantes\api\dto\DocumentShareDto.java
+backend\src\main\java\com\despachantes\api\dto\DocumentTypeDto.java
+backend\src\main\java\com\despachantes\api\dto\EmailTemplateDto.java
+backend\src\main\java\com\despachantes\api\dto\OperationDto.java
+backend\src\main\java\com\despachantes\api\dto\WorkflowStateDto.java
+backend\src\main\java\com\despachantes\api\exception\GlobalExceptionHandler.java
+backend\src\main\java\com\despachantes\api\exception\ResourceNotFoundException.java
+backend\src\main\java\com\despachantes\api\model\AppUser.java
+backend\src\main\java\com\despachantes\api\model\AuditLog.java
+backend\src\main\java\com\despachantes\api\model\Client.java
+backend\src\main\java\com\despachantes\api\model\Contact.java
+backend\src\main\java\com\despachantes\api\model\ContactType.java
+backend\src\main\java\com\despachantes\api\model\DnaChannel.java
+backend\src\main\java\com\despachantes\api\model\Document.java
+backend\src\main\java\com\despachantes\api\model\DocumentIdentifierType.java
+backend\src\main\java\com\despachantes\api\model\DocumentShare.java
+backend\src\main\java\com\despachantes\api\model\DocumentType.java
+backend\src\main\java\com\despachantes\api\model\EmailTemplate.java
+backend\src\main\java\com\despachantes\api\model\Operation.java
+backend\src\main\java\com\despachantes\api\model\OperationStatus.java
+backend\src\main\java\com\despachantes\api\model\OperationType.java
+backend\src\main\java\com\despachantes\api\model\Permission.java
+backend\src\main\java\com\despachantes\api\model\PersonType.java
+backend\src\main\java\com\despachantes\api\model\Role.java
+backend\src\main\java\com\despachantes\api\model\RolePermission.java
+backend\src\main\java\com\despachantes\api\model\SystemConfig.java
+backend\src\main\java\com\despachantes\api\model\TransportMode.java
+backend\src\main\java\com\despachantes\api\model\WorkflowState.java
+backend\src\main\java\com\despachantes\api\repository\AppUserRepository.java
+backend\src\main\java\com\despachantes\api\repository\AuditLogRepository.java
+backend\src\main\java\com\despachantes\api\repository\ClientRepository.java
+backend\src\main\java\com\despachantes\api\repository\ContactRepository.java
+backend\src\main\java\com\despachantes\api\repository\ContactTypeRepository.java
+backend\src\main\java\com\despachantes\api\repository\DocumentRepository.java
+backend\src\main\java\com\despachantes\api\repository\DocumentShareRepository.java
+backend\src\main\java\com\despachantes\api\repository\DocumentTypeRepository.java
+backend\src\main\java\com\despachantes\api\repository\EmailTemplateRepository.java
+backend\src\main\java\com\despachantes\api\repository\OperationRepository.java
+backend\src\main\java\com\despachantes\api\repository\PermissionRepository.java
+backend\src\main\java\com\despachantes\api\repository\RolePermissionRepository.java
+backend\src\main\java\com\despachantes\api\repository\SystemConfigRepository.java
+backend\src\main\java\com\despachantes\api\repository\WorkflowStateRepository.java
+backend\src\main\java\com\despachantes\api\security\SecurityConfig.java
+backend\src\main\java\com\despachantes\api\service\ClientService.java
+backend\src\main\java\com\despachantes\api\service\ClientServiceImpl.java
+backend\src\main\java\com\despachantes\api\service\ContactService.java
+backend\src\main\java\com\despachantes\api\service\ContactServiceImpl.java
+backend\src\main\java\com\despachantes\api\service\ContactTypeService.java
+backend\src\main\java\com\despachantes\api\service\ContactTypeServiceImpl.java
+backend\src\main\java\com\despachantes\api\service\DocumentShareService.java
+backend\src\main\java\com\despachantes\api\service\DocumentTypeService.java
+backend\src\main\java\com\despachantes\api\service\DocumentTypeServiceImpl.java
+backend\src\main\java\com\despachantes\api\service\NotificationService.java
+backend\src\main\java\com\despachantes\api\service\OperationService.java
+backend\src\main\java\com\despachantes\api\service\OperationServiceImpl.java
+backend\src\main\java\com\despachantes\api\service\PermissionService.java
+backend\src\main\java\com\despachantes\api\service\StorageService.java
+backend\src\main\java\com\despachantes\api\service\UserProvisioningService.java
+backend\src\main\java\com\despachantes\api\service\WorkflowStateService.java
+backend\src\main\java\com\despachantes\api\service\WorkflowStateServiceImpl.java
+backend\src\main\resources\db\migration\V004__seed_permissions_despachantes.sql
+backend\src\test\java\com\despachantes\api\ApiApplicationTests.java
+
+============================================================
+12. PACKAGE.JSON SCRIPTS SUMMARY
+============================================================
+
+
+--- frontend\package.json ---
+name: frontend
+version: 0.0.0
+scripts:
+  - dev: vite
+  - build: vite build
+  - lint: eslint .
+  - preview: vite preview
+
+============================================================
+13. POSSIBLE INSTRUCTION CONFLICTS (HEURISTIC)
+============================================================
+
+
+--- SIGNAL SCAN: .claude\settings.local.json ---
+
+--- SIGNAL SCAN: CLAUDE.md ---
+
+============================================================
+14. NEXT STEP
+============================================================
+
+Share this file with ChatGPT (paste in chunks if needed).
+Recommended first chunks:
+1) Sections 4, 12, 13
+2) Then sections 2, 8, 9
+3) Then any specific files requested

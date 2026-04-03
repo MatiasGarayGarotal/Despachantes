@@ -1,19 +1,63 @@
 server:
-  port: 8081
+  port: ${APP_PORT:8081}
 
 spring:
   application:
-    name: api
+    name: despachantes-api
+
   datasource:
-    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME}
     username: ${DB_USER}
     password: ${DB_PASS}
     driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: validate
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: false
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Zitadel expone el OIDC discovery en /.well-known/openid-configuration
+          # Spring Boot auto-descubre las claves públicas desde ahí.
+          issuer-uri: ${ZITADEL_ISSUER_URI:http://localhost:8080}
+
+  minio:
+    endpoint: ${STORAGE_ENDPOINT:http://localhost:9000}
+    accessKey: ${STORAGE_ACCESS_KEY}
+    secretKey: ${STORAGE_SECRET_KEY}
+    bucket: ${STORAGE_BUCKET}
+
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+
+# ── Zitadel Management API ────────────────────────────────────────────────────
+# Se usa para gestionar usuarios internos (crear, listar) contra la Management
+# REST API de Zitadel. Requiere un Machine User con rol Org User Manager.
+zitadel:
+  issuer-uri: ${ZITADEL_ISSUER_URI:http://localhost:8080}
+  machine-token: ${ZITADEL_MACHINE_TOKEN:}
+  org-id: ${ZITADEL_ORG_ID:}
+  project-id: ${ZITADEL_PROJECT_ID:}
+
+resend:
+  api:
+    key: ${RESEND_API_KEY:re_placeholder}
+  from:
+    email: ${MAIL_FROM_ADDRESS:onboarding@resend.dev}
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: TRACE

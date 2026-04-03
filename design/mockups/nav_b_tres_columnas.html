@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opción B — Tres Columnas</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy: '#0E3048', gold: '#B18F5B', surface: '#E9EBF0', canvas: '#FFFFFF',
+        s50: '#E9EBF0', s100: '#DDE0E8', s400: '#8A94A8', s500: '#64748B', s600: '#475569', s700: '#334155',
+        info: '#2E4A7D', success: '#5AB6AD',
+      },
+      fontFamily: { sans: ['Montserrat','sans-serif'] },
+    }
+  }
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Montserrat', sans-serif; box-sizing: border-box; }
+  .fade-in { animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .col-panel { transition: all 0.25s ease; }
+</style>
+</head>
+<body class="bg-surface min-h-screen">
+
+<!-- Banner -->
+<div class="bg-navy text-white text-center py-2 text-xs font-bold tracking-widest">
+  OPCIÓN B — TRES COLUMNAS · Clientes | Carpetas del cliente | Detalle carpeta
+</div>
+<div class="bg-white border-b border-navy/10 px-4 py-3 flex items-center justify-between flex-wrap gap-2">
+  <p class="text-xs text-s500 max-w-lg">
+    Todo visible a la vez en pantallas grandes. En mobile se muestra <strong class="text-navy">una columna por vez</strong> con navegación ← →.
+  </p>
+  <div class="flex items-center gap-2">
+    <span class="text-[10px] text-s400 font-bold tracking-wide">MOBILE:</span>
+    <button onclick="mobileStep(0)" id="m0" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-navy text-white">Clientes</button>
+    <button onclick="mobileStep(1)" id="m1" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-s100 text-s600">Carpetas</button>
+    <button onclick="mobileStep(2)" id="m2" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-s100 text-s600">Detalle</button>
+  </div>
+</div>
+
+<!-- App shell -->
+<div class="flex flex-col" style="height:calc(100vh - 76px)">
+  <header class="h-12 bg-navy flex items-center justify-between px-4 shrink-0">
+    <div class="flex items-center gap-3">
+      <button class="p-1.5 text-white/50"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <span class="text-white font-bold text-sm">López Vener <span class="text-gold">&</span> Asoc.</span>
+    </div>
+    <div class="w-8 h-8 rounded-full bg-gold flex items-center justify-center text-navy font-bold text-xs">GV</div>
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex flex-col w-16 bg-navy border-r border-white/5 shrink-0">
+      <nav class="flex-1 flex flex-col gap-1 pt-4 px-2">
+        <button class="flex items-center justify-center py-3 rounded-xl text-white/30"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+        <button class="flex items-center justify-center py-3 rounded-xl bg-white/10"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="text-gold"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></button>
+        <button class="flex items-center justify-center py-3 rounded-xl text-white/30"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></button>
+      </nav>
+    </aside>
+
+    <!-- Three-column area -->
+    <main class="flex-1 overflow-hidden bg-surface rounded-tl-[40px] flex flex-col">
+
+      <!-- Column header breadcrumb (desktop) -->
+      <div class="hidden lg:flex items-center gap-0 px-4 pt-4 pb-0 shrink-0">
+        <span class="text-xs font-bold text-navy/40">Clientes</span>
+        <span id="bc-client" class="hidden items-center gap-1 ml-1">
+          <span class="text-navy/20">›</span>
+          <span class="text-xs font-bold text-navy/40" id="bc-client-name">ACME Importaciones SA</span>
+        </span>
+        <span id="bc-carpeta" class="hidden items-center gap-1 ml-1">
+          <span class="text-navy/20">›</span>
+          <span class="text-xs font-bold text-navy">2025-IMP-0042</span>
+        </span>
+      </div>
+
+      <!-- Three columns layout -->
+      <div class="flex flex-1 overflow-hidden p-4 gap-3" id="three-col">
+
+        <!-- COLUMNA 1: Lista de clientes -->
+        <div id="col-1" class="col-panel flex flex-col bg-canvas rounded-2xl border border-navy/5 shadow-sm overflow-hidden" style="min-width:220px; width:260px; flex-shrink:0">
+          <div class="px-4 py-3 border-b border-navy/5 shrink-0">
+            <h3 class="text-xs font-bold text-navy tracking-tight">Clientes</h3>
+            <div class="mt-2 relative">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="absolute left-3 top-1/2 -translate-y-1/2 text-navy/30"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input placeholder="Buscar..." class="w-full pl-8 pr-3 py-2 bg-s50 border border-navy/10 rounded-lg text-xs outline-none focus:border-gold/50">
+            </div>
+          </div>
+          <div class="flex-1 overflow-y-auto divide-y divide-navy/[0.04]">
+            <button onclick="selectClient()" id="row-c1"
+              class="w-full flex items-center gap-3 px-4 py-3.5 text-left hover:bg-gold/[0.04] transition-colors group">
+              <div class="w-8 h-8 rounded-full bg-navy/10 flex items-center justify-center text-xs font-bold text-navy/50 shrink-0">AC</div>
+              <div class="min-w-0 flex-1">
+                <p class="text-xs font-bold text-navy truncate group-hover:text-gold transition-colors">ACME Importaciones SA</p>
+                <p class="text-[10px] text-navy/30 mt-0.5">21.234.567</p>
+              </div>
+            </button>
+            <button class="w-full flex items-center gap-3 px-4 py-3.5 text-left hover:bg-gold/[0.04] transition-colors group">
+              <div class="w-8 h-8 rounded-full bg-navy/10 flex items-center justify-center text-xs font-bold text-navy/50 shrink-0">TI</div>
+              <div class="min-w-0 flex-1">
+                <p class="text-xs font-bold text-navy truncate">TechnoImport SRL</p>
+                <p class="text-[10px] text-navy/30 mt-0.5">32.198.440</p>
+              </div>
+            </button>
+            <button class="w-full flex items-center gap-3 px-4 py-3.5 text-left hover:bg-gold/[0.04] transition-colors group">
+              <div class="w-8 h-8 rounded-full bg-navy/10 flex items-center justify-center text-xs font-bold text-navy/50 shrink-0">ES</div>
+              <div class="min-w-0 flex-1">
+                <p class="text-xs font-bold text-navy truncate">Exportadora del Sur SA</p>
+                <p class="text-[10px] text-navy/30 mt-0.5">45.001.123</p>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- COLUMNA 2: Carpetas del cliente -->
+        <div id="col-2" class="col-panel flex flex-col bg-canvas rounded-2xl border border-navy/5 shadow-sm overflow-hidden" style="min-width:220px; width:280px; flex-shrink:0; opacity:0.35">
+          <div id="col2-placeholder" class="flex-1 flex items-center justify-center">
+            <div class="text-center">
+              <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" class="text-navy/20 mx-auto mb-2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              <p class="text-xs text-navy/30 font-medium">Seleccioná un cliente</p>
+            </div>
+          </div>
+          <div id="col2-content" class="hidden flex-col h-full">
+            <div class="px-4 py-3 border-b border-navy/5 shrink-0 flex items-center justify-between">
+              <div>
+                <h3 class="text-xs font-bold text-navy">Carpetas · ACME</h3>
+                <p class="text-[10px] text-navy/40 mt-0.5">3 carpetas</p>
+              </div>
+              <button class="text-[10px] font-bold text-navy flex items-center gap-1 px-2 py-1.5 bg-navy text-white rounded-lg">
+                <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                Nueva
+              </button>
+            </div>
+            <!-- Filter tabs -->
+            <div class="flex px-3 pt-2 gap-1 shrink-0">
+              <button class="px-2.5 py-1 text-[10px] font-bold rounded-lg bg-navy text-white">Todas</button>
+              <button class="px-2.5 py-1 text-[10px] font-bold rounded-lg text-navy/40 hover:bg-s50">Activas</button>
+              <button class="px-2.5 py-1 text-[10px] font-bold rounded-lg text-navy/40 hover:bg-s50">Cerradas</button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-3 space-y-1.5">
+              <button onclick="selectCarpeta()" id="row-cp1"
+                class="w-full flex items-center gap-3 p-3 bg-s50 rounded-xl hover:bg-white border border-transparent hover:border-navy/5 transition-all text-left group">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="text-navy/30 shrink-0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs font-bold text-navy font-mono">2025-IMP-0042</p>
+                  <p class="text-[10px] text-navy/40 mt-0.5">15/01/2025</p>
+                </div>
+                <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full shrink-0" style="background:#FFF3E0; color:#B45309">CANAL</span>
+              </button>
+              <button class="w-full flex items-center gap-3 p-3 bg-s50 rounded-xl hover:bg-white border border-transparent hover:border-navy/5 transition-all text-left group">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="text-navy/30 shrink-0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs font-bold text-navy font-mono">2025-IMP-0018</p>
+                  <p class="text-[10px] text-navy/40 mt-0.5">03/01/2025</p>
+                </div>
+                <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full shrink-0 bg-emerald-100 text-emerald-700">CERRADO</span>
+              </button>
+              <button class="w-full flex items-center gap-3 p-3 bg-s50 rounded-xl hover:bg-white border border-transparent hover:border-navy/5 transition-all text-left group">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="text-navy/30 shrink-0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs font-bold text-navy font-mono">2024-EXP-0099</p>
+                  <p class="text-[10px] text-navy/40 mt-0.5">10/11/2024</p>
+                </div>
+                <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full shrink-0 bg-emerald-100 text-emerald-700">CERRADO</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMNA 3: Detalle carpeta -->
+        <div id="col-3" class="col-panel flex-1 flex flex-col bg-canvas rounded-2xl border border-navy/5 shadow-sm overflow-hidden min-w-0" style="opacity:0.35">
+          <div id="col3-placeholder" class="flex-1 flex items-center justify-center">
+            <div class="text-center">
+              <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" class="text-navy/20 mx-auto mb-2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+              <p class="text-xs text-navy/30 font-medium">Seleccioná una carpeta</p>
+            </div>
+          </div>
+          <div id="col3-content" class="hidden flex-col h-full">
+            <div class="bg-navy px-5 py-4 shrink-0">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="flex items-center gap-2 mb-0.5">
+                    <h3 class="font-bold text-white text-sm font-mono">2025-IMP-0042</h3>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background:#FFF3E0; color:#B45309">CANAL ASIGNADO</span>
+                  </div>
+                  <p class="text-[10px] text-gold font-bold tracking-widest">ACME IMPORTACIONES SA</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex border-b border-navy/5 shrink-0">
+              <button class="flex-1 py-2.5 text-[11px] font-bold text-navy border-b-2 border-gold">Datos</button>
+              <button class="flex-1 py-2.5 text-[11px] font-bold text-navy/30 border-b-2 border-transparent">Documentos</button>
+              <button class="flex-1 py-2.5 text-[11px] font-bold text-navy/30 border-b-2 border-transparent">Estado</button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-4 space-y-3">
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <p class="text-[9px] text-navy/40 font-bold tracking-widest mb-1">TIPO</p>
+                  <span class="text-[11px] font-bold px-2 py-1 rounded-lg" style="background:#E8EDF8; color:#2E4A7D">IMPORTACIÓN</span>
+                </div>
+                <div>
+                  <p class="text-[9px] text-navy/40 font-bold tracking-widest mb-1">VÍA</p>
+                  <span class="text-[11px] font-bold px-2 py-1 rounded-lg bg-s50 text-s600">MARÍTIMA</span>
+                </div>
+              </div>
+              <div>
+                <p class="text-[9px] text-navy/40 font-bold tracking-widest mb-1">PROVEEDOR</p>
+                <p class="text-xs text-s700">China Exports Co. Ltd</p>
+              </div>
+              <div>
+                <p class="text-[9px] text-navy/40 font-bold tracking-widest mb-1">MERCADERÍA</p>
+                <p class="text-xs text-s700">Componentes electrónicos — Lote 847A</p>
+              </div>
+              <div>
+                <p class="text-[9px] text-navy/40 font-bold tracking-widest mb-1">VALOR ESTIMADO</p>
+                <p class="text-sm font-bold text-navy">USD 24.800</p>
+              </div>
+              <div class="pt-2 border-t border-navy/5">
+                <p class="text-[9px] text-navy/40 font-bold tracking-widest mb-2">DOCUMENTOS</p>
+                <div class="space-y-1.5">
+                  <div class="flex items-center gap-2 p-2 bg-emerald-50 rounded-lg">
+                    <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20" class="text-emerald-500"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    <span class="text-[11px] font-medium text-emerald-700">Factura Comercial</span>
+                  </div>
+                  <div class="flex items-center gap-2 p-2 bg-s50 rounded-lg">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" class="text-navy/20"><path d="M12 4v16m8-8H4"/></svg>
+                    <span class="text-[11px] text-navy/40">Bill of Lading</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nota -->
+      <div class="mx-4 mb-4 p-3 bg-navy/5 rounded-2xl border border-navy/10 shrink-0">
+        <p class="text-xs text-s600">
+          <strong class="text-navy">✓ Ventajas:</strong> Todo el contexto visible simultáneamente. Sin cambios de pantalla. Ideal para trabajo intensivo.<br>
+          <strong class="text-navy">— Consideración:</strong> Las columnas se vuelven angostas en pantallas medianas. En mobile se muestra una columna a la vez (simulá con los botones de arriba).
+        </p>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+let clientSelected = false;
+let carpetaSelected = false;
+
+function selectClient() {
+  clientSelected = true;
+  document.getElementById('row-c1').classList.add('bg-gold/[0.06]');
+  const col2 = document.getElementById('col-2');
+  col2.style.opacity = '1';
+  document.getElementById('col2-placeholder').classList.add('hidden');
+  document.getElementById('col2-content').classList.remove('hidden');
+  document.getElementById('col2-content').classList.add('flex');
+  document.getElementById('bc-client').classList.remove('hidden');
+  document.getElementById('bc-client').classList.add('flex');
+}
+
+function selectCarpeta() {
+  if (!clientSelected) return;
+  carpetaSelected = true;
+  document.getElementById('row-cp1').classList.add('bg-gold/[0.06]');
+  const col3 = document.getElementById('col-3');
+  col3.style.opacity = '1';
+  document.getElementById('col3-placeholder').classList.add('hidden');
+  document.getElementById('col3-content').classList.remove('hidden');
+  document.getElementById('col3-content').classList.add('flex');
+  document.getElementById('bc-carpeta').classList.remove('hidden');
+  document.getElementById('bc-carpeta').classList.add('flex');
+}
+
+function mobileStep(step) {
+  const cols = ['col-1','col-2','col-3'];
+  const btns = ['m0','m1','m2'];
+  cols.forEach((c, i) => {
+    const el = document.getElementById(c);
+    if (i === step) {
+      el.style.display = 'flex'; el.style.flexDirection = 'column';
+      el.style.width = '100%'; el.style.minWidth = '0'; el.style.flexShrink = '1';
+    } else {
+      el.style.display = 'none';
+    }
+  });
+  btns.forEach((b, i) => {
+    document.getElementById(b).className = i === step
+      ? 'px-3 py-1.5 text-xs font-bold rounded-lg bg-navy text-white'
+      : 'px-3 py-1.5 text-xs font-bold rounded-lg bg-s100 text-s600';
+  });
+  if (step === 1 && !clientSelected) selectClient();
+  if (step === 2 && !carpetaSelected) { selectClient(); selectCarpeta(); }
+}
+</script>
+</body>
+</html>

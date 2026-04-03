@@ -1,6 +1,25 @@
+# Entorno — NUNCA commitear el .env real
 .env
-node_modules/
+.env.local
+.env.*.local
+
+# Compilados Java
 target/
-.idea/
 *.class
 *.jar
+
+# Dependencias Node
+node_modules/
+
+# Build frontend
+dist/
+build/
+
+# IDEs
+.idea/
+*.iml
+.vscode/settings.json
+
+# OS
+.DS_Store
+Thumbs.db

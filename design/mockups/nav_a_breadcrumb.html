@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opción A — Navegación Breadcrumb</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy: '#0E3048',
+        gold: '#B18F5B',
+        surface: '#E9EBF0',
+        canvas: '#FFFFFF',
+        s50: '#E9EBF0', s100: '#DDE0E8', s200: '#C8CDD8',
+        s300: '#A9B1C2', s400: '#8A94A8', s500: '#64748B',
+        s600: '#475569', s700: '#334155', s800: '#1E293B',
+        info: '#2E4A7D', success: '#5AB6AD', warn: '#E67E22',
+      },
+      fontFamily: { sans: ['Montserrat','sans-serif'] },
+    }
+  }
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Montserrat', sans-serif; box-sizing: border-box; }
+  .view { display: none; }
+  .view.active { display: block; }
+  .fade-in { animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body class="bg-surface min-h-screen">
+
+<!-- ══ BANNER DESCRIPTIVO ════════════════════════════════════════════════════ -->
+<div class="bg-navy text-white text-center py-2 text-xs font-bold tracking-widest">
+  OPCIÓN A — BREADCRUMB FULL-PAGE · Clientes › Cliente › Carpeta
+</div>
+<div class="bg-white border-b border-navy/10 px-4 py-3 flex items-center justify-between">
+  <p class="text-xs text-s500 max-w-lg">
+    Navegar desde el cliente abre la carpeta en <strong class="text-navy">página completa</strong>.
+    El breadcrumb mantiene el contexto. Volver regresa al cliente.
+  </p>
+  <div class="flex items-center gap-2 shrink-0 ml-4">
+    <button onclick="showView('clientes')" id="btn-clientes"
+      class="px-3 py-1.5 text-xs font-bold rounded-lg bg-navy text-white transition-all">
+      1 · Lista Clientes
+    </button>
+    <button onclick="showView('carpeta')" id="btn-carpeta"
+      class="px-3 py-1.5 text-xs font-bold rounded-lg bg-s100 text-s600 transition-all">
+      2 · Detalle Carpeta
+    </button>
+  </div>
+</div>
+
+<!-- ══ APP SHELL ══════════════════════════════════════════════════════════════ -->
+<div class="flex flex-col" style="height: calc(100vh - 76px)">
+
+  <!-- Header -->
+  <header class="h-12 bg-navy flex items-center justify-between px-4 shrink-0 z-10">
+    <div class="flex items-center gap-3">
+      <button class="p-1.5 text-white/50 hover:text-white">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <span class="text-white font-bold text-sm">López Vener <span class="text-gold">&</span> Asoc.</span>
+    </div>
+    <div class="w-8 h-8 rounded-full bg-gold flex items-center justify-center text-navy font-bold text-xs">GV</div>
+  </header>
+
+  <!-- Body -->
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex flex-col w-16 bg-navy border-r border-white/5 shrink-0">
+      <nav class="flex-1 flex flex-col gap-1 pt-4 px-2">
+        <button class="flex items-center justify-center py-3 rounded-xl text-white/30 hover:bg-white/5">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </button>
+        <button class="flex items-center justify-center py-3 rounded-xl bg-white/10">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="text-gold"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </button>
+        <button class="flex items-center justify-center py-3 rounded-xl text-white/30 hover:bg-white/5">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        </button>
+      </nav>
+      <div class="px-2 pb-4">
+        <button class="flex items-center justify-center py-3 w-full rounded-xl text-white/20 hover:text-red-400 hover:bg-white/5">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 overflow-y-auto bg-surface rounded-tl-[40px]">
+
+      <!-- ╔══ VISTA 1: Lista de Clientes con panel lateral ══╗ -->
+      <div id="view-clientes" class="view active fade-in h-full flex flex-col">
+        <div class="px-4 md:px-8 pt-6 pb-4 shrink-0">
+          <h2 class="text-2xl font-bold text-navy tracking-tight">Clientes</h2>
+          <p class="text-s500 text-sm mt-1">3 clientes</p>
+          <div class="mt-4 flex gap-3">
+            <div class="relative flex-1">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-navy/30"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input placeholder="Buscar cliente..." class="w-full pl-9 pr-4 py-2.5 bg-white border border-navy/10 rounded-xl text-sm outline-none focus:border-gold/50">
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-1 overflow-hidden px-4 md:px-8 pb-6 gap-4">
+          <!-- Lista -->
+          <div class="flex-1 overflow-auto min-w-0">
+            <div class="bg-canvas rounded-2xl shadow-sm border border-navy/5 overflow-hidden">
+              <table class="w-full text-left">
+                <thead>
+                  <tr class="border-b border-navy/5 bg-s50/60">
+                    <th class="px-5 py-3 text-[10px] font-bold text-navy/40 tracking-wide">RUT</th>
+                    <th class="px-5 py-3 text-[10px] font-bold text-navy/40 tracking-wide">Razón Social</th>
+                    <th class="px-5 py-3 text-[10px] font-bold text-navy/40 tracking-wide hidden md:table-cell">Email</th>
+                    <th class="px-5 py-3 text-[10px] font-bold text-navy/40 tracking-wide w-24 text-center">Estado</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-navy/[0.04]">
+                  <tr onclick="selectClient('acme')" class="cursor-pointer hover:bg-gold/[0.04] transition-colors group" id="row-acme">
+                    <td class="px-5 py-4"><span class="font-mono text-sm font-bold text-navy">21.234.567</span></td>
+                    <td class="px-5 py-4"><span class="font-bold text-sm text-navy group-hover:text-gold transition-colors">ACME Importaciones SA</span></td>
+                    <td class="px-5 py-4 hidden md:table-cell"><span class="text-sm text-s500">contacto@acme.com</span></td>
+                    <td class="px-5 py-4 text-center"><span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600">Activo</span></td>
+                  </tr>
+                  <tr class="cursor-pointer hover:bg-gold/[0.04] transition-colors group">
+                    <td class="px-5 py-4"><span class="font-mono text-sm font-bold text-navy">32.198.440</span></td>
+                    <td class="px-5 py-4"><span class="font-bold text-sm text-navy group-hover:text-gold transition-colors">TechnoImport SRL</span></td>
+                    <td class="px-5 py-4 hidden md:table-cell"><span class="text-sm text-s500">ops@technoimport.uy</span></td>
+                    <td class="px-5 py-4 text-center"><span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600">Activo</span></td>
+                  </tr>
+                  <tr class="cursor-pointer hover:bg-gold/[0.04] transition-colors group">
+                    <td class="px-5 py-4"><span class="font-mono text-sm font-bold text-navy">45.001.123</span></td>
+                    <td class="px-5 py-4"><span class="font-bold text-sm text-navy group-hover:text-gold transition-colors">Exportadora del Sur SA</span></td>
+                    <td class="px-5 py-4 hidden md:table-cell"><span class="text-sm text-s500">—</span></td>
+                    <td class="px-5 py-4 text-center"><span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-s100 text-s400">Inactivo</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="text-xs text-s400 mt-3 italic">↑ Click en ACME para ver el panel lateral con sus carpetas</p>
+          </div>
+
+          <!-- Panel lateral cliente (aparece al hacer click) -->
+          <div id="panel-cliente" class="hidden lg:hidden flex-col bg-canvas rounded-2xl shadow-lg border border-navy/5 overflow-hidden shrink-0" style="width:380px">
+            <div class="bg-navy px-5 py-4 flex items-center justify-between">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="p-1.5 bg-gold rounded-lg shrink-0">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="text-navy"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm text-white truncate">ACME Importaciones SA</h3>
+                  <p class="text-[10px] text-gold font-bold tracking-widest mt-0.5">RUT 21.234.567</p>
+                </div>
+              </div>
+              <button onclick="closePanel()" class="p-1.5 hover:bg-white/10 rounded-lg">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="text-white/50"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              </button>
+            </div>
+            <!-- Tabs -->
+            <div class="flex border-b border-navy/5">
+              <button class="flex-1 py-3 text-[11px] font-bold text-navy border-b-2 border-gold">Datos</button>
+              <button onclick="showCarpetasTab()" class="flex-1 py-3 text-[11px] font-bold text-navy/30 border-b-2 border-transparent hover:text-navy/60">Carpetas</button>
+            </div>
+            <!-- Carpetas tab content -->
+            <div id="carpetas-panel" class="hidden flex-1 p-4 overflow-y-auto space-y-2">
+              <p class="text-[10px] font-bold text-navy/40 tracking-widest mb-3">3 CARPETAS</p>
+              <!-- Carpeta row — CLICK LLEVA A BREADCRUMB -->
+              <button onclick="showView('carpeta')" class="w-full flex items-center gap-3 p-3 bg-s50 rounded-xl hover:bg-white border border-transparent hover:border-navy/5 transition-all text-left group">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="text-navy/30 shrink-0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-bold text-navy font-mono">2025-IMP-0042</p>
+                  <p class="text-[10px] text-navy/40 mt-0.5">15/01/2025</p>
+                </div>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 shrink-0">NUMERADO</span>
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="text-navy/20 group-hover:text-gold transition-colors"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+              <button class="w-full flex items-center gap-3 p-3 bg-s50 rounded-xl hover:bg-white border border-transparent hover:border-navy/5 transition-all text-left group">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" class="text-navy/30 shrink-0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-bold text-navy font-mono">2025-IMP-0018</p>
+                  <p class="text-[10px] text-navy/40 mt-0.5">03/01/2025</p>
+                </div>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 shrink-0">CERRADO</span>
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="text-navy/20 group-hover:text-gold transition-colors"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+            <div id="datos-panel" class="p-4 space-y-3">
+              <div><p class="text-[10px] font-bold text-navy/40 tracking-widest mb-1">EMAIL</p><p class="text-sm text-navy">contacto@acme.com</p></div>
+              <div><p class="text-[10px] font-bold text-navy/40 tracking-widest mb-1">TELÉFONO</p><p class="text-sm text-navy">+598 2 900 0000</p></div>
+              <div><p class="text-[10px] font-bold text-navy/40 tracking-widest mb-1">DIRECCIÓN</p><p class="text-sm text-navy">Av. Uruguay 1234, Montevideo</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ╔══ VISTA 2: Detalle Carpeta con Breadcrumb ══╗ -->
+      <div id="view-carpeta" class="view fade-in">
+        <!-- Breadcrumb -->
+        <div class="px-4 md:px-8 pt-5">
+          <nav class="flex items-center gap-1.5 text-xs font-semibold">
+            <button onclick="showView('clientes')" class="text-navy/40 hover:text-gold transition-colors">Clientes</button>
+            <span class="text-navy/20">›</span>
+            <button onclick="showView('clientes'); selectClient('acme')" class="text-navy/40 hover:text-gold transition-colors">ACME Importaciones SA</button>
+            <span class="text-navy/20">›</span>
+            <span class="text-navy font-bold">2025-IMP-0042</span>
+          </nav>
+
+          <div class="flex items-center gap-3 mt-3 mb-5">
+            <button onclick="showView('clientes'); selectClient('acme')"
+              class="p-2 bg-white rounded-xl border border-navy/10 hover:border-gold/40 transition-colors group">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="text-navy/40 group-hover:text-gold transition-colors"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
+            </button>
+            <div class="flex-1">
+              <h2 class="text-xl font-bold text-navy tracking-tight">2025-IMP-0042</h2>
+              <p class="text-s500 text-xs mt-0.5">ACME Importaciones SA · Importación · Marítima</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="text-[10px] font-bold px-3 py-1.5 rounded-full bg-amber-50 text-amber-700">CANAL ASIGNADO</span>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="flex border-b border-navy/5">
+            <button class="px-4 py-2.5 text-xs font-bold text-navy border-b-2 border-gold">Datos</button>
+            <button class="px-4 py-2.5 text-xs font-bold text-navy/30 border-b-2 border-transparent hover:text-navy/60">Documentos</button>
+            <button class="px-4 py-2.5 text-xs font-bold text-navy/30 border-b-2 border-transparent hover:text-navy/60">Estado</button>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="px-4 md:px-8 py-5">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Datos -->
+            <div class="bg-canvas rounded-2xl p-5 border border-navy/5 shadow-sm col-span-1 md:col-span-2">
+              <p class="text-[10px] font-bold text-navy/40 tracking-widest mb-4">DATOS DE OPERACIÓN</p>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <p class="text-[10px] text-navy/40 font-bold tracking-widest mb-1">CLIENTE</p>
+                  <p class="text-sm font-bold text-navy">ACME Importaciones SA</p>
+                </div>
+                <div>
+                  <p class="text-[10px] text-navy/40 font-bold tracking-widest mb-1">PROVEEDOR</p>
+                  <p class="text-sm text-s700">China Exports Co. Ltd</p>
+                </div>
+                <div>
+                  <p class="text-[10px] text-navy/40 font-bold tracking-widest mb-1">TIPO</p>
+                  <span class="text-[11px] font-bold px-2.5 py-1 rounded-lg" style="background:#E8EDF8; color:#2E4A7D">IMPORTACIÓN</span>
+                </div>
+                <div>
+                  <p class="text-[10px] text-navy/40 font-bold tracking-widest mb-1">VÍA</p>
+                  <span class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-s50 text-s600">MARÍTIMA</span>
+                </div>
+                <div class="col-span-2">
+                  <p class="text-[10px] text-navy/40 font-bold tracking-widest mb-1">MERCADERÍA</p>
+                  <p class="text-sm text-s700">Componentes electrónicos — Lote 847A</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Progreso -->
+            <div class="bg-canvas rounded-2xl p-5 border border-navy/5 shadow-sm">
+              <p class="text-[10px] font-bold text-navy/40 tracking-widest mb-3">PROGRESO</p>
+              <div class="space-y-0.5">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-navy/70 flex items-center justify-center shrink-0">
+                    <svg width="9" height="9" fill="white" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                  </div>
+                  <span class="text-xs text-navy/40 line-through">Apertura</span>
+                </div>
+                <div class="w-px h-2 bg-navy/10 ml-2.5"></div>
+                <div class="flex items-center gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-navy/70 flex items-center justify-center shrink-0">
+                    <svg width="9" height="9" fill="white" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                  </div>
+                  <span class="text-xs text-navy/40 line-through">Docs. en proceso</span>
+                </div>
+                <div class="w-px h-2 bg-navy/10 ml-2.5"></div>
+                <div class="flex items-center gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-navy/70 flex items-center justify-center shrink-0">
+                    <svg width="9" height="9" fill="white" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                  </div>
+                  <span class="text-xs text-navy/40 line-through">Numerado</span>
+                </div>
+                <div class="w-px h-2 bg-gold/30 ml-2.5"></div>
+                <div class="flex items-center gap-2.5">
+                  <div class="w-6 h-6 -ml-0.5 rounded-full bg-gold flex items-center justify-center shrink-0 shadow-md shadow-gold/30 ring-4 ring-gold/20">
+                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                  </div>
+                  <span class="text-xs font-bold text-navy">Canal Asignado</span>
+                  <span class="text-[9px] bg-gold/10 text-gold font-bold px-1.5 py-0.5 rounded-full ml-auto">HOY</span>
+                </div>
+                <div class="w-px h-2 bg-navy/5 ml-2.5"></div>
+                <div class="flex items-center gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-navy/5 border-2 border-navy/10 shrink-0"></div>
+                  <span class="text-xs text-navy/25">En Depósito</span>
+                </div>
+                <div class="w-px h-2 bg-navy/5 ml-2.5"></div>
+                <div class="flex items-center gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-navy/5 border-2 border-navy/10 shrink-0"></div>
+                  <span class="text-xs text-navy/25">Levante</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nota UX -->
+        <div class="mx-4 md:mx-8 mb-6 p-4 bg-navy/5 rounded-2xl border border-navy/10">
+          <p class="text-xs text-s600 font-medium">
+            <strong class="text-navy">✓ Ventajas:</strong> Pantalla completa para la carpeta. Breadcrumb siempre visible. El botón ← vuelve al panel del cliente con el estado conservado. <br>
+            <strong class="text-navy">— Consideración:</strong> Se abandona momentáneamente la vista de lista de clientes (pero se vuelve con un click).
+          </p>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  document.getElementById('btn-clientes').className = name === 'clientes'
+    ? 'px-3 py-1.5 text-xs font-bold rounded-lg bg-navy text-white transition-all'
+    : 'px-3 py-1.5 text-xs font-bold rounded-lg bg-s100 text-s600 transition-all';
+  document.getElementById('btn-carpeta').className = name === 'carpeta'
+    ? 'px-3 py-1.5 text-xs font-bold rounded-lg bg-navy text-white transition-all'
+    : 'px-3 py-1.5 text-xs font-bold rounded-lg bg-s100 text-s600 transition-all';
+}
+function selectClient(id) {
+  if (id === 'acme') {
+    const row = document.getElementById('row-acme');
+    row.classList.add('bg-gold/[0.06]');
+    const panel = document.getElementById('panel-cliente');
+    panel.classList.remove('hidden');
+    panel.classList.add('flex');
+    document.getElementById('carpetas-panel').classList.remove('hidden');
+    document.getElementById('carpetas-panel').classList.add('flex', 'flex-col');
+    document.getElementById('datos-panel').classList.add('hidden');
+  }
+}
+function closePanel() {
+  document.getElementById('panel-cliente').classList.add('hidden');
+  document.getElementById('panel-cliente').classList.remove('flex');
+  document.getElementById('row-acme').classList.remove('bg-gold/[0.06]');
+}
+function showCarpetasTab() {
+  document.getElementById('carpetas-panel').classList.remove('hidden');
+  document.getElementById('carpetas-panel').classList.add('flex', 'flex-col');
+  document.getElementById('datos-panel').classList.add('hidden');
+}
+</script>
+</body>
+</html>

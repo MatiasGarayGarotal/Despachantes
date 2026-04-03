@@ -1,0 +1,13 @@
+{
+  "name": "despachantes-v2",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Scripts de infraestructura y configuración — López Vener & Asoc",
+  "scripts": {
+    "setup:zitadel": "node scripts/setup-zitadel-branding.js",
+    "rollback:zitadel": "node scripts/rollback-zitadel.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

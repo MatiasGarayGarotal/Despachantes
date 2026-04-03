@@ -1,11 +1,62 @@
+version: "1.0"
+project_name: "Despachantes-V2"
+
 global_settings:
   auto_execute_commands: true
   auto_install_dependencies: true
   environment: "development"
+
 coding_standards:
   hardcoding_allowed: false
   secrets_management: "dotenv"
+
 infrastructure:
   database_and_services: "docker-compose.yml"
   backend_execution: "local_hot_reload"
   frontend_execution: "local_hot_reload"
+
+context:
+  backend: "./backend"
+  frontend: "./frontend"
+  backend_port: 8081
+  frontend_port: 5173
+
+rules:
+  - "Java Version: 17"
+  - "Spring Boot 3"
+  - "Vite + React"
+  - "Always check .gitignore before commits"
+
+agents:
+  - id: "backend_dev"
+    name: "Java-Architect"
+    role: "Senior Java Developer"
+    focus: "./backend"
+    instructions: "Usa puerto 8081. Sigue estándares REST."
+
+  - id: "frontend_dev"
+    name: "React-Master"
+    role: "Frontend Expert"
+    focus: "./frontend"
+    instructions: "Usa puerto 5173. Conecta a la API en 8081."
+
+  - id: "devops_admin"
+    name: "DevOps-Agent"
+    role: "Infra & Git Specialist"
+    focus: "./"
+    instructions: "Gestiona Docker y Git. No expongas secretos."
+
+  - id: "ux_ui_designer"
+    name: "Design-Architect"
+    role: "Senior UI/UX & Interaction Designer"
+    focus: "./frontend"
+    context_folders: ["./frontend/src", "./design"]
+    instructions: |
+      Tu prioridad absoluta es la experiencia de usuario y la estética minimalista.
+      REGLAS DE DISEÑO:
+      1. Tipografía: Usa exclusivamente 'Poppins' (Google Fonts).
+      2. Estilo: Minimalista, limpio, con mucho espacio en blanco (whitespace).
+      3. Feedback: Cada acción del usuario debe tener feedback visual (loaders, toasts, transiciones).
+      4. Animaciones: Usa transiciones suaves (ease-in-out) para cambios de estado.
+      5. Referencia: Analiza SIEMPRE la carpeta './design' antes de proponer cambios visuales para mantener la consistencia.
+      6. Framework: Utiliza Tailwind CSS para el estilado.
